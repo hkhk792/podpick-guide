@@ -7,11 +7,15 @@ import { AU_SHOP_URL, REGIONS } from "../../config";
 import { hubBrands } from "../../data/hub/brands";
 import { hubComparisons } from "../../data/hub/comparisons";
 import { hubProducts } from "../../data/hub/products";
+import { hubGuides } from "../../data/hub/guides";
+import { hubReviews } from "../../data/hub/reviews";
+import { hubNewsPosts } from "../../data/hub/news";
 
 const au = REGIONS.australia;
 const auBrands = hubBrands.filter((b) => b.region === "australia" || b.region === "global");
 const auComparisons = hubComparisons.filter((c) => c.region === "australia");
 const auProducts = hubProducts.filter((p) => p.region === "australia");
+const auNews = hubNewsPosts.filter((n) => n.region === "australia").slice(0, 4);
 
 const title = "Australia — Disposable Vape Guides & Reviews";
 const description =
@@ -48,7 +52,29 @@ const description =
   </figure>
 
   <section class="hub-section">
-    <h2 class="section-title">Australia Reviews & Products</h2>
+    <h2 class="section-title">Buying Guides</h2>
+    <div class="hub-card-grid">
+      {
+        hubGuides.map((g) => (
+          <ContentCard href={`/buying-guides/${g.slug}`} title={g.title} description={g.description} image={g.heroImage} imageAlt={g.imageAlt} tag={g.category} />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Flavour Reviews</h2>
+    <div class="hub-card-grid">
+      {
+        hubReviews.map((r) => (
+          <ContentCard href={`/reviews/${r.slug}`} title={r.title} description={r.description} image={r.heroImage} imageAlt={r.imageAlt} tag="Review" />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Products</h2>
     <div class="hub-card-grid">
       {
         auProducts.map((p) => (
@@ -59,7 +85,7 @@ const description =
   </section>
 
   <section class="hub-section">
-    <h2 class="section-title">Australia Comparisons</h2>
+    <h2 class="section-title">Comparisons</h2>
     <div class="hub-card-grid">
       {
         auComparisons.map((c) => (
@@ -70,7 +96,7 @@ const description =
   </section>
 
   <section class="hub-section">
-    <h2 class="section-title">Brands in Australia</h2>
+    <h2 class="section-title">Brands</h2>
     <div class="hub-card-grid">
       {
         auBrands.map((b) => (
@@ -79,6 +105,19 @@ const description =
       }
     </div>
   </section>
+
+  {
+    auNews.length ? (
+      <section class="hub-section">
+        <h2 class="section-title">Australia News</h2>
+        <div class="hub-card-grid">
+          {auNews.map((n) => (
+            <ContentCard href={`/news/${n.slug}`} title={n.title} description={n.excerpt} image={n.heroImage} tag={n.weekTag} />
+          ))}
+        </div>
+      </section>
+    ) : null
+  }
 
   <RegionShopCta region="australia" />
 </BaseLayout>

@@ -4,9 +4,11 @@ import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
 import PodPickScore from "../../components/hub/PodPickScore.astro";
 import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import ContentSections from "../../components/hub/ContentSections.astro";
 import { hubBrands, getBrand } from "../../data/hub/brands";
 import { getProductsByBrand } from "../../data/hub/products";
 import { hubComparisons } from "../../data/hub/comparisons";
+import { hubGuides } from "../../data/hub/guides";
 import { buildBrandJsonLd, buildFaqJsonLd } from "../../lib/seo";
 
 export function getStaticPaths() {
@@ -20,6 +22,9 @@ const comparisons = hubComparisons.filter(
   (c) => c.slug === brand.compareSlug || c.relatedSlugs.includes(brand.slug)
 );
 const relatedBrands = hubBrands.filter((b) => brand.relatedSlugs.includes(b.slug));
+const latestGuides = hubGuides
+  .filter((g) => brand.latestArticleSlugs?.includes(g.slug) || g.title.toLowerCase().includes(brand.name.toLowerCase()))
+  .slice(0, 4);
 
 const jsonLd = [
   buildBrandJsonLd(brand),
@@ -52,10 +57,21 @@ const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australi
 
     {brand.score ? <PodPickScore score={brand.score} /> : null}
 
-    <section>
-      <h2>Brand Overview</h2>
-      {brand.history.map((p) => <p>{p}</p>)}
-    </section>
+    {
+      brand.overview?.length ? (
+        <section>
+          <h2>Brand Overview</h2>
+          {brand.overview.map((p) => <p>{p}</p>)}
+        </section>
+      ) : (
+        <section>
+          <h2>Brand Overview</h2>
+          {brand.history.map((p) => <p>{p}</p>)}
+        </section>
+      )
+    }
+
+    {brand.sections?.length ? <ContentSections sections={brand.sections} /> : null}
 
     <section>
       <h2>Popular Products</h2>
@@ -124,6 +140,19 @@ const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australi
           <div class="hub-card-grid">
             {comparisons.map((c) => (
               <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      latestGuides.length ? (
+        <section>
+          <h2>Latest Articles</h2>
+          <div class="hub-card-grid">
+            {latestGuides.map((g) => (
+              <ContentCard href={`/buying-guides/${g.slug}`} title={g.title} description={g.description} image={g.heroImage} imageAlt={g.imageAlt} tag={g.category} />
             ))}
           </div>
         </section>

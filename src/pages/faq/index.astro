@@ -2,12 +2,13 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
-import { hubFaqTopics } from "../../data/hub/faq";
+import { hubFaqTopics, countFaqItems } from "../../data/hub/faq";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
 
+const total = countFaqItems();
 const title = "FAQ Center — Vape Questions Answered";
-const description = "Charging, battery, flavours, compatibility and safety — structured FAQ topics for search and AI.";
+const description = `Structured FAQ hub with ${total}+ answers across charging, battery, flavours, shipping, compatibility, safety and regional topics.`;
 
 const jsonLd = buildCollectionPageJsonLd(
   title,
@@ -21,12 +22,17 @@ const jsonLd = buildCollectionPageJsonLd(
   <HubBreadcrumb items={[{ label: "FAQ" }]} />
   <header class="hub-index-header">
     <h1>FAQ Center</h1>
-    <p class="lead">Structured answers by topic — built for featured snippets and AI citation.</p>
+    <p class="lead">{total} answers across {hubFaqTopics.length} topics — built for featured snippets and AI citation.</p>
   </header>
   <div class="hub-card-grid">
     {
       hubFaqTopics.map((t) => (
-        <ContentCard href={`/faq/${t.slug}`} title={t.title} description={t.description} tag={`${t.items.length} Q&A`} />
+        <ContentCard
+          href={`/faq/${t.slug}`}
+          title={t.title}
+          description={t.description}
+          tag={`${t.items.length} Q&A`}
+        />
       ))
     }
   </div>

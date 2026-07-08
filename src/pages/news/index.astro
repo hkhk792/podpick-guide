@@ -2,39 +2,42 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
-
-const posts = [
-  {
-    href: "/australia",
-    title: "Australia Hub Launched",
-    description: "English guides, Alibarbar product database and AU comparisons now live.",
-    tag: "Australia News",
-  },
-  {
-    href: "/taiwan",
-    title: "Taiwan Pod Guide Collection",
-    description: "19 Traditional Chinese guides covering SP2S, LANA and troubleshooting.",
-    tag: "Taiwan News",
-  },
-  {
-    href: "/brands/alibarbar",
-    title: "Alibarbar Brand Guide Updated",
-    description: "Ingot 9000 specs, PodPick Score™ and IGET comparison links refreshed.",
-    tag: "New Product",
-  },
-];
+import { hubNewsPosts } from "../../data/hub/news";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
 
 const title = "News — Industry & Regional Updates";
-const description = "Australia news, Taiwan updates, new products and market notes from PodPick Guide.";
+const description =
+  "Australia news, Taiwan updates, regulations and product notes. Editorial cadence: about two posts per week.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/news",
+  hubNewsPosts.map((n) => ({ name: n.title, url: `${SITE_URL}/news/${n.slug}` }))
+);
 ---
 
-<BaseLayout title={title} description={description} path="/news" wide lang="en">
+<BaseLayout title={title} description={description} path="/news" wide jsonLd={jsonLd} lang="en">
   <HubBreadcrumb items={[{ label: "News" }]} />
   <header class="hub-index-header">
     <h1>News</h1>
-    <p class="lead">Regional updates and knowledge hub releases — not a daily blog, a curated bulletin.</p>
+    <p class="lead">
+      Curated bulletin (~2 posts/week). Add entries in <code>src/data/hub/news.ts</code> — see NEWS_WORKFLOW.md.
+    </p>
   </header>
   <div class="hub-card-grid">
-    {posts.map((p) => <ContentCard href={p.href} title={p.title} description={p.description} tag={p.tag} />)}
+    {
+      hubNewsPosts.map((p) => (
+        <ContentCard
+          href={`/news/${p.slug}`}
+          title={p.title}
+          description={p.excerpt}
+          image={p.heroImage}
+          imageAlt=""
+          tag={`${p.category} · ${p.weekTag}`}
+        />
+      ))
+    }
   </div>
 </BaseLayout>

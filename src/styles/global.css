@@ -1255,6 +1255,12 @@ img {
   padding-bottom: 1.25rem;
 }
 
+.footer-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .hub-hero {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -1525,6 +1531,18 @@ img {
 
 .article-hero--region {
   margin-bottom: 0.5rem;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+code {
+  font-size: 0.85em;
+  background: #f1f5f9;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import { hubNewsPosts, getNews } from "../../data/hub/news";
+
+export function getStaticPaths() {
+  return hubNewsPosts.map((n) => ({ params: { slug: n.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getNews(slug!)!;
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.description}
+  path={`/news/${post.slug}`}
+  ogImage={post.heroImage ?? "/images/podpick-flavor-selection.png"}
+  narrow
+  lang="en"
+>
+  <article class="hub-doc">
+    <HubBreadcrumb items={[{ label: "News", href: "/news" }, { label: post.title }]} />
+    <header class="article-header">
+      <span class="badge">{post.category}</span>
+      <h1>{post.title}</h1>
+      <p class="lead">{post.excerpt}</p>
+      <p class="muted">{post.datePublished} · {post.weekTag}</p>
+    </header>
+    {
+      post.heroImage ? (
+        <figure class="article-hero">
+          <img src={post.heroImage} alt="" width="1200" height="675" loading="eager" />
+        </figure>
+      ) : null
+    }
+    <section>
+      {post.body.map((p) => <p>{p}</p>)}
+    </section>
+    {
+      post.relatedSlugs?.length ? (
+        <p class="hub-more">
+          Related:{" "}
+          {post.relatedSlugs.map((s, i) => (
+            <>
+              {i > 0 ? " · " : null}
+              <a href={`/${s}`}>{s}</a>
+            </>
+          ))}
+        </p>
+      ) : null
+    }
+  </article>
+</BaseLayout>

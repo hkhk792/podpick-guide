@@ -2,28 +2,57 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubReviews } from "../../data/hub/reviews";
 import { hubProducts } from "../../data/hub/products";
-import { hubBrands } from "../../data/hub/brands";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
 
-const title = "Reviews — Independent Product & Brand Reviews";
-const description = "PodPick Score™ reviews for flagship products and brand deep-dives.";
+const title = "Reviews — Independent Flavour & Product Reviews";
+const description = "TL;DR verdicts, rating notes and PodPick Score™ reviews for adult vapers.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/reviews",
+  hubReviews.map((r) => ({ name: r.title, url: `${SITE_URL}/reviews/${r.slug}` }))
+);
 ---
 
-<BaseLayout title={title} description={description} path="/reviews" wide lang="en">
+<BaseLayout title={title} description={description} path="/reviews" wide jsonLd={jsonLd} lang="en">
   <HubBreadcrumb items={[{ label: "Reviews" }]} />
   <header class="hub-index-header">
     <h1>Reviews</h1>
-    <p class="lead">TL;DR verdicts, PodPick Score™ breakdowns and who-should-buy guidance.</p>
+    <p class="lead">Flavour reviews with rating notes, pros/cons and verdicts — plus product deep-dives.</p>
   </header>
+
+  <h2 class="section-title">Flavour Reviews</h2>
+  <div class="hub-card-grid">
+    {
+      hubReviews.map((r) => (
+        <ContentCard
+          href={`/reviews/${r.slug}`}
+          title={r.title}
+          description={r.description}
+          image={r.heroImage}
+          imageAlt={r.imageAlt}
+          tag={r.category}
+        />
+      ))
+    }
+  </div>
+
+  <h2 class="section-title">Product Deep-dives</h2>
   <div class="hub-card-grid">
     {
       hubProducts.map((p) => (
-        <ContentCard href={`/products/${p.slug}`} title={p.title} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag="Review" />
-      ))
-    }
-    {
-      hubBrands.slice(0, 4).map((b) => (
-        <ContentCard href={`/brands/${b.slug}`} title={b.title} description={b.intro} image={b.heroImage} imageAlt={b.imageAlt} tag="Brand Review" />
+        <ContentCard
+          href={`/products/${p.slug}`}
+          title={p.title}
+          description={p.description}
+          image={p.heroImage}
+          imageAlt={p.imageAlt}
+          tag="Product"
+        />
       ))
     }
   </div>

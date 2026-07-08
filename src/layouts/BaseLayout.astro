@@ -4,6 +4,8 @@ import {
   AU_SHOP_URL,
   AU_SHOP_LABEL,
   GA_MEASUREMENT_ID,
+  GITHUB_ORG_LABEL,
+  GITHUB_ORG_URL,
   SHOP_URL,
   SHOP_LABEL,
   SITE_NAME,
@@ -144,10 +146,17 @@ const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
             <a href="/author/jason-chen">Editor</a>
           </p>
         </div>
+        <div>
+          <strong>Open Data</strong>
+          <p>
+            <a href={GITHUB_ORG_URL} rel="noopener noreferrer me">{GITHUB_ORG_LABEL}</a>
+          </p>
+        </div>
       </div>
       <div class="container container--wide">
         <p class="footer-legal">
           Not medical or legal advice. Adults only — follow local regulations. Products and laws vary by region.
+          · <a href={GITHUB_ORG_URL} rel="noopener noreferrer me">{GITHUB_ORG_LABEL}</a>
         </p>
       </div>
     </footer>

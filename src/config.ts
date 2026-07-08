@@ -4,6 +4,10 @@ export const SITE_TAGLINE = "Independent Vape Reviews, Buying Guides & Compariso
 export const SITE_SUBTITLE =
   "Helping adult consumers choose the right vape products through independent reviews, flavour guides and comparisons.";
 
+/** Public data on GitHub Organization (SEO / citation) */
+export const GITHUB_ORG_URL = "https://github.com/PodPickGuide";
+export const GITHUB_ORG_LABEL = "Data on GitHub";
+
 /** 台灣官方選購站 */
 export const SHOP_URL = "https://lanatw1.com";
 export const SHOP_LABEL = "LANA 官方商城";

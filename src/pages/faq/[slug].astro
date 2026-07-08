@@ -26,6 +26,7 @@ const jsonLd = [buildFaqJsonLd(topic.items.map((f) => ({ q: f.q, a: f.a })))];
     <header class="article-header">
       <h1>{topic.title}</h1>
       <p class="lead">{topic.description}</p>
+      {topic.intro ? <p>{topic.intro}</p> : null}
     </header>
     <section class="faq">
       <dl>

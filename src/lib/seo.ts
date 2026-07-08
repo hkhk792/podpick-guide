@@ -1,7 +1,7 @@
 import type { ArticleCard } from "../data/articles";
 import type { ArticleGeo } from "../data/articleTypes";
 import { buildAuthorPersonJsonLd } from "../data/author";
-import { SITE_NAME, SITE_URL } from "../config";
+import { GITHUB_ORG_URL, SITE_NAME, SITE_URL } from "../config";
 
 export function articleUrl(slug: string): string {
   return `${SITE_URL}/${slug}`;
@@ -16,6 +16,7 @@ function buildPublisher() {
       "@type": "ImageObject",
       url: new URL("/favicon.png", SITE_URL).href,
     },
+    sameAs: [GITHUB_ORG_URL],
   };
 }
 
@@ -49,6 +50,7 @@ export function buildOrganizationJsonLd() {
     description:
       "Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers.",
     inLanguage: ["en", "zh-Hant-TW"],
+    sameAs: [GITHUB_ORG_URL],
     founder: buildAuthorPersonJsonLd(),
   };
 }

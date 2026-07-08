@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentSections from "../../components/hub/ContentSections.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubGuides, getGuide } from "../../data/hub/guides";
+import { getProduct } from "../../data/hub/products";
+import { buildFaqJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return hubGuides.map((g) => ({ params: { slug: g.slug } }));
+}
+
+const { slug } = Astro.params;
+const guide = getGuide(slug!)!;
+const related = (guide.relatedGuides ?? [])
+  .map((s) => getGuide(s))
+  .filter(Boolean);
+const relatedProducts = (guide.relatedProductSlugs ?? [])
+  .map((s) => getProduct(s))
+  .filter(Boolean);
+
+const jsonLd = guide.faq?.length
+  ? [buildFaqJsonLd(guide.faq.map((f) => ({ q: f.q, a: f.a })))]
+  : [];
+---
+
+<BaseLayout
+  title={guide.title}
+  description={guide.description}
+  path={`/buying-guides/${guide.slug}`}
+  ogImage={guide.heroImage}
+  jsonLd={jsonLd}
+  narrow
+  lang="en"
+>
+  <article class="hub-doc">
+    <HubBreadcrumb
+      items={[
+        { label: "Buying Guides", href: "/buying-guides" },
+        { label: guide.title },
+      ]}
+    />
+    <header class="article-header">
+      <span class="badge">{guide.category}</span>
+      <h1>{guide.title}</h1>
+      <p class="lead">{guide.intro}</p>
+      <p class="muted">{guide.readTime} · Updated {guide.dateModified}</p>
+    </header>
+    <figure class="article-hero">
+      <img src={guide.heroImage} alt={guide.imageAlt} width="1200" height="675" loading="eager" />
+    </figure>
+    <ContentSections sections={guide.sections} />
+    {
+      guide.faq?.length ? (
+        <section class="faq">
+          <h2>FAQ</h2>
+          <dl>
+            {guide.faq.map((f) => (
+              <>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+      ) : null
+    }
+    {
+      related.length ? (
+        <section>
+          <h2>Related Guides</h2>
+          <div class="hub-card-grid">
+            {related.map((g) => (
+              <ContentCard
+                href={`/buying-guides/${g!.slug}`}
+                title={g!.title}
+                description={g!.description}
+                image={g!.heroImage}
+                imageAlt={g!.imageAlt}
+                tag={g!.category}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+    {
+      relatedProducts.length ? (
+        <section>
+          <h2>Related Products</h2>
+          <div class="hub-card-grid">
+            {relatedProducts.map((p) => (
+              <ContentCard
+                href={`/products/${p!.slug}`}
+                title={p!.name}
+                description={p!.description}
+                image={p!.heroImage}
+                imageAlt={p!.imageAlt}
+                tag="Product"
+              />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+    <RegionShopCta region="australia" />
+  </article>
+</BaseLayout>

@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentSections from "../../components/hub/ContentSections.astro";
+import PodPickScore from "../../components/hub/PodPickScore.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubReviews, getReview } from "../../data/hub/reviews";
+import { buildFaqJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return hubReviews.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const { slug } = Astro.params;
+const review = getReview(slug!)!;
+const related = (review.relatedReviews ?? [])
+  .map((s) => getReview(s))
+  .filter(Boolean);
+const jsonLd = review.faq.length
+  ? [buildFaqJsonLd(review.faq.map((f) => ({ q: f.q, a: f.a })))]
+  : [];
+---
+
+<BaseLayout
+  title={review.title}
+  description={review.description}
+  path={`/reviews/${review.slug}`}
+  ogImage={review.heroImage}
+  jsonLd={jsonLd}
+  narrow
+  lang="en"
+>
+  <article class="hub-doc">
+    <HubBreadcrumb items={[{ label: "Reviews", href: "/reviews" }, { label: review.title }]} />
+    <header class="article-header">
+      <span class="badge">{review.category}</span>
+      <h1>{review.title}</h1>
+      <p class="lead">{review.intro}</p>
+      {review.tldr ? <p class="geo-block geo-tldr"><strong>TL;DR:</strong> {review.tldr}</p> : null}
+      <p class="muted">{review.readTime} · Updated {review.dateModified}</p>
+    </header>
+    <figure class="article-hero">
+      <img src={review.heroImage} alt={review.imageAlt} width="1200" height="675" loading="eager" />
+    </figure>
+    {review.score ? <PodPickScore score={review.score} /> : null}
+    {
+      review.dimensions?.length ? (
+        <section>
+          <h2>Quick Rating Notes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>/5</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                {review.dimensions.map((d) => (
+                  <tr>
+                    <th scope="row">{d.label}</th>
+                    <td>{d.value}</td>
+                    <td>{d.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null
+    }
+    <ContentSections sections={review.sections} />
+    <section class="pros-cons">
+      <div class="pros-cons__col pros-cons__col--pros">
+        <h2>Pros</h2>
+        <ul>{review.pros.map((p) => <li>{p}</li>)}</ul>
+      </div>
+      <div class="pros-cons__col pros-cons__col--cons">
+        <h2>Cons</h2>
+        <ul>{review.cons.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </section>
+    <section>
+      <h2>Verdict</h2>
+      {review.verdict.map((p) => <p>{p}</p>)}
+    </section>
+    {
+      review.faq.length ? (
+        <section class="faq">
+          <h2>FAQ</h2>
+          <dl>
+            {review.faq.map((f) => (
+              <>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+      ) : null
+    }
+    {
+      related.length ? (
+        <section>
+          <h2>Related Reviews</h2>
+          <div class="hub-card-grid">
+            {related.map((r) => (
+              <ContentCard
+                href={`/reviews/${r!.slug}`}
+                title={r!.title}
+                description={r!.description}
+                image={r!.heroImage}
+                imageAlt={r!.imageAlt}
+                tag="Review"
+              />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+    <RegionShopCta region="australia" />
+  </article>
+</BaseLayout>

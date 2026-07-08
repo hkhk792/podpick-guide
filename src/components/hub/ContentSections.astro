@@ -1,0 +1,24 @@
+---
+interface Props {
+  sections: { heading: string; paragraphs: string[]; bullets?: string[] }[];
+}
+const { sections } = Astro.props;
+---
+
+{
+  sections.map((sec) => (
+    <section>
+      <h2>{sec.heading}</h2>
+      {sec.paragraphs.map((p) => (
+        <p>{p}</p>
+      ))}
+      {sec.bullets?.length ? (
+        <ul>
+          {sec.bullets.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      ) : null}
+    </section>
+  ))
+}

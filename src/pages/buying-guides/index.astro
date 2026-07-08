@@ -2,27 +2,63 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubGuides } from "../../data/hub/guides";
 import { articles } from "../../data/articles";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
 
-const buyingCategories = new Set(["新手指南", "選購對比", "入門知識", "旅行須知"]);
-const guides = articles.filter((a) => buyingCategories.has(a.category));
+const twBuying = articles.filter((a) =>
+  ["新手指南", "選購對比", "入門知識", "旅行須知"].includes(a.category)
+);
 
 const title = "Buying Guides — How to Choose Vape Products";
-const description = "Beginner guides, pod vs disposable comparisons, counterfeit checks and travel basics.";
+const description =
+  "English Australia buying guides plus Taiwan Traditional Chinese purchase references — independent and region-aware.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/buying-guides",
+  hubGuides.map((g) => ({ name: g.title, url: `${SITE_URL}/buying-guides/${g.slug}` }))
+);
 ---
 
-<BaseLayout title={title} description={description} path="/buying-guides" wide lang="en">
+<BaseLayout title={title} description={description} path="/buying-guides" wide jsonLd={jsonLd} lang="en">
   <HubBreadcrumb items={[{ label: "Buying Guides" }]} />
   <header class="hub-index-header">
     <h1>Buying Guides</h1>
-    <p class="lead">Step-by-step purchase decisions — compatibility, flavour fit and retailer safety.</p>
+    <p class="lead">Australia-focused English guides first, with Taiwan articles linked for Traditional Chinese shoppers.</p>
   </header>
+
+  <h2 class="section-title">Australia Guides (English)</h2>
   <div class="hub-card-grid">
     {
-      guides.map((a) => (
-        <ContentCard href={`/${a.slug}`} title={a.title} description={a.description} image={a.heroImage} imageAlt={a.imageAlt} tag={a.category} />
+      hubGuides.map((g) => (
+        <ContentCard
+          href={`/buying-guides/${g.slug}`}
+          title={g.title}
+          description={g.description}
+          image={g.heroImage}
+          imageAlt={g.imageAlt}
+          tag={g.category}
+        />
       ))
     }
   </div>
-  <p class="hub-more"><a href="/comparisons">See all comparisons →</a></p>
+
+  <h2 class="section-title">Taiwan Guides (繁體)</h2>
+  <div class="hub-card-grid">
+    {
+      twBuying.map((a) => (
+        <ContentCard
+          href={`/${a.slug}`}
+          title={a.title}
+          description={a.description}
+          image={a.heroImage}
+          imageAlt={a.imageAlt}
+          tag={a.category}
+        />
+      ))
+    }
+  </div>
 </BaseLayout>

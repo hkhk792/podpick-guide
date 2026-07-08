@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import PodPickScore from "../../components/hub/PodPickScore.astro";
 import RegionShopCta from "../../components/hub/RegionShopCta.astro";
-import ContentCard from "../../components/hub/ContentCard.astro";
+import ContentSections from "../../components/hub/ContentSections.astro";
 import { hubProducts, getProduct } from "../../data/hub/products";
 import { getBrand } from "../../data/hub/brands";
 import { buildFaqJsonLd } from "../../lib/seo";
@@ -43,6 +43,7 @@ const jsonLd = product.faq.length
     <header class="article-header">
       <h1>{product.title}</h1>
       <p class="lead">{product.description}</p>
+      {product.tldr ? <p class="geo-block geo-tldr"><strong>TL;DR:</strong> {product.tldr}</p> : null}
     </header>
 
     <figure class="article-hero">
@@ -65,6 +66,26 @@ const jsonLd = product.faq.length
       <h2>Overview</h2>
       {product.overview.map((p) => <p>{p}</p>)}
     </section>
+
+    {product.sections?.length ? <ContentSections sections={product.sections} /> : null}
+
+    {
+      product.performance?.length ? (
+        <section>
+          <h2>Performance</h2>
+          <ul>{product.performance.map((p) => <li>{p}</li>)}</ul>
+        </section>
+      ) : null
+    }
+
+    {
+      product.whoShouldBuy?.length ? (
+        <section>
+          <h2>Who Should Buy</h2>
+          <ul>{product.whoShouldBuy.map((p) => <li>{p}</li>)}</ul>
+        </section>
+      ) : null
+    }
 
     <section>
       <h2>Specifications</h2>
