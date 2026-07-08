@@ -1,4 +1,5 @@
 import type { ArticleCard } from "../data/articles";
+import { articles as allArticles } from "../data/articles";
 import type { ArticleBody, ArticleGeo, ArticleSection } from "../data/articleTypes";
 import { DEFAULT_AUTHOR } from "../data/author";
 
@@ -163,7 +164,10 @@ function mergeFaqSections(sections: ArticleSection[], article: ArticleCard): Art
               .slice(0, 6)
               .map((path) => {
                 const slug = path.replace(/^\//, "");
-                return `<a href="${path}">${slug.replace(/-/g, " ")}</a>`;
+                const title =
+                  allArticles.find((a) => a.slug === slug)?.title ??
+                  slug.replace(/-/g, " ");
+                return `<a href="${path}">${title}</a>`;
               })
               .join("、") + " 等文章可組成完整選購知識庫。",
           },
