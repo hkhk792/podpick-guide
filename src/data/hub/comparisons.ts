@@ -263,6 +263,76 @@ export const hubComparisons: HubComparison[] = [
     datePublished: "2026-05-18",
     dateModified: "2026-07-08",
   },
+  {
+    slug: "mesh-coil-vs-regular-coil",
+    path: "/mesh-coil-vs-regular-coil",
+    title: "Mesh Coil vs Regular Coil: What's the Difference?",
+    description:
+      "Mesh coil vs regular round-wire coil explained for pod systems and disposables — flavour, vapour, ramp-up, battery use, coil life and which type suits your draw style.",
+    intro:
+      "If you shop for closed pods, refillable kits or modern disposables, you will see mesh coil and regular coil (round wire) mentioned constantly. " +
+      "They are not marketing buzzwords — they describe how the heating element is built, and that changes flavour clarity, ramp-up speed and how long a pod feels consistent. " +
+      "This guide compares them in plain language for adult vapers choosing between pod brands, disposable formats and replacement pods.",
+    quickWinner:
+      "Mesh coils usually win on flavour clarity, even heating and fast ramp-up — common in SP2S Gen 2 pods and many current disposables. " +
+      "Regular round-wire coils can still suit tight MTL draws and simpler refillable setups where cost per coil matters more than maximum surface area.",
+    leftLabel: "Mesh coil",
+    rightLabel: "Regular coil (round wire)",
+    rows: [
+      { feature: "Heating surface", left: "Wide perforated metal sheet", right: "Single or dual wire loop" },
+      { feature: "Flavour clarity", left: "Stronger, more even at moderate power", right: "Can be clean at matched wattage; hotspots if under-powered" },
+      { feature: "Ramp-up time", left: "Fast — vapour arrives quickly", right: "Slightly slower on some MTL builds" },
+      { feature: "Vapour warmth", left: "Warm, dense MTL at low–mid output", right: "Cooler or thinner if wire is under-driven" },
+      { feature: "Sweetener / coil life", left: "Can gunk faster on very sweet liquids", right: "Often similar lifespan; depends on wick and liquid" },
+      { feature: "Typical use", left: "Closed pods, mesh disposables, modern kits", right: "Older pods, some refillable MTL coils" },
+      { feature: "Best for", left: "Flavour-first pod users, nicotine salt MTL", right: "Budget refillables, very tight cigarette-like draws" },
+    ],
+    leftStrengths: [
+      "Larger contact area vaporises e-liquid more evenly",
+      "Clearer flavour on nicotine-salt pod draws",
+      "Less hotspotting than a thin wire at similar power",
+      "Standard in many closed-pod lines (e.g. SP2S Gen 2 mesh pods)",
+    ],
+    rightStrengths: [
+      "Simple, proven design in refillable MTL coils",
+      "Can feel tighter and more cigarette-like on some builds",
+      "Replacement coils are sometimes cheaper in open systems",
+      "Easy to understand resistance ratings (e.g. 1.0Ω, 1.2Ω)",
+    ],
+    verdict: [
+      "For most closed-pod and disposable buyers today, mesh is the default for a reason: it delivers clearer flavour from the first puff and stays more consistent through the pod life when power delivery is stable.",
+      "Regular round-wire coils are not obsolete. In refillable mouth-to-lung kits they still work well when resistance, wattage and airflow are matched. The mistake is assuming every pod labelled mesh is automatically better — generation fit, wick quality and nicotine strength still matter.",
+      "If you use SP2S or similar ecosystems, verify Gen 1 vs Gen 2 pod matching before chasing mesh marketing. If you use long-life disposables, mesh helps flavour stay readable as battery output tapers.",
+    ],
+    faq: [
+      {
+        q: "Is mesh coil better than regular coil?",
+        a: "For flavour clarity and even heating in pod systems, mesh is usually preferred. Regular coils can still be excellent in refillable MTL setups when correctly powered. Neither fixes a mismatched pod generation or a finished coil.",
+      },
+      {
+        q: "Do mesh coils use more e-liquid?",
+        a: "They can use slightly more liquid per puff because more surface area vaporises faster, but the difference is often small compared with draw length and chain-vaping habits.",
+      },
+      {
+        q: "Why does my mesh pod taste burnt faster?",
+        a: "Burnt taste usually means the wick is dry or the coil is spent — not that mesh is worse. Chain-vaping, low e-liquid, or a dying battery can all cause it on mesh or regular coils.",
+      },
+      {
+        q: "Are disposable vapes mesh or regular coil?",
+        a: "Many modern disposables use mesh-style heating elements for flavour consistency. Older or ultra-compact models may use simpler wire coils. Check the product listing or our brand guides for specifics.",
+      },
+      {
+        q: "Does coil type change nicotine hit?",
+        a: "Indirectly. A coil that vaporises liquid efficiently at your draw style keeps nicotine delivery steadier. Harshness usually comes from strength, cooling agents and airflow, not mesh vs wire alone.",
+      },
+    ],
+    region: "global",
+    heroImage: "/images/podpick-gen-comparison.png",
+    imageAlt: "Mesh coil versus regular round-wire coil comparison diagram",
+    relatedSlugs: ["sp2s", "sp2s-universal-pods", "alibarbar-ingot-9000"],
+    datePublished: "2026-07-08",
+    dateModified: "2026-07-08",
+  },
 ];
 
 export function getComparison(slug: string | undefined): HubComparison | undefined {

@@ -15,6 +15,7 @@ import {
   getProductsForSection,
   getReviewsForSection,
 } from "../../data/hub/australiaSections";
+import { getComparisonPath } from "../../data/hub/comparisons";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
 
@@ -34,7 +35,7 @@ const otherSections = getOtherAustraliaSections(section.slug);
 
 const jsonLd = buildCollectionPageJsonLd(section.title, section.description, path, [
   ...guides.map((g) => ({ name: g.title, url: `${SITE_URL}/buying-guides/${g.slug}` })),
-  ...comparisons.map((c) => ({ name: c.title, url: `${SITE_URL}/comparisons/${c.slug}` })),
+  ...comparisons.map((c) => ({ name: c.title, url: `${SITE_URL}${getComparisonPath(c)}` })),
   ...(brand ? [{ name: brand.name, url: `${SITE_URL}/brands/${brand.slug}` }] : []),
 ]);
 ---
@@ -146,7 +147,7 @@ const jsonLd = buildCollectionPageJsonLd(section.title, section.description, pat
           {
             comparisons.map((c) => (
               <ContentCard
-                href={`/comparisons/${c.slug}`}
+                href={getComparisonPath(c)}
                 title={c.title}
                 description={c.description}
                 image={c.heroImage}

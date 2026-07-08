@@ -1,0 +1,8 @@
+---
+import ComparisonDoc from "../components/hub/ComparisonDoc.astro";
+import { getComparison } from "../data/hub/comparisons";
+
+const cmp = getComparison("mesh-coil-vs-regular-coil")!;
+---
+
+<ComparisonDoc cmp={cmp} path="/mesh-coil-vs-regular-coil" />

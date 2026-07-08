@@ -7,7 +7,7 @@ import RegionShopCta from "../../components/hub/RegionShopCta.astro";
 import ContentSections from "../../components/hub/ContentSections.astro";
 import { hubBrands, getBrand } from "../../data/hub/brands";
 import { getProductsByBrand } from "../../data/hub/products";
-import { hubComparisons } from "../../data/hub/comparisons";
+import { hubComparisons, getComparisonPath } from "../../data/hub/comparisons";
 import { hubGuides } from "../../data/hub/guides";
 import { buildBrandJsonLd, buildFaqJsonLd } from "../../lib/seo";
 
@@ -139,7 +139,7 @@ const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australi
           <h2>Comparisons</h2>
           <div class="hub-card-grid">
             {comparisons.map((c) => (
-              <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
+              <ContentCard href={getComparisonPath(c)} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
             ))}
           </div>
         </section>

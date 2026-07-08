@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
-import { hubComparisons } from "../../data/hub/comparisons";
+import { hubComparisons, getComparisonPath } from "../../data/hub/comparisons";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
 
@@ -13,7 +13,7 @@ const jsonLd = buildCollectionPageJsonLd(
   title,
   description,
   "/comparisons",
-  hubComparisons.map((c) => ({ name: c.title, url: `${SITE_URL}/comparisons/${c.slug}` }))
+  hubComparisons.map((c) => ({ name: c.title, url: `${SITE_URL}${getComparisonPath(c)}` }))
 );
 ---
 
@@ -26,7 +26,7 @@ const jsonLd = buildCollectionPageJsonLd(
   <div class="hub-card-grid">
     {
       hubComparisons.map((c) => (
-        <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag={c.region} />
+        <ContentCard href={getComparisonPath(c)} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag={c.region} />
       ))
     }
   </div>

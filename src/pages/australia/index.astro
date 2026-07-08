@@ -10,7 +10,7 @@ import {
   AUSTRALIA_SECTIONS,
   AU_EDITORIAL_BRANDS,
 } from "../../data/hub/australiaSections";
-import { hubComparisons } from "../../data/hub/comparisons";
+import { hubComparisons, getComparisonPath } from "../../data/hub/comparisons";
 import { hubNewsPosts } from "../../data/hub/news";
 
 const au = REGIONS.australia;
@@ -81,7 +81,7 @@ const description =
       {
         auComparisons.map((c) => (
           <ContentCard
-            href={`/comparisons/${c.slug}`}
+            href={getComparisonPath(c)}
             title={c.title}
             description={c.description}
             image={c.heroImage}
