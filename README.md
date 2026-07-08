@@ -42,4 +42,4 @@ npm run dev
 3. SSL/TLS 选 **Full**。
 4. 可选：`www` → 301 到根域。
 
-商城 `sp2spods.com` 的 `/info/*` 已在 Vercel 配置 301 到本站对应路径。
+商城 `lanatw1.com` 的文章 `/info/*` 可在對應商城 Vercel 配置 301 到本站。

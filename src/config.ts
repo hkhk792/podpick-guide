@@ -1,8 +1,8 @@
 export const SITE_NAME = "PodPick Guide";
 export const SITE_URL = "https://podpickguide.com";
-/** 官方选购站（文末 CTA，不做硬广措辞） */
-export const SHOP_URL = "https://sp2spods.com";
-export const SHOP_LABEL = "官方精选";
+/** 官方選購站（文末 CTA，不做硬廣措辭） */
+export const SHOP_URL = "https://lanatw1.com";
+export const SHOP_LABEL = "LANA 官方商城";
 
 /** LINE 諮詢（口味、規格、現貨、售後） */
 export const LINE_ID = "kao28992";
