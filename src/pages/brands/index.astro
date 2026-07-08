@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubBrands } from "../../data/hub/brands";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
+
+const title = "Vape Brands — Independent Brand Guides";
+const description =
+  "Brand database for Alibarbar, SP2S, LANA, IGET, HQD, RELX and KUZ — specs, flavours, pros/cons and comparisons.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/brands",
+  hubBrands.map((b) => ({ name: b.name, url: `${SITE_URL}/brands/${b.slug}` }))
+);
+---
+
+<BaseLayout title={title} description={description} path="/brands" wide jsonLd={jsonLd} lang="en">
+  <HubBreadcrumb items={[{ label: "Brands" }]} />
+  <header class="hub-index-header">
+    <h1>Brands</h1>
+    <p class="lead">Independent brand guides — history, products, flavour range and cross-brand comparisons.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      hubBrands.map((b) => (
+        <ContentCard
+          href={`/brands/${b.slug}`}
+          title={b.name}
+          description={b.description}
+          image={b.heroImage}
+          imageAlt={b.imageAlt}
+          tag={b.region}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import { hubFaqTopics, getFaqTopic } from "../../data/hub/faq";
+import { buildFaqJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return hubFaqTopics.map((t) => ({ params: { slug: t.slug } }));
+}
+
+const { slug } = Astro.params;
+const topic = getFaqTopic(slug!)!;
+const jsonLd = [buildFaqJsonLd(topic.items.map((f) => ({ q: f.q, a: f.a })))];
+---
+
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  path={`/faq/${topic.slug}`}
+  jsonLd={jsonLd}
+  narrow
+  lang="en"
+>
+  <article class="hub-doc">
+    <HubBreadcrumb items={[{ label: "FAQ", href: "/faq" }, { label: topic.title }]} />
+    <header class="article-header">
+      <h1>{topic.title}</h1>
+      <p class="lead">{topic.description}</p>
+    </header>
+    <section class="faq">
+      <dl>
+        {
+          topic.items.map((f) => (
+            <>
+              <dt>{f.q}</dt>
+              <dd>{f.a}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
+  </article>
+</BaseLayout>

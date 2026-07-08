@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import PodPickScore from "../../components/hub/PodPickScore.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import { hubBrands, getBrand } from "../../data/hub/brands";
+import { getProductsByBrand } from "../../data/hub/products";
+import { hubComparisons } from "../../data/hub/comparisons";
+import { buildBrandJsonLd, buildFaqJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return hubBrands.map((b) => ({ params: { slug: b.slug } }));
+}
+
+const { slug } = Astro.params;
+const brand = getBrand(slug!)!;
+const products = getProductsByBrand(brand.slug);
+const comparisons = hubComparisons.filter(
+  (c) => c.slug === brand.compareSlug || c.relatedSlugs.includes(brand.slug)
+);
+const relatedBrands = hubBrands.filter((b) => brand.relatedSlugs.includes(b.slug));
+
+const jsonLd = [
+  buildBrandJsonLd(brand),
+  ...(brand.faq.length ? [buildFaqJsonLd(brand.faq.map((f) => ({ q: f.q, a: f.a })))] : []),
+];
+const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australia" ? "australia" : undefined;
+---
+
+<BaseLayout
+  title={brand.title}
+  description={brand.description}
+  path={`/brands/${brand.slug}`}
+  ogImage={brand.heroImage}
+  jsonLd={jsonLd}
+  narrow
+  lang={brand.region === "taiwan" ? "zh-Hant-TW" : "en"}
+>
+  <article class="hub-doc">
+    <HubBreadcrumb items={[{ label: "Brands", href: "/brands" }, { label: brand.name }]} />
+
+    <header class="article-header">
+      <span class="badge">{brand.region === "taiwan" ? "Taiwan" : brand.region === "australia" ? "Australia" : "Global"}</span>
+      <h1>{brand.title}</h1>
+      <p class="lead">{brand.intro}</p>
+    </header>
+
+    <figure class="article-hero">
+      <img src={brand.heroImage} alt={brand.imageAlt} width="1200" height="675" loading="eager" />
+    </figure>
+
+    {brand.score ? <PodPickScore score={brand.score} /> : null}
+
+    <section>
+      <h2>Brand Overview</h2>
+      {brand.history.map((p) => <p>{p}</p>)}
+    </section>
+
+    <section>
+      <h2>Popular Products</h2>
+      <ul>{brand.popularProducts.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Main Features</h2>
+      <ul>{brand.mainFeatures.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Compatible Products</h2>
+      <ul>{brand.compatibleProducts.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Flavour Range</h2>
+      <ul>{brand.flavourRange.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section class="pros-cons">
+      <div class="pros-cons__col pros-cons__col--pros">
+        <h2>Pros</h2>
+        <ul>{brand.pros.map((p) => <li>{p}</li>)}</ul>
+      </div>
+      <div class="pros-cons__col pros-cons__col--cons">
+        <h2>Cons</h2>
+        <ul>{brand.cons.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </section>
+
+    {
+      brand.faq.length ? (
+        <section class="faq">
+          <h2>FAQs</h2>
+          <dl>
+            {brand.faq.map((f) => (
+              <>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+      ) : null
+    }
+
+    {
+      products.length ? (
+        <section>
+          <h2>Products</h2>
+          <div class="hub-card-grid">
+            {products.map((p) => (
+              <ContentCard href={`/products/${p.slug}`} title={p.name} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag="Product" />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      comparisons.length ? (
+        <section>
+          <h2>Comparisons</h2>
+          <div class="hub-card-grid">
+            {comparisons.map((c) => (
+              <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      relatedBrands.length ? (
+        <section>
+          <h2>Related Brands</h2>
+          <div class="hub-card-grid hub-card-grid--brands">
+            {relatedBrands.map((b) => (
+              <a class="brand-chip" href={`/brands/${b.slug}`}>{b.name}</a>
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
+
+    <RegionShopCta region={region} />
+  </article>
+</BaseLayout>

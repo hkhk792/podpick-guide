@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubProducts } from "../../data/hub/products";
+import { hubBrands } from "../../data/hub/brands";
+
+const title = "Reviews — Independent Product & Brand Reviews";
+const description = "PodPick Score™ reviews for flagship products and brand deep-dives.";
+---
+
+<BaseLayout title={title} description={description} path="/reviews" wide lang="en">
+  <HubBreadcrumb items={[{ label: "Reviews" }]} />
+  <header class="hub-index-header">
+    <h1>Reviews</h1>
+    <p class="lead">TL;DR verdicts, PodPick Score™ breakdowns and who-should-buy guidance.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      hubProducts.map((p) => (
+        <ContentCard href={`/products/${p.slug}`} title={p.title} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag="Review" />
+      ))
+    }
+    {
+      hubBrands.slice(0, 4).map((b) => (
+        <ContentCard href={`/brands/${b.slug}`} title={b.title} description={b.intro} image={b.heroImage} imageAlt={b.imageAlt} tag="Brand Review" />
+      ))
+    }
+  </div>
+</BaseLayout>

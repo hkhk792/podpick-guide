@@ -47,9 +47,11 @@ const jsonLd = [
   ogImage={article.heroImage}
   jsonLd={jsonLd}
   narrow
+  lang="zh-Hant-TW"
+  locale="zh-Hant-TW"
 >
   <article>
-    <BreadcrumbNav title={article.title} slug={article.slug} />
+    <BreadcrumbNav title={article.title} slug={article.slug} hubLabel="Taiwan" hubHref="/taiwan" />
 
     <header class="article-header">
       <span class="badge">{article.category}</span>

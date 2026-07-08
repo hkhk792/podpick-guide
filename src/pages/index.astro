@@ -1,101 +1,155 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import GridShopPrompt from "../components/GridShopPrompt.astro";
-import { SITE_NAME, SHOP_URL, SHOP_LABEL } from "../config";
+import ContentCard from "../components/hub/ContentCard.astro";
+import {
+  SITE_NAME,
+  SITE_SUBTITLE,
+  SITE_TAGLINE,
+  SITE_URL,
+} from "../config";
+import { HOME_BRANDS, HOME_GUIDE_LINKS } from "../data/hub/navigation";
+import { hubBrands } from "../data/hub/brands";
+import { hubComparisons } from "../data/hub/comparisons";
+import { hubProducts } from "../data/hub/products";
 import { articles, featuredArticles } from "../data/articles";
-import { buildItemListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
 
-const moreArticles = articles.filter((a) => !a.featured);
+const title = `${SITE_NAME} — ${SITE_TAGLINE}`;
+const description = SITE_SUBTITLE;
 
-const title = `${SITE_NAME} — 煙彈口味與選購指南`;
-const description =
-  "SP2S 煙彈口味、選購對比、使用技巧與旅行須知。簡明易讀的獨立參考站，選購前先看這裡。";
+const editorPicks = [
+  hubProducts.find((p) => p.slug === "alibarbar-ingot-9000")!,
+  hubProducts.find((p) => p.slug === "sp2s-universal-pods")!,
+  hubComparisons.find((c) => c.slug === "alibarbar-vs-iget")!,
+];
 
-const slides = featuredArticles;
-
-const jsonLd = [buildWebSiteJsonLd(description), buildOrganizationJsonLd(), buildItemListJsonLd(articles)];
+const jsonLd = [
+  buildWebSiteJsonLd(description),
+  buildOrganizationJsonLd(),
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Popular brands",
+    itemListElement: HOME_BRANDS.map((b, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: b.name,
+      url: `${SITE_URL}/brands/${b.slug}`,
+    })),
+  },
+];
 ---
 
-<BaseLayout title={title} description={description} path="/" jsonLd={jsonLd}>
-  <section class="hero">
-    <div class="hero-copy">
+<BaseLayout title={title} description={description} path="/" wide jsonLd={jsonLd} lang="en">
+  <section class="hub-hero">
+    <div class="hub-hero__copy">
       <p class="kicker">PodPick Guide</p>
-      <h1>選煙彈前，先把口味與規格搞清楚</h1>
-      <p class="lead">
-        實測整理、新手指南與常見問題 — 共 {articles.length} 篇，幫你少踩雷。需要現貨時再前往
-        <a href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>。
-      </p>
+      <h1>{SITE_TAGLINE}</h1>
+      <p class="lead">{SITE_SUBTITLE}</p>
+      <div class="hub-hero__tags">
+        <span>Independent Reviews</span>
+        <span>Buying Guides</span>
+        <span>Comparisons</span>
+      </div>
     </div>
-
-    <div class="hero-slider" aria-label="精選文章輪播">
-      {
-        slides.map((a, index) => (
-          <a
-            class="hero-slide"
-            href={`/${a.slug}`}
-            style={`--i:${index}; --count:${slides.length}; background-image: linear-gradient(90deg, rgba(15,23,42,.74), rgba(15,23,42,.18)), url('${a.heroImage}')`}
-          >
-            <span class="hero-slide__tag">{a.category}</span>
-            <strong>{a.title}</strong>
-            <span>{a.description}</span>
-          </a>
-        ))
-      }
-      <div class="hero-dots" aria-hidden="true">
-        {slides.map(() => <span />)}
+    <div class="hub-hero__regions">
+      <h2 class="section-kicker">Browse by Region</h2>
+      <div class="region-cards">
+        <a class="region-card region-card--au" href="/australia">
+          <span class="region-card__flag">🇦🇺</span>
+          <strong>Australia</strong>
+          <span>Disposables, Alibarbar guides & AU comparisons</span>
+        </a>
+        <a class="region-card region-card--tw" href="/taiwan">
+          <span class="region-card__flag">🇹🇼</span>
+          <strong>Taiwan</strong>
+          <span>SP2S, LANA pod guides & 繁體中文選購參考</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <h2 class="section-title">精選閱讀</h2>
-  <div class="article-grid">
-    {
-      featuredArticles.map((a) => (
-        <a class="card" href={`/${a.slug}`}>
-          <img
-            class="card__img"
-            src={a.heroImage}
-            alt={a.imageAlt}
-            width={a.heroWidth}
-            height={a.heroHeight}
-            loading="lazy"
-            decoding="async"
-          />
-          <div class="card__body">
-            <span class="card__tag">{a.category}</span>
-            <h3 class="card__title">{a.title}</h3>
-            <p class="card__desc">{a.description}</p>
-            <span class="card__date">{a.date}</span>
-          </div>
-        </a>
-      ))
-    }
-    {featuredArticles.length % 2 === 1 ? <GridShopPrompt /> : null}
-  </div>
+  <section class="hub-section">
+    <h2 class="section-title">Popular Brands</h2>
+    <div class="hub-card-grid hub-card-grid--brands">
+      {
+        HOME_BRANDS.map((b) => {
+          const brand = hubBrands.find((x) => x.slug === b.slug);
+          return (
+            <a class="brand-chip" href={`/brands/${b.slug}`}>
+              {b.name}
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
 
-  <h2 class="section-title">更多文章</h2>
-  <div class="article-grid">
-    {
-      moreArticles.map((a) => (
-        <a class="card" href={`/${a.slug}`}>
-          <img
-            class="card__img"
-            src={a.heroImage}
-            alt={a.imageAlt}
-            width={a.heroWidth}
-            height={a.heroHeight}
-            loading="lazy"
-            decoding="async"
+  <section class="hub-section">
+    <h2 class="section-title">Knowledge Hubs</h2>
+    <div class="hub-card-grid">
+      {
+        HOME_GUIDE_LINKS.map((g) => (
+          <a class="hub-tile" href={g.href}>
+            <strong>{g.label}</strong>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Editor's Choice</h2>
+    <div class="hub-card-grid">
+      {
+        editorPicks.map((item) => (
+          <ContentCard
+            href={
+              "brandSlug" in item
+                ? `/products/${item.slug}`
+                : `/comparisons/${item.slug}`
+            }
+            title={item.title}
+            description={item.description}
+            image={item.heroImage}
+            imageAlt={item.imageAlt}
+            tag={"brandSlug" in item ? "Product" : "Comparison"}
           />
-          <div class="card__body">
-            <span class="card__tag">{a.category}</span>
-            <h3 class="card__title">{a.title}</h3>
-            <p class="card__desc">{a.description}</p>
-            <span class="card__date">{a.date}</span>
-          </div>
-        </a>
-      ))
-    }
-    {moreArticles.length % 2 === 1 ? <GridShopPrompt /> : null}
-  </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Latest Articles</h2>
+    <div class="hub-card-grid">
+      {
+        articles.slice(0, 6).map((a) => (
+          <ContentCard
+            href={`/${a.slug}`}
+            title={a.title}
+            description={a.description}
+            image={a.heroImage}
+            imageAlt={a.imageAlt}
+            tag={a.category}
+          />
+        ))
+      }
+    </div>
+    <p class="hub-more"><a href="/taiwan">More Taiwan guides →</a> · <a href="/australia">Australia hub →</a></p>
+  </section>
+
+  <section class="hub-section hub-section--countries">
+    <h2 class="section-title">Countries</h2>
+    <div class="region-cards region-cards--footer">
+      <a class="region-card" href="/australia">
+        <strong>Australia</strong>
+        <span>English guides → ailibarbar.com</span>
+      </a>
+      <a class="region-card" href="/taiwan">
+        <strong>Taiwan</strong>
+        <span>繁體指南 → lanatw1.com</span>
+      </a>
+    </div>
+  </section>
 </BaseLayout>

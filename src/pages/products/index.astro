@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubProducts } from "../../data/hub/products";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
+
+const title = "Product Database — Specs, Flavours & Ratings";
+const description = "Independent product pages with specifications, PodPick Score™, pros/cons and FAQs.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/products",
+  hubProducts.map((p) => ({ name: p.name, url: `${SITE_URL}/products/${p.slug}` }))
+);
+---
+
+<BaseLayout title={title} description={description} path="/products" wide jsonLd={jsonLd} lang="en">
+  <HubBreadcrumb items={[{ label: "Products" }]} />
+  <header class="hub-index-header">
+    <h1>Products</h1>
+    <p class="lead">Deep-dive product pages — specs, battery, flavours and PodPick Score™.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      hubProducts.map((p) => (
+        <ContentCard href={`/products/${p.slug}`} title={p.name} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag={p.region} />
+      ))
+    }
+  </div>
+</BaseLayout>

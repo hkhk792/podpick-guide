@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { articles } from "../../data/articles";
+
+const flavourGuides = articles.filter((a) => a.category === "口味指南");
+
+const title = "Flavour Guides — Taste, Cooling & Sweetness";
+const description = "SP2S 32-flavour matrix, coolness/sweetness scales, tea & dessert profiles and seasonal picks.";
+---
+
+<BaseLayout title={title} description={description} path="/flavour-guides" wide lang="en">
+  <HubBreadcrumb items={[{ label: "Flavour Guides" }]} />
+  <header class="hub-index-header">
+    <h1>Flavour Guides</h1>
+    <p class="lead">Find your flavour profile before you buy — ratings, scales and category picks.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      flavourGuides.map((a) => (
+        <ContentCard href={`/${a.slug}`} title={a.title} description={a.description} image={a.heroImage} imageAlt={a.imageAlt} tag={a.category} />
+      ))
+    }
+  </div>
+</BaseLayout>

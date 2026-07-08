@@ -1,6 +1,15 @@
 ---
 import "../styles/global.css";
-import { SITE_NAME, SITE_URL, GA_MEASUREMENT_ID, SHOP_URL, SHOP_LABEL } from "../config";
+import {
+  AU_SHOP_URL,
+  AU_SHOP_LABEL,
+  GA_MEASUREMENT_ID,
+  SHOP_URL,
+  SHOP_LABEL,
+  SITE_NAME,
+  SITE_URL,
+} from "../config";
+import { MAIN_NAV, REGION_NAV } from "../data/hub/navigation";
 import FloatingLineWidget from "../components/FloatingLineWidget.astro";
 
 interface Props {
@@ -10,6 +19,9 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   narrow?: boolean;
+  wide?: boolean;
+  lang?: string;
+  locale?: string;
 }
 
 const {
@@ -19,17 +31,25 @@ const {
   ogImage = "/images/podpick-flavor-selection.png",
   jsonLd,
   narrow = false,
+  wide = false,
+  lang = "en",
+  locale = "en",
 } = Astro.props;
 
 const canonical = new URL(path.replace(/^\//, "") || "", SITE_URL).href;
 const ogImageUrl = new URL(ogImage, SITE_URL).href;
 const fullTitle = path === "" || path === "/" ? title : `${title} | ${SITE_NAME}`;
-const mainClass = narrow ? "container container--narrow" : "container";
+const mainClass = narrow
+  ? "container container--narrow"
+  : wide
+    ? "container container--wide"
+    : "container";
 const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
 ---
 
 <!doctype html>
-<html lang="zh-Hant-TW">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -39,7 +59,7 @@ const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta name="robots" content="index, follow" />
-    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:type" content={path === "" ? "website" : "article"} />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
@@ -68,22 +88,30 @@ const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     }
   </head>
   <body>
-    <header class="site-header">
-      <div class={`${mainClass} site-header__inner`}>
+    <header class="site-header site-header--hub">
+      <div class="container container--wide site-header__top">
         <a class="brand" href="/">
           <img src="/favicon.png" alt="" width="28" height="28" />
           {SITE_NAME}
         </a>
-        <a class="header-hint" href={SHOP_URL} rel="noopener noreferrer">
-          <span class="header-hint__long">選好口味？現貨與規格請至</span>
-          <span class="header-hint__short">現貨請點</span>
-          <strong>{SHOP_LABEL}</strong>
-        </a>
-        <nav class="nav" aria-label="主要導覽">
-          <a class="nav__link" href="/">全部文章</a>
-          <a class="nav__link" href="/about">關於</a>
-          <a class="nav__cta" href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>
+        <div class="region-pills" aria-label="Browse by region">
+          {
+            REGION_NAV.map((r) => (
+              <a class="region-pill" href={r.href}>
+                <span aria-hidden="true">{r.flag}</span> {r.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div class="container container--wide site-header__navrow">
+        <nav class="hub-nav" aria-label="Main navigation">
+          {MAIN_NAV.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
+        <div class="header-shops">
+          <a class="header-shop header-shop--au" href={AU_SHOP_URL} rel="noopener noreferrer">{AU_SHOP_LABEL}</a>
+          <a class="header-shop header-shop--tw" href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>
+        </div>
       </div>
     </header>
     <main class={mainClass}>
@@ -91,14 +119,35 @@ const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     </main>
     <FloatingLineWidget />
     <footer class="site-footer">
-      <div class={mainClass}>
-        <p>
-          {SITE_NAME} 為獨立選購參考站，非醫療或法律建議。內容僅供年滿 20 歲使用者參考；法規與產品以實際通路為準。
-          <a href="/about">關於我們</a>
-          ·
-          <a href="/author/jason-chen">評測編輯</a>
-          ·
-          <a href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>
+      <div class="container container--wide footer-grid">
+        <div>
+          <strong>{SITE_NAME}</strong>
+          <p>Independent vape reviews, buying guides and comparisons for adult consumers.</p>
+        </div>
+        <div>
+          <strong>Regions</strong>
+          <p>
+            <a href="/australia">Australia</a> · <a href="/taiwan">Taiwan</a>
+          </p>
+        </div>
+        <div>
+          <strong>Stores</strong>
+          <p>
+            <a href={AU_SHOP_URL} rel="noopener noreferrer">ailibarbar.com</a> ·
+            <a href={SHOP_URL} rel="noopener noreferrer">lanatw1.com</a>
+          </p>
+        </div>
+        <div>
+          <strong>About</strong>
+          <p>
+            <a href="/about">About</a> · <a href="/contact">Contact</a> ·
+            <a href="/author/jason-chen">Editor</a>
+          </p>
+        </div>
+      </div>
+      <div class="container container--wide">
+        <p class="footer-legal">
+          Not medical or legal advice. Adults only — follow local regulations. Products and laws vary by region.
         </p>
       </div>
     </footer>

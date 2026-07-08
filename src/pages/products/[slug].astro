@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import PodPickScore from "../../components/hub/PodPickScore.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubProducts, getProduct } from "../../data/hub/products";
+import { getBrand } from "../../data/hub/brands";
+import { buildFaqJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return hubProducts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const product = getProduct(slug!)!;
+const brand = getBrand(product.brandSlug);
+const region = product.region === "taiwan" ? "taiwan" : "australia";
+
+const jsonLd = product.faq.length
+  ? [buildFaqJsonLd(product.faq.map((f) => ({ q: f.q, a: f.a })))]
+  : [];
+---
+
+<BaseLayout
+  title={product.title}
+  description={product.description}
+  path={`/products/${product.slug}`}
+  ogImage={product.heroImage}
+  jsonLd={jsonLd}
+  narrow
+  lang={product.region === "taiwan" ? "zh-Hant-TW" : "en"}
+>
+  <article class="hub-doc">
+    <HubBreadcrumb
+      items={[
+        { label: "Products", href: "/products" },
+        ...(brand ? [{ label: brand.name, href: `/brands/${brand.slug}` }] : []),
+        { label: product.name },
+      ]}
+    />
+
+    <header class="article-header">
+      <h1>{product.title}</h1>
+      <p class="lead">{product.description}</p>
+    </header>
+
+    <figure class="article-hero">
+      <img src={product.heroImage} alt={product.imageAlt} width="1200" height="675" loading="eager" />
+    </figure>
+
+    {
+      product.gallery?.length ? (
+        <div class="product-gallery">
+          {product.gallery.map((src) => (
+            <img src={src} alt="" loading="lazy" width="400" height="400" />
+          ))}
+        </div>
+      ) : null
+    }
+
+    {product.score ? <PodPickScore score={product.score} /> : null}
+
+    <section>
+      <h2>Overview</h2>
+      {product.overview.map((p) => <p>{p}</p>)}
+    </section>
+
+    <section>
+      <h2>Specifications</h2>
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            {product.specifications.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Battery</h2>
+      <ul>{product.battery.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Charging</h2>
+      <ul>{product.charging.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section>
+      <h2>Flavours</h2>
+      <ul>{product.flavours.map((p) => <li>{p}</li>)}</ul>
+    </section>
+
+    <section class="pros-cons">
+      <div class="pros-cons__col pros-cons__col--pros">
+        <h2>Pros</h2>
+        <ul>{product.pros.map((p) => <li>{p}</li>)}</ul>
+      </div>
+      <div class="pros-cons__col pros-cons__col--cons">
+        <h2>Cons</h2>
+        <ul>{product.cons.map((p) => <li>{p}</li>)}</ul>
+      </div>
+    </section>
+
+    {
+      product.faq.length ? (
+        <section class="faq">
+          <h2>FAQ</h2>
+          <dl>
+            {product.faq.map((f) => (
+              <>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+      ) : null
+    }
+
+    <RegionShopCta region={region} />
+  </article>
+</BaseLayout>

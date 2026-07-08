@@ -26,7 +26,7 @@ export function buildWebSiteJsonLd(description: string) {
     name: SITE_NAME,
     url: SITE_URL,
     description,
-    inLanguage: "zh-Hant-TW",
+    inLanguage: ["en", "zh-Hant-TW"],
     publisher: buildPublisher(),
     potentialAction: {
       "@type": "SearchAction",
@@ -46,9 +46,52 @@ export function buildOrganizationJsonLd() {
     name: SITE_NAME,
     url: SITE_URL,
     logo: new URL("/favicon.png", SITE_URL).href,
-    description: "SP2S 煙彈口味、選購對比、使用技巧與旅行須知的獨立參考站。",
-    inLanguage: "zh-Hant-TW",
+    description:
+      "Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers.",
+    inLanguage: ["en", "zh-Hant-TW"],
     founder: buildAuthorPersonJsonLd(),
+  };
+}
+
+export function buildCollectionPageJsonLd(
+  name: string,
+  description: string,
+  path: string,
+  items: { name: string; url: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name,
+    description,
+    url: new URL(path.replace(/^\//, ""), SITE_URL).href,
+    inLanguage: "en",
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: items.length,
+      itemListElement: items.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    },
+  };
+}
+
+export function buildBrandJsonLd(brand: {
+  name: string;
+  description: string;
+  slug: string;
+  heroImage: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    name: brand.name,
+    description: brand.description,
+    url: `${SITE_URL}/brands/${brand.slug}`,
+    logo: new URL(brand.heroImage, SITE_URL).href,
   };
 }
 

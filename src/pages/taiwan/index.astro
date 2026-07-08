@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import { REGIONS, SHOP_URL } from "../../config";
+import { hubBrands } from "../../data/hub/brands";
+import { hubComparisons } from "../../data/hub/comparisons";
+import { articles } from "../../data/articles";
+
+const tw = REGIONS.taiwan;
+const twBrands = hubBrands.filter((b) => b.region === "taiwan" || b.slug === "sp2s" || b.slug === "lana" || b.slug === "relx");
+const twComparisons = hubComparisons.filter((c) => c.region === "taiwan");
+
+const title = "台灣 — 煙彈口味、選購與品牌指南";
+const description =
+  "繁體中文 SP2S、LANA 煙彈評測、選購對比與故障排查。獨立參考站，現貨請至 lanatw1.com。";
+---
+
+<BaseLayout title={title} description={description} path="/taiwan" ogImage={tw.heroImage} wide lang="zh-Hant-TW" locale="zh-Hant-TW">
+  <HubBreadcrumb items={[{ label: "Taiwan" }]} />
+
+  <header class="hub-index-header hub-index-header--region">
+    <span class="region-card__flag">🇹🇼</span>
+    <h1>台灣 Taiwan</h1>
+    <p class="lead">
+      封閉式 Pod 獨立選購參考 — 口味實測、一代二代對比、漏油糊味排查。官方商城：
+      <a href={SHOP_URL} rel="noopener noreferrer">lanatw1.com</a>
+    </p>
+  </header>
+
+  <section class="hub-section">
+    <h2 class="section-title">熱門品牌</h2>
+    <div class="hub-card-grid">
+      {
+        twBrands.map((b) => (
+          <ContentCard href={`/brands/${b.slug}`} title={b.name} description={b.description} image={b.heroImage} imageAlt={b.imageAlt} tag="品牌" />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">選購對比</h2>
+    <div class="hub-card-grid">
+      {
+        twComparisons.map((c) => (
+          <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="對比" />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">全部指南（繁體）</h2>
+    <div class="hub-card-grid">
+      {
+        articles.map((a) => (
+          <ContentCard href={`/${a.slug}`} title={a.title} description={a.description} image={a.heroImage} imageAlt={a.imageAlt} tag={a.category} />
+        ))
+      }
+    </div>
+  </section>
+
+  <RegionShopCta region="taiwan" />
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  tag?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { href, title, description, tag, image, imageAlt = "" } = Astro.props;
+---
+
+<a class="hub-card" href={href}>
+  {
+    image ? (
+      <img class="hub-card__img" src={image} alt={imageAlt} loading="lazy" decoding="async" />
+    ) : null
+  }
+  <div class="hub-card__body">
+    {tag ? <span class="hub-card__tag">{tag}</span> : null}
+    <strong class="hub-card__title">{title}</strong>
+    <p class="hub-card__desc">{description}</p>
+  </div>
+</a>

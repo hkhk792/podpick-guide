@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import { AU_SHOP_URL, REGIONS } from "../../config";
+import { hubBrands } from "../../data/hub/brands";
+import { hubComparisons } from "../../data/hub/comparisons";
+import { hubProducts } from "../../data/hub/products";
+
+const au = REGIONS.australia;
+const auBrands = hubBrands.filter((b) => b.region === "australia" || b.region === "global");
+const auComparisons = hubComparisons.filter((c) => c.region === "australia");
+const auProducts = hubProducts.filter((p) => p.region === "australia");
+
+const title = "Australia — Disposable Vape Guides & Reviews";
+const description =
+  "English-language buying guides, Alibarbar reviews and comparisons for Australian adult vapers. Shop at ailibarbar.com.";
+---
+
+<BaseLayout title={title} description={description} path="/australia" ogImage={au.heroImage} wide lang="en">
+  <HubBreadcrumb items={[{ label: "Australia" }]} />
+
+  <header class="hub-index-header hub-index-header--region">
+    <span class="region-card__flag">🇦🇺</span>
+    <h1>Australia</h1>
+    <p class="lead">
+      Independent English guides for the Australian market — disposables, flavour picks and head-to-head comparisons.
+      Official store: <a href={AU_SHOP_URL} rel="noopener noreferrer">ailibarbar.com</a>
+    </p>
+  </header>
+
+  <figure class="article-hero article-hero--region">
+    <img src={au.heroImage} alt="Alibarbar Ingot 9000 Australia" width="1200" height="675" loading="eager" />
+    <div class="review-photo-strip">
+      {
+        Array.from({ length: 6 }, (_, i) => (
+          <img
+            src={`/images/australia/reviews/review-${String(i + 1).padStart(2, "0")}.jpg`}
+            alt={`Customer review photo ${i + 1}`}
+            loading="lazy"
+            width="120"
+            height="120"
+          />
+        ))
+      }
+    </div>
+  </figure>
+
+  <section class="hub-section">
+    <h2 class="section-title">Australia Reviews & Products</h2>
+    <div class="hub-card-grid">
+      {
+        auProducts.map((p) => (
+          <ContentCard href={`/products/${p.slug}`} title={p.name} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag="Product" />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Australia Comparisons</h2>
+    <div class="hub-card-grid">
+      {
+        auComparisons.map((c) => (
+          <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Brands in Australia</h2>
+    <div class="hub-card-grid">
+      {
+        auBrands.map((b) => (
+          <ContentCard href={`/brands/${b.slug}`} title={b.name} description={b.description} image={b.heroImage} imageAlt={b.imageAlt} tag="Brand" />
+        ))
+      }
+    </div>
+  </section>
+
+  <RegionShopCta region="australia" />
+</BaseLayout>

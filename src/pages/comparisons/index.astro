@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { hubComparisons } from "../../data/hub/comparisons";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
+
+const title = "Vape Comparisons — Head-to-Head Guides";
+const description = "Alibarbar vs IGET, SP2S vs LANA and more — comparison tables built for search and AI citation.";
+
+const jsonLd = buildCollectionPageJsonLd(
+  title,
+  description,
+  "/comparisons",
+  hubComparisons.map((c) => ({ name: c.title, url: `${SITE_URL}/comparisons/${c.slug}` }))
+);
+---
+
+<BaseLayout title={title} description={description} path="/comparisons" wide jsonLd={jsonLd} lang="en">
+  <HubBreadcrumb items={[{ label: "Comparisons" }]} />
+  <header class="hub-index-header">
+    <h1>Comparisons</h1>
+    <p class="lead">Quick winner summaries, comparison tables and verdicts — optimised for AI extraction.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      hubComparisons.map((c) => (
+        <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag={c.region} />
+      ))
+    }
+  </div>
+</BaseLayout>

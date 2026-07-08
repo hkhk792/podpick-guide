@@ -1,0 +1,44 @@
+---
+import type { PodPickScore } from "../../data/hub/types";
+
+interface Props {
+  score: PodPickScore;
+  title?: string;
+}
+
+const { score, title = "PodPick Score™" } = Astro.props;
+
+const rows = [
+  { label: "Flavor Accuracy", value: score.flavorAccuracy },
+  { label: "Cooling", value: score.cooling },
+  { label: "Sweetness", value: score.sweetness },
+  { label: "Battery Life", value: score.batteryLife },
+  { label: "Leak Resistance", value: score.leakResistance },
+  { label: "Beginner Friendly", value: score.beginnerFriendly },
+  { label: "Overall", value: score.overall, highlight: true },
+];
+---
+
+<section class="podpick-score" aria-label={title}>
+  <h2>{title}</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Dimension</th>
+          <th scope="col">Score / 10</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr class={row.highlight ? "podpick-score__overall" : undefined}>
+              <th scope="row">{row.label}</th>
+              <td>{row.value.toFixed(1)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

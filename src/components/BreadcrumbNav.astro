@@ -2,14 +2,17 @@
 interface Props {
   title: string;
   slug: string;
+  hubLabel?: string;
+  hubHref?: string;
 }
 
-const { title, slug } = Astro.props;
+const { title, slug, hubLabel, hubHref } = Astro.props;
 ---
 
-<nav class="breadcrumb" aria-label="麵包屑">
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <ol>
-    <li><a href="/">首頁</a></li>
+    <li><a href="/">Home</a></li>
+    {hubLabel && hubHref ? <li><a href={hubHref}>{hubLabel}</a></li> : null}
     <li aria-current="page">
       <a href={`/${slug}`}>{title}</a>
     </li>

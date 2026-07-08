@@ -1,0 +1,28 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import { articles } from "../../data/articles";
+
+const buyingCategories = new Set(["新手指南", "選購對比", "入門知識", "旅行須知"]);
+const guides = articles.filter((a) => buyingCategories.has(a.category));
+
+const title = "Buying Guides — How to Choose Vape Products";
+const description = "Beginner guides, pod vs disposable comparisons, counterfeit checks and travel basics.";
+---
+
+<BaseLayout title={title} description={description} path="/buying-guides" wide lang="en">
+  <HubBreadcrumb items={[{ label: "Buying Guides" }]} />
+  <header class="hub-index-header">
+    <h1>Buying Guides</h1>
+    <p class="lead">Step-by-step purchase decisions — compatibility, flavour fit and retailer safety.</p>
+  </header>
+  <div class="hub-card-grid">
+    {
+      guides.map((a) => (
+        <ContentCard href={`/${a.slug}`} title={a.title} description={a.description} image={a.heroImage} imageAlt={a.imageAlt} tag={a.category} />
+      ))
+    }
+  </div>
+  <p class="hub-more"><a href="/comparisons">See all comparisons →</a></p>
+</BaseLayout>

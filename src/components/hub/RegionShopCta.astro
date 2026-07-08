@@ -1,0 +1,20 @@
+---
+import { AU_SHOP_LABEL, AU_SHOP_URL, SHOP_LABEL, SHOP_URL } from "../../config";
+
+interface Props {
+  region?: "australia" | "taiwan";
+  label?: string;
+}
+
+const { region, label } = Astro.props;
+const shopUrl = region === "australia" ? AU_SHOP_URL : region === "taiwan" ? SHOP_URL : SHOP_URL;
+const shopLabel = label ?? (region === "australia" ? AU_SHOP_LABEL : SHOP_LABEL);
+---
+
+<aside class="region-cta" aria-label="Official store">
+  <p>
+    Ready to check stock? Visit <a href={shopUrl} rel="noopener noreferrer"><strong>{shopLabel}</strong></a>
+    for current availability and specifications.
+  </p>
+  <a class="btn btn--shop" href={shopUrl} rel="noopener noreferrer">Visit {shopLabel}</a>
+</aside>
