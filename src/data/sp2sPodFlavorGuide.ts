@@ -1,4 +1,5 @@
 import type { FlavorItem } from "./articleTypes";
+import { SHOP_PRODUCTS, shopLinkHtml, shopProductLinkHtml } from "../lib/shopLinks";
 
 function flavor(
   name: string,
@@ -210,6 +211,7 @@ export const sp2sPodFlavorGuide = {
         "選口味之外，建議同步了解這些實體概念：<strong>Nicotine Salt</strong> 讓 MTL 口吸更順；<strong>Mesh Coil</strong> 影響霧化與風味還原；<strong>VG/PG</strong> 比例決定煙霧量與擊喉感。",
         "保存請直立、避光，開封後風味會隨時間變化，詳見 <a href=\"/pod-storage-shelf-life\">煙彈保存與效期</a>。若出現漏油、糊味，分別參考 <a href=\"/pod-leaking-troubleshooting\">漏油排查</a> 與 <a href=\"/pod-no-flavor-or-burned-taste\">沒味道/糊味處理</a>。",
         "出國旅行攜帶請先看 <a href=\"/airport-vaping-guide\">機場規定</a>；換季選味可參考 <a href=\"/seasonal-pod-flavor-guide\">季節口味指南</a>。與 LANA 比較請讀 <a href=\"/sp2s-vs-lana-pod-how-to-choose\">品牌選購對比</a>。",
+        `選定口味後，可至 ${shopLinkHtml()} 查看現貨：${shopProductLinkHtml(SHOP_PRODUCTS.sp2sUniversalPods, "SP2S 二代通用煙彈")}、${shopProductLinkHtml(SHOP_PRODUCTS.sp2sGen1Pods, "SP2S 一代煙彈")}、${shopProductLinkHtml(SHOP_PRODUCTS.lanaPods, "LANA 煙彈")}。`,
       ],
       html: true,
     },

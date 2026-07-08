@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GridShopPrompt from "../components/GridShopPrompt.astro";
-import { SITE_NAME } from "../config";
+import { SITE_NAME, SHOP_URL, SHOP_LABEL } from "../config";
 import { articles, featuredArticles } from "../data/articles";
 import { buildItemListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
 
@@ -22,7 +22,8 @@ const jsonLd = [buildWebSiteJsonLd(description), buildOrganizationJsonLd(), buil
       <p class="kicker">PodPick Guide</p>
       <h1>選煙彈前，先把口味與規格搞清楚</h1>
       <p class="lead">
-        實測整理、新手指南與常見問題 — 共 {articles.length} 篇，幫你少踩雷。需要現貨時再前往官方選購站。
+        實測整理、新手指南與常見問題 — 共 {articles.length} 篇，幫你少踩雷。需要現貨時再前往
+        <a href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>。
       </p>
     </div>
 

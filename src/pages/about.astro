@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_NAME } from "../config";
+import ShopCta from "../components/ShopCta.astro";
+import { SITE_NAME, SHOP_URL, SHOP_LABEL } from "../config";
 import { DEFAULT_AUTHOR } from "../data/author";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
 
@@ -47,9 +48,11 @@ const jsonLd = [
     <section>
       <h2>與商城的關係</h2>
       <p>
-        文末 CTA 連至官方選購站，方便你在看完評測後查現貨與規格。我們優先提供可驗證的實測資訊與對照表，而非硬性推銷單一口味。
+        文末 CTA 連至<a href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>，方便你在看完評測後查現貨與規格。我們優先提供可驗證的實測資訊與對照表，而非硬性推銷單一口味。
       </p>
     </section>
+
+    <ShopCta />
 
     <section>
       <h2>主題權威（Topic Cluster）</h2>

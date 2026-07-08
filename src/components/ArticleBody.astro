@@ -30,7 +30,13 @@ function renderFlavorMeta(item: {
   {body.intro.map((p) =>
     body.introHtml ? <p set:html={p} /> : <p>{p}</p>
   )}
-  {body.disclaimer && <p class="disclaimer">{body.disclaimer}</p>}
+  {body.disclaimer && (
+    body.disclaimer.includes("<a ") ? (
+      <p class="disclaimer" set:html={body.disclaimer} />
+    ) : (
+      <p class="disclaimer">{body.disclaimer}</p>
+    )
+  )}
 
   {
     body.geo?.pros?.length || body.geo?.cons?.length ? (

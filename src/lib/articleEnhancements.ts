@@ -2,6 +2,12 @@ import type { ArticleCard } from "../data/articles";
 import { articles as allArticles } from "../data/articles";
 import type { ArticleBody, ArticleGeo, ArticleSection } from "../data/articleTypes";
 import { DEFAULT_AUTHOR } from "../data/author";
+import {
+  SHOP_PRODUCTS,
+  linkifyShopMentions,
+  shopLinkHtml,
+  shopProductLinkHtml,
+} from "./shopLinks";
 
 const CATEGORY_FAQ: Record<string, { q: string; a: string }[]> = {
   口味指南: [
@@ -174,7 +180,14 @@ function mergeFaqSections(sections: ArticleSection[], article: ArticleCard): Art
         ]
       : [];
 
-  const supplemental = [...categoryFaqs, ...clusterFaq];
+  const supplemental = [
+    ...categoryFaqs,
+    ...clusterFaq,
+    {
+      q: "哪裡可以查看現貨並選購？",
+      a: `可至 ${shopLinkHtml()} 查詢 SP2S／LANA 煙彈與主機現貨；熱門品項如 ${shopProductLinkHtml(SHOP_PRODUCTS.sp2sUniversalPods, "SP2S 二代煙彈")}、${shopProductLinkHtml(SHOP_PRODUCTS.lanaPods, "LANA 煙彈")} 亦可直接點選。`,
+    },
+  ];
   if (supplemental.length === 0) return sections;
 
   if (faqIndex === -1) {
@@ -231,14 +244,73 @@ function ensureTestingMethod(sections: ArticleSection[], geo: ArticleGeo): Artic
   ];
 }
 
+function linkifySection(section: ArticleSection): ArticleSection {
+  switch (section.kind) {
+    case "text":
+      return section.html
+        ? {
+            ...section,
+            paragraphs: section.paragraphs.map(linkifyShopMentions),
+          }
+        : section;
+    case "list":
+      return section.html
+        ? { ...section, items: section.items.map(linkifyShopMentions) }
+        : section;
+    case "flavors":
+      return section.html && section.lead
+        ? { ...section, lead: linkifyShopMentions(section.lead) }
+        : section;
+    case "faq":
+      return section.html
+        ? {
+            ...section,
+            items: section.items.map((item) => ({
+              ...item,
+              a: linkifyShopMentions(item.a),
+            })),
+          }
+        : section;
+    case "summary":
+      return section.html
+        ? {
+            ...section,
+            paragraphs: section.paragraphs.map(linkifyShopMentions),
+          }
+        : section;
+    default:
+      return section;
+  }
+}
+
+function applyShopLinks(body: ArticleBody): ArticleBody {
+  const intro = body.introHtml ? body.intro.map(linkifyShopMentions) : body.intro;
+  const disclaimer = body.disclaimer ? linkifyShopMentions(body.disclaimer) : body.disclaimer;
+  const geo = body.geo
+    ? {
+        ...body.geo,
+        summary: body.geo.summary?.map(linkifyShopMentions),
+      }
+    : body.geo;
+
+  return {
+    ...body,
+    intro,
+    disclaimer,
+    geo,
+    sections: body.sections.map(linkifySection),
+  };
+}
+
 /** 為文章補齊 GEO 模板欄位與 FAQ，不改動已有自訂內容 */
 export function enrichArticleBody(article: ArticleCard, body: ArticleBody): ArticleBody {
-  const geo = buildDefaultGeo(article, body);
-  let sections = [...body.sections];
+  const withLinks = applyShopLinks(body);
+  const geo = buildDefaultGeo(article, withLinks);
+  let sections = [...withLinks.sections];
   sections = ensureTestingMethod(sections, geo);
   sections = mergeFaqSections(sections, article);
   sections = ensureSummarySection(sections, geo);
-  return { ...body, geo, sections };
+  return { ...withLinks, geo, sections };
 }
 
 export function collectAllFaqItems(sections: ArticleSection[]): { q: string; a: string }[] {
