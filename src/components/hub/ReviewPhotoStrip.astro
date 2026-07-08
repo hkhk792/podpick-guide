@@ -1,0 +1,19 @@
+---
+import { australiaReviewPhotos } from "../../data/hub/australiaImages";
+
+interface Props {
+  limit?: number;
+  label?: string;
+}
+
+const { limit = 6, label = "Customer photos" } = Astro.props;
+const photos = australiaReviewPhotos.slice(0, limit);
+---
+
+<div class="review-photo-strip" aria-label={label}>
+  {
+    photos.map((src, i) => (
+      <img src={src} alt={`${label} ${i + 1}`} loading="lazy" decoding="async" width="120" height="120" />
+    ))
+  }
+</div>

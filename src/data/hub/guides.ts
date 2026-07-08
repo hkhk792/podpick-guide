@@ -1,6 +1,5 @@
 import type { HubGuide } from "./types";
-
-const AU = "/images/australia";
+import { AU, AU_LIFESTYLE, AU_PACKS, AU_PRODUCTS } from "./australiaImages";
 
 export const hubGuides: HubGuide[] = [
   {
@@ -57,10 +56,12 @@ export const hubGuides: HubGuide[] = [
         a: "It is rated for up to 9000 puffs. The exact number depends on draw length and frequency, so treat the rating as an upper estimate rather than a fixed guarantee.",
       },
     ],
-    relatedProductSlugs: ["quadruple-berry", "mango-magic", "custom-5-pack"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: ["alibarbar-quadruple-berry-review", "alibarbar-peach-ice-review"],
     relatedGuides: ["how-long-does-alibarbar-ingot-9000-last", "how-to-use-a-disposable-vape"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    brandSlug: "alibarbar",
+    heroImage: `${AU_LIFESTYLE}/hero-pair.png`,
     imageAlt: "Alibarbar Ingot 9000 disposable vape device",
     datePublished: "2026-02-01",
     dateModified: "2026-07-01",
@@ -110,10 +111,12 @@ export const hubGuides: HubGuide[] = [
         a: "Long hard draws and chain-vaping use e-liquid and battery faster. Heat exposure can also shorten lifespan. Gentler puffs and cool storage help.",
       },
     ],
-    relatedProductSlugs: ["peach-ice", "grape-ice"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: ["alibarbar-peach-ice-review"],
     relatedGuides: ["what-is-alibarbar-ingot-9000", "how-many-puffs-does-alibarbar-ingot-9000-have"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    brandSlug: "alibarbar",
+    heroImage: `${AU_LIFESTYLE}/unbox-01.jpg`,
     imageAlt: "Alibarbar Ingot 9000 display showing device life",
     datePublished: "2026-02-05",
     dateModified: "2026-07-01",
@@ -148,10 +151,11 @@ export const hubGuides: HubGuide[] = [
         ],
       },
     ],
-    relatedProductSlugs: ["strawberry-ice", "blackberry-ice"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
     relatedGuides: ["how-long-does-alibarbar-ingot-9000-last", "what-is-alibarbar-ingot-9000"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    brandSlug: "alibarbar",
+    heroImage: `${AU_LIFESTYLE}/device-hand-01.jpg`,
     imageAlt: "Alibarbar Ingot 9000 puff count guide",
     datePublished: "2026-02-08",
     dateModified: "2026-07-01",
@@ -222,10 +226,12 @@ export const hubGuides: HubGuide[] = [
         a: "No. Opening or modifying a non-rechargeable disposable vape can damage the battery and electronics. Do not attempt it.",
       },
     ],
-    relatedProductSlugs: ["custom-5-pack", "peach-ice", "quadruple-berry"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: ["alibarbar-quadruple-berry-review", "alibarbar-peach-ice-review"],
     relatedGuides: ["how-long-does-alibarbar-ingot-9000-last", "how-many-puffs-does-alibarbar-ingot-9000-have"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    brandSlug: "alibarbar",
+    heroImage: `${AU_LIFESTYLE}/collection.png`,
     imageAlt: "Alibarbar Ingot 9000 battery and e-liquid display",
     datePublished: "2026-02-10",
     dateModified: "2026-07-07",
@@ -274,10 +280,11 @@ export const hubGuides: HubGuide[] = [
         a: "Many disposables, including the Alibarbar Ingot 9000, come pre-charged and are non-rechargeable. When the battery or e-liquid runs out, replace or recycle the device responsibly.",
       },
     ],
-    relatedProductSlugs: ["custom-5-pack", "fanta"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: ["alibarbar-fanta-review"],
     relatedGuides: ["what-is-alibarbar-ingot-9000", "disposable-vape-laws-in-australia"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    heroImage: `${AU_LIFESTYLE}/unbox-03.webp`,
     imageAlt: "Beginner using a disposable vape guide",
     datePublished: "2026-02-12",
     dateModified: "2026-07-01",
@@ -318,10 +325,16 @@ export const hubGuides: HubGuide[] = [
         ],
       },
     ],
-    relatedProductSlugs: ["quadruple-berry", "peach-ice", "custom-5-pack"],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: [
+      "alibarbar-quadruple-berry-review",
+      "alibarbar-peach-ice-review",
+      "alibarbar-fanta-review",
+    ],
     relatedGuides: ["what-is-alibarbar-ingot-9000", "how-to-use-a-disposable-vape"],
     region: "australia",
-    heroImage: `${AU}/products/flavor-quadruple-berry.png`,
+    brandSlug: "alibarbar",
+    heroImage: `${AU_PRODUCTS}/flavor-quadruple-berry.png`,
     imageAlt: "Alibarbar flavour selection in Australia",
     datePublished: "2026-02-16",
     dateModified: "2026-07-01",
@@ -363,10 +376,275 @@ export const hubGuides: HubGuide[] = [
     ],
     relatedGuides: ["how-to-use-a-disposable-vape", "what-is-alibarbar-ingot-9000"],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    heroImage: `${AU_PACKS}/custom-5-pack.png`,
     imageAlt: "Australia disposable vape laws guide",
     datePublished: "2026-02-20",
-    dateModified: "2026-07-01",
+    dateModified: "2026-07-08",
+  },
+  {
+    slug: "best-disposable-vape-australia",
+    title: "Best Disposable Vape Australia (2026 Round-up)",
+    description:
+      "Independent comparison of Australia's leading disposable vape brands — Alibarbar, IGET, HQD, KUZ and what to buy for capacity, portability or flavour.",
+    category: "Market Guide",
+    readTime: "8 min read",
+    intro:
+      "Australia's disposable market is no longer a single-brand story. Adults now choose between familiar names like IGET, compact options like HQD, high-puff challengers like KUZ and display-led devices like the Alibarbar Ingot 9000. " +
+      "This round-up explains who each brand suits and where to read deeper brand-specific guides.",
+    sections: [
+      {
+        heading: "How we evaluate disposables in Australia",
+        paragraphs: [
+          "PodPick Guide treats disposables as adult-only products and compares them on practical buying factors: headline puff count, e-liquid capacity, battery size, display visibility, flavour breadth, pack flexibility and how easy the spec sheet is to understand.",
+          "No brand wins every category. A device that excels on capacity may feel bulky; a compact HQD-style unit may need replacing sooner. The best disposable is the one that matches your priority.",
+        ],
+        bullets: [
+          "Capacity class: compact (~2k puffs) vs mid/high vs 9000-puff display devices",
+          "Flavour familiarity vs exploration",
+          "One-device simplicity vs mixing flavours in a custom pack",
+          "Retailer traceability and regional compliance",
+        ],
+      },
+      {
+        heading: "Best for maximum capacity and display visibility",
+        paragraphs: [
+          "Alibarbar Ingot 9000 leads the high-capacity lane with a clear spec story: up to 9000 puffs, 22ml e-liquid, 2350mAh battery and a smart LED display for battery and e-liquid levels.",
+          "Adults who want fewer replacements, visible remaining life and a 5 Flavour Custom Pack should start with our Alibarbar column and the Ingot 9000 product guide.",
+        ],
+      },
+      {
+        heading: "Best for brand familiarity and model variety",
+        paragraphs: [
+          "IGET remains one of Australia's most recognised disposable names. Its strength is breadth — Bar, Legend, King and other models cover different sizes and flavour habits.",
+          "The buying risk is assuming every IGET is the same. Compare exact model specs before checkout and read our IGET Guides column for model-level advice.",
+        ],
+      },
+      {
+        heading: "Best for pocket size and simplicity",
+        paragraphs: [
+          "HQD represents the compact disposable lane. If portability matters more than headline puff count, HQD-style devices can feel more discreet and lightweight in daily carry.",
+          "Trade-off: lower capacity versus 9000-puff class devices. HQD is often the right answer when size beats longevity.",
+        ],
+      },
+      {
+        heading: "Best high-puff alternative to compare",
+        paragraphs: [
+          "KUZ competes in the high-puff segment with alternative flavour positioning. It is worth comparing when a specific KUZ model or flavour appeals, but always verify puff count, battery and display details model by model.",
+          "Use our head-to-head Alibarbar vs KUZ comparison for a structured starting point.",
+        ],
+      },
+      {
+        heading: "Quick brand picker",
+        paragraphs: ["Use this shorthand if you are deciding between columns:"],
+        bullets: [
+          "Choose Alibarbar if capacity, display and custom packs matter most",
+          "Choose IGET if you want a familiar brand and a specific model/flavour you already trust",
+          "Choose HQD if compact size is the priority",
+          "Choose KUZ if you are comparing high-puff alternatives and want a second opinion on value",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "What is the best disposable vape in Australia overall?",
+        a: "There is no universal winner. Alibarbar leads on clear high-capacity specs; IGET leads on familiarity; HQD leads on portability; KUZ is a high-puff alternative worth model-level comparison.",
+      },
+      {
+        q: "Are disposable vapes legal for adults in Australia?",
+        a: "Rules vary by state and territory and change over time. See our Australia laws guide for a general overview — it is not legal advice.",
+      },
+    ],
+    relatedGuides: ["how-to-use-a-disposable-vape", "disposable-vape-laws-in-australia"],
+    region: "australia",
+    heroImage: `${AU_LIFESTYLE}/lifestyle-01.webp`,
+    imageAlt: "Best disposable vape brands compared for Australia",
+    datePublished: "2026-07-01",
+    dateModified: "2026-07-08",
+  },
+  {
+    slug: "iget-australia-buying-guide",
+    title: "IGET Australia Buying Guide: Models, Flavours & What to Check",
+    description:
+      "How to buy IGET disposables in Australia — compare Bar, Legend and King models, flavours and specs before you checkout.",
+    category: "Brand Guide",
+    readTime: "7 min read",
+    intro:
+      "IGET's strength in Australia is recognition, but its product range is not one-size-fits-all. This guide explains how to compare IGET models fairly and when IGET beats newer high-capacity alternatives.",
+    sections: [
+      {
+        heading: "Why IGET still matters in Australia",
+        paragraphs: [
+          "Many adult buyers already know IGET flavours and naming before they compare newer devices. That familiarity reduces flavour risk — you may already know whether you like IGET's fruit, ice or mint style.",
+          "The trade-off is spec clarity. IGET covers multiple device sizes, so two listings both branded IGET can have very different puff counts and capacities.",
+        ],
+      },
+      {
+        heading: "Compare by model, not by logo",
+        paragraphs: [
+          "Before buying, write down the exact model name from the listing. Bar, Legend and King devices are not interchangeable on capacity or battery.",
+          "If a retailer only says IGET without a model, ask for the SKU photo or specification sheet. Vague listings are a common source of disappointment.",
+        ],
+        bullets: [
+          "Check puff rating for the exact SKU",
+          "Check e-liquid capacity in ml",
+          "Note whether the device is rechargeable or single-use",
+          "Confirm flavour availability for that model",
+        ],
+      },
+      {
+        heading: "IGET vs high-puff display devices",
+        paragraphs: [
+          "Against Alibarbar Ingot 9000, IGET often wins on flavour familiarity and model choice, while Alibarbar wins on a single clear high-capacity spec and LED display.",
+          "If you already know your favourite IGET flavour in a model that lasts long enough for your routine, IGET may still be the rational buy. If you want fewer replacements and visible battery/e-liquid levels, compare the Ingot 9000.",
+        ],
+      },
+      {
+        heading: "Buying checklist for Australian adults",
+        paragraphs: [
+          "Buy from traceable retailers, keep product photos, verify adult-only policies and store devices upright away from heat. See our Australia laws guide for general compliance context.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Which IGET model is most popular in Australia?",
+        a: "Bar and Legend lines are widely discussed, but popularity varies by retailer stock. Choose based on the exact model specs you need, not hype.",
+      },
+      {
+        q: "Does IGET have a battery display?",
+        a: "Many familiar IGET models do not include a combined battery and e-liquid display. Check the exact SKU.",
+      },
+    ],
+    relatedGuides: ["best-disposable-vape-australia"],
+    region: "australia",
+    brandSlug: "iget",
+    heroImage: `${AU_PRODUCTS}/flavor-grape.png`,
+    imageAlt: "IGET disposable vape buying guide Australia",
+    datePublished: "2026-07-02",
+    dateModified: "2026-07-08",
+  },
+  {
+    slug: "hqd-australia-buying-guide",
+    title: "HQD Australia Buying Guide: Compact Disposables Explained",
+    description:
+      "HQD disposable guide for Australia — when compact Cuvie-style devices make sense and how they compare with high-puff alternatives.",
+    category: "Brand Guide",
+    readTime: "6 min read",
+    intro:
+      "HQD is often the reference point for pocket-friendly disposables in Australia. This guide explains HQD's positioning, what to check by model and when portability should beat capacity.",
+    sections: [
+      {
+        heading: "What HQD is known for",
+        paragraphs: [
+          "HQD built early market share with compact, simple disposables. For many adults the appeal is not maximum puff count — it is a smaller device that feels easy to carry and use without thinking about charging or pods.",
+          "HQD is best understood as a portability choice, not a capacity champion.",
+        ],
+      },
+      {
+        heading: "Specs vary by HQD model",
+        paragraphs: [
+          "Like other multi-model brands, HQD devices differ in puff rating, battery and e-liquid volume. Compare the exact unit on the listing rather than assuming every HQD feels the same.",
+        ],
+        bullets: [
+          "Compact form factor and mouthpiece style",
+          "Puff rating for the listed SKU",
+          "Fruit, mint or classic flavour profile",
+          "Whether the model is rechargeable or single-use",
+        ],
+      },
+      {
+        heading: "When HQD beats a 9000-puff device",
+        paragraphs: [
+          "HQD can be the better buy when discretion and pocket size matter more than weeks of use per device. Travelling light, trying a new flavour cheaply or preferring a smaller hand feel are all valid HQD use cases.",
+          "When you want fewer replacements, visible remaining life or multi-flavour packs, compare Alibarbar or other high-puff options instead.",
+        ],
+      },
+      {
+        heading: "Fair comparison tip",
+        paragraphs: [
+          "Read our Alibarbar vs HQD comparison for a structured side-by-side on capacity, display and pack flexibility before choosing.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is HQD good for beginners?",
+        a: "HQD can be simple to use because many models are inhale-activated and compact. Adults must still be 18+ and already smoke or vape.",
+      },
+      {
+        q: "Does HQD last as long as Alibarbar?",
+        a: "Generally no on headline capacity. HQD trades size for fewer puffs per device.",
+      },
+    ],
+    relatedGuides: ["best-disposable-vape-australia"],
+    region: "australia",
+    brandSlug: "hqd",
+    heroImage: `${AU_LIFESTYLE}/unbox-04.webp`,
+    imageAlt: "HQD compact disposable vape Australia guide",
+    datePublished: "2026-07-03",
+    dateModified: "2026-07-08",
+  },
+  {
+    slug: "kuz-australia-buying-guide",
+    title: "KUZ Australia Buying Guide: High-Puff Alternatives Compared",
+    description:
+      "KUZ disposable buying guide for Australia — model verification, flavour positioning and comparison with Alibarbar Ingot 9000.",
+    category: "Brand Guide",
+    readTime: "6 min read",
+    intro:
+      "KUZ targets adults comparing high-puff disposables in Australia. Because marketing claims can sound similar across brands, this guide focuses on what to verify before you buy KUZ.",
+    sections: [
+      {
+        heading: "Where KUZ fits in the market",
+        paragraphs: [
+          "KUZ competes in the same broad lane as other high-puff disposables: adults who want a long-lasting single device rather than frequent replacements.",
+          "KUZ can be attractive when a specific flavour or price point stands out, but the brand requires more model-level checking than a single-SKU flagship like the Alibarbar Ingot 9000.",
+        ],
+      },
+      {
+        heading: "What to verify on every KUZ listing",
+        paragraphs: [
+          "Treat KUZ listings like any high-puff disposable: confirm the numbers, not just the headline marketing.",
+        ],
+        bullets: [
+          "Rated puff count for the exact model",
+          "E-liquid capacity in ml",
+          "Battery size and whether it is rechargeable",
+          "Display features, if any",
+          "Retailer authenticity and batch photos",
+        ],
+      },
+      {
+        heading: "KUZ vs Alibarbar Ingot 9000",
+        paragraphs: [
+          "Alibarbar offers a consistent flagship spec sheet and custom 5 Flavour Pack. KUZ may win on a particular flavour or promotional bundle, but comparisons should be model-specific.",
+          "Start with our Alibarbar vs KUZ head-to-head, then narrow to the exact devices you are considering.",
+        ],
+      },
+      {
+        heading: "Who should consider KUZ",
+        paragraphs: [
+          "KUZ suits adults who are already comparing high-puff devices and want an alternative flavour mix or price angle. It is less ideal as a default recommendation without checking the exact SKU.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is KUZ the same type of device as Alibarbar?",
+        a: "Both are inhale-activated disposables in the high-puff category, but specs and flavours differ by model.",
+      },
+      {
+        q: "Does KUZ offer custom flavour packs?",
+        a: "Pack formats vary by retailer. Alibarbar's 5 Flavour Custom Pack is a distinct buying advantage to compare directly.",
+      },
+    ],
+    relatedGuides: ["best-disposable-vape-australia"],
+    region: "australia",
+    brandSlug: "kuz",
+    heroImage: `${AU_PRODUCTS}/flavor-mango.png`,
+    imageAlt: "KUZ disposable vape buying guide Australia",
+    datePublished: "2026-07-04",
+    dateModified: "2026-07-08",
   },
 ];
 

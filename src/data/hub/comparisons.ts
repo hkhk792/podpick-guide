@@ -1,6 +1,5 @@
 import type { HubComparison } from "./types";
-
-const AU = "/images/australia";
+import { AU, AU_LIFESTYLE, AU_PACKS, AU_PRODUCTS } from "./australiaImages";
 const SHARED_DISCLAIMER =
   "Competitor specifications vary by model and change over time; figures below are typical ranges for reference only. Always check the specific device before buying.";
 
@@ -46,7 +45,7 @@ export const hubComparisons: HubComparison[] = [
       },
     ],
     region: "australia",
-    heroImage: `${AU}/packs/custom-5-pack.png`,
+    heroImage: `${AU_PACKS}/custom-5-pack.png`,
     imageAlt: "Alibarbar Ingot 9000 versus IGET comparison",
     relatedSlugs: ["alibarbar-ingot-9000", "alibarbar", "iget"],
     datePublished: "2026-03-01",
@@ -88,7 +87,7 @@ export const hubComparisons: HubComparison[] = [
       },
     ],
     region: "australia",
-    heroImage: `${AU}/products/flavor-peach-ice.png`,
+    heroImage: `${AU_PACKS}/alibarbar-3-pack.webp`,
     imageAlt: "Alibarbar Ingot 9000 versus HQD comparison",
     relatedSlugs: ["alibarbar", "hqd", "alibarbar-ingot-9000"],
     datePublished: "2026-03-04",
@@ -130,7 +129,7 @@ export const hubComparisons: HubComparison[] = [
       },
     ],
     region: "australia",
-    heroImage: `${AU}/products/flavor-grape.png`,
+    heroImage: `${AU_LIFESTYLE}/unbox-04.webp`,
     imageAlt: "Alibarbar Ingot 9000 versus Gunnpod comparison",
     relatedSlugs: ["alibarbar", "gunnpod", "alibarbar-ingot-9000"],
     datePublished: "2026-03-07",
@@ -172,7 +171,7 @@ export const hubComparisons: HubComparison[] = [
       },
     ],
     region: "australia",
-    heroImage: `${AU}/products/flavor-mango.png`,
+    heroImage: `${AU_PRODUCTS}/flavor-lychee.png`,
     imageAlt: "Alibarbar Ingot 9000 versus KUZ comparison",
     relatedSlugs: ["alibarbar", "kuz", "alibarbar-ingot-9000"],
     datePublished: "2026-03-10",
@@ -218,7 +217,7 @@ export const hubComparisons: HubComparison[] = [
       },
     ],
     region: "australia",
-    heroImage: `${AU}/hero-device.png`,
+    heroImage: `${AU_LIFESTYLE}/hero-pair.png`,
     imageAlt: "Alibarbar Ingot 9000 versus RELX pod system comparison",
     relatedSlugs: ["alibarbar", "relx", "alibarbar-ingot-9000"],
     datePublished: "2026-03-13",
@@ -269,4 +268,8 @@ export const hubComparisons: HubComparison[] = [
 export function getComparison(slug: string | undefined): HubComparison | undefined {
   if (!slug) return undefined;
   return hubComparisons.find((comparison) => comparison.slug === slug);
+}
+
+export function getComparisonPath(cmp: HubComparison): string {
+  return cmp.path ?? `/comparisons/${cmp.slug}`;
 }

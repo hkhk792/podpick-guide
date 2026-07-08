@@ -27,9 +27,9 @@ export const HOME_BRANDS = [
 ] as const;
 
 export const HOME_GUIDE_LINKS = [
+  { label: "Australia Hub", href: "/australia" },
+  { label: "Best Disposable AU", href: "/australia/best-disposable-vape" },
   { label: "Buying Guides", href: "/buying-guides" },
-  { label: "Best Flavours", href: "/flavour-guides" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Comparisons", href: "/comparisons" },
   { label: "FAQ", href: "/faq" },
 ] as const;

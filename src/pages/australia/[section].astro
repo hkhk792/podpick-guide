@@ -1,0 +1,179 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
+import ContentCard from "../../components/hub/ContentCard.astro";
+import AustraliaSectionNav from "../../components/hub/AustraliaSectionNav.astro";
+import ReviewPhotoStrip from "../../components/hub/ReviewPhotoStrip.astro";
+import RegionShopCta from "../../components/hub/RegionShopCta.astro";
+import {
+  AUSTRALIA_SECTIONS,
+  getAustraliaSection,
+  getBrandForSection,
+  getComparisonsForAustraliaSection,
+  getGuidesForAustraliaSection,
+  getOtherAustraliaSections,
+  getProductsForSection,
+  getReviewsForSection,
+} from "../../data/hub/australiaSections";
+import { SITE_URL } from "../../config";
+import { buildCollectionPageJsonLd } from "../../lib/seo";
+
+export function getStaticPaths() {
+  return AUSTRALIA_SECTIONS.map((section) => ({ params: { section: section.slug } }));
+}
+
+const { section: sectionSlug } = Astro.params;
+const section = getAustraliaSection(sectionSlug!)!;
+const path = `/australia/${section.slug}`;
+const brand = getBrandForSection(section);
+const guides = getGuidesForAustraliaSection(section);
+const comparisons = getComparisonsForAustraliaSection(section);
+const products = getProductsForSection(section);
+const reviews = getReviewsForSection(section);
+const otherSections = getOtherAustraliaSections(section.slug);
+
+const jsonLd = buildCollectionPageJsonLd(section.title, section.description, path, [
+  ...guides.map((g) => ({ name: g.title, url: `${SITE_URL}/buying-guides/${g.slug}` })),
+  ...comparisons.map((c) => ({ name: c.title, url: `${SITE_URL}/comparisons/${c.slug}` })),
+  ...(brand ? [{ name: brand.name, url: `${SITE_URL}/brands/${brand.slug}` }] : []),
+]);
+---
+
+<BaseLayout
+  title={section.title}
+  description={section.description}
+  path={path}
+  ogImage={section.heroImage}
+  wide
+  jsonLd={jsonLd}
+  lang="en"
+>
+  <HubBreadcrumb items={[{ label: "Australia", href: "/australia" }, { label: section.title }]} />
+  <AustraliaSectionNav current={path} />
+
+  <header class="hub-index-header hub-index-header--region">
+    {section.brandSlug ? <span class="badge">{section.brandSlug.toUpperCase()}</span> : null}
+    <h1>{section.title}</h1>
+    <p class="lead">{section.intro}</p>
+  </header>
+
+  <figure class="article-hero article-hero--region">
+    <img src={section.heroImage} alt={section.imageAlt} width="1200" height="675" loading="eager" />
+    {section.brandSlug === "alibarbar" ? (
+      <ReviewPhotoStrip limit={8} label="Customer and unboxing photos" />
+    ) : null}
+  </figure>
+
+  {
+    brand ? (
+      <section class="hub-section hub-section--brand-spotlight">
+        <h2 class="section-title">About {brand.name}</h2>
+        <p>{brand.intro}</p>
+        <p>
+          <a href={`/brands/${brand.slug}`}>Full {brand.name} brand guide →</a>
+        </p>
+      </section>
+    ) : null
+  }
+
+  <section class="hub-section">
+    <h2 class="section-title">Guides</h2>
+    <div class="hub-card-grid">
+      {
+        guides.map((g) => (
+          <ContentCard
+            href={`/buying-guides/${g.slug}`}
+            title={g.title}
+            description={g.description}
+            image={g.heroImage}
+            imageAlt={g.imageAlt}
+            tag={g.category}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    reviews.length ? (
+      <section class="hub-section">
+        <h2 class="section-title">Flavour Reviews</h2>
+        <div class="hub-card-grid">
+          {
+            reviews.map((r) => (
+              <ContentCard
+                href={`/reviews/${r.slug}`}
+                title={r.title}
+                description={r.description}
+                image={r.heroImage}
+                imageAlt={r.imageAlt}
+                tag="Review"
+              />
+            ))
+          }
+        </div>
+      </section>
+    ) : null
+  }
+
+  {
+    products.length ? (
+      <section class="hub-section">
+        <h2 class="section-title">Products</h2>
+        <div class="hub-card-grid">
+          {
+            products.map((p) => (
+              <ContentCard
+                href={`/products/${p.slug}`}
+                title={p.name}
+                description={p.description}
+                image={p.heroImage}
+                imageAlt={p.imageAlt}
+                tag="Product"
+              />
+            ))
+          }
+        </div>
+      </section>
+    ) : null
+  }
+
+  {
+    comparisons.length ? (
+      <section class="hub-section">
+        <h2 class="section-title">Comparisons</h2>
+        <div class="hub-card-grid">
+          {
+            comparisons.map((c) => (
+              <ContentCard
+                href={`/comparisons/${c.slug}`}
+                title={c.title}
+                description={c.description}
+                image={c.heroImage}
+                imageAlt={c.imageAlt}
+                tag="Comparison"
+              />
+            ))
+          }
+        </div>
+      </section>
+    ) : null
+  }
+
+  <section class="hub-section">
+    <h2 class="section-title">More Australia Columns</h2>
+    <div class="australia-editorial-grid">
+      {
+        otherSections.map((s) => (
+          <a class="australia-editorial-card" href={`/australia/${s.slug}`}>
+            <img src={s.heroImage} alt="" loading="lazy" width="400" height="225" />
+            <strong>{s.navLabel}</strong>
+            <span>{s.description}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <RegionShopCta region="australia" />
+</BaseLayout>

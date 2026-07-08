@@ -12,6 +12,7 @@ import {
   SITE_URL,
 } from "../config";
 import { MAIN_NAV, REGION_NAV } from "../data/hub/navigation";
+import { AUSTRALIA_SECTION_NAV } from "../data/hub/australiaSections";
 import FloatingLineWidget from "../components/FloatingLineWidget.astro";
 
 interface Props {
@@ -131,6 +132,19 @@ const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
           <strong>Regions</strong>
           <p>
             <a href="/australia">Australia</a> · <a href="/taiwan">Taiwan</a>
+          </p>
+        </div>
+        <div>
+          <strong>Australia Columns</strong>
+          <p>
+            {
+              AUSTRALIA_SECTION_NAV.map((item, i) => (
+                <>
+                  {i > 0 ? " · " : null}
+                  <a href={item.href}>{item.label}</a>
+                </>
+              ))
+            }
           </p>
         </div>
         <div>

@@ -1,6 +1,5 @@
 import type { HubProduct } from "./types";
-
-const AU = "/images/australia";
+import { AU, AU_LIFESTYLE, AU_PACKS, AU_PRODUCTS } from "./australiaImages";
 
 type ProductSectionProfile = {
   productName: string;
@@ -200,10 +199,15 @@ export const hubProducts: HubProduct[] = [
     heroImage: `${AU}/hero-device.png`,
     imageAlt: "Alibarbar Ingot 9000 product hero",
     gallery: [
-      `${AU}/products/flavor-quadruple-berry.png`,
-      `${AU}/products/flavor-peach-ice.png`,
-      `${AU}/products/flavor-fanta.png`,
-      `${AU}/packs/custom-5-pack.png`,
+      `${AU_PRODUCTS}/flavor-quadruple-berry.png`,
+      `${AU_PRODUCTS}/flavor-peach-ice.png`,
+      `${AU_PRODUCTS}/flavor-fanta.png`,
+      `${AU_PRODUCTS}/flavor-mango.png`,
+      `${AU_PACKS}/custom-5-pack.png`,
+      `${AU_PACKS}/alibarbar-10-pack.webp`,
+      `${AU_LIFESTYLE}/hero-pair.png`,
+      `${AU_LIFESTYLE}/unbox-01.jpg`,
+      `${AU_LIFESTYLE}/device-hand-01.jpg`,
     ],
     shopUrl: "https://ailibarbar.com",
     priceNote: "Pricing varies by flavour and pack size - check the regional AU retailer.",

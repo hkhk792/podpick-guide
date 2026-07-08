@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
 import { hubGuides } from "../../data/hub/guides";
+import { AUSTRALIA_SECTIONS } from "../../data/hub/australiaSections";
 import { articles } from "../../data/articles";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
@@ -13,7 +14,7 @@ const twBuying = articles.filter((a) =>
 
 const title = "Buying Guides — How to Choose Vape Products";
 const description =
-  "English Australia buying guides plus Taiwan Traditional Chinese purchase references — independent and region-aware.";
+  "Australia brand columns and English buying guides plus Taiwan Traditional Chinese purchase references.";
 
 const jsonLd = buildCollectionPageJsonLd(
   title,
@@ -27,24 +28,46 @@ const jsonLd = buildCollectionPageJsonLd(
   <HubBreadcrumb items={[{ label: "Buying Guides" }]} />
   <header class="hub-index-header">
     <h1>Buying Guides</h1>
-    <p class="lead">Australia-focused English guides first, with Taiwan articles linked for Traditional Chinese shoppers.</p>
+    <p class="lead">
+      Australia guides are organised by editorial column on the
+      <a href="/australia">Australia hub</a>. Taiwan articles remain in Traditional Chinese.
+    </p>
   </header>
 
-  <h2 class="section-title">Australia Guides (English)</h2>
-  <div class="hub-card-grid">
-    {
-      hubGuides.map((g) => (
-        <ContentCard
-          href={`/buying-guides/${g.slug}`}
-          title={g.title}
-          description={g.description}
-          image={g.heroImage}
-          imageAlt={g.imageAlt}
-          tag={g.category}
-        />
-      ))
-    }
-  </div>
+  {
+    AUSTRALIA_SECTIONS.map((section) => {
+      const sectionGuides =
+        section.slug === "best-disposable-vape"
+          ? hubGuides.filter((g) =>
+              ["best-disposable-vape-australia", "how-to-use-a-disposable-vape", "disposable-vape-laws-in-australia"].includes(
+                g.slug
+              )
+            )
+          : section.brandSlug
+            ? hubGuides.filter((g) => g.brandSlug === section.brandSlug)
+            : [];
+      if (!sectionGuides.length) return null;
+      return (
+        <section class="hub-section">
+          <h2 class="section-title">
+            <a href={`/australia/${section.slug}`}>{section.title}</a>
+          </h2>
+          <div class="hub-card-grid">
+            {sectionGuides.map((g) => (
+              <ContentCard
+                href={`/buying-guides/${g.slug}`}
+                title={g.title}
+                description={g.description}
+                image={g.heroImage}
+                imageAlt={g.imageAlt}
+                tag={g.category}
+              />
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
 
   <h2 class="section-title">Taiwan Guides (繁體)</h2>
   <div class="hub-card-grid">

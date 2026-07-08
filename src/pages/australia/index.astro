@@ -2,105 +2,92 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
+import AustraliaSectionNav from "../../components/hub/AustraliaSectionNav.astro";
+import ReviewPhotoStrip from "../../components/hub/ReviewPhotoStrip.astro";
 import RegionShopCta from "../../components/hub/RegionShopCta.astro";
-import { AU_SHOP_URL, REGIONS } from "../../config";
-import { hubBrands } from "../../data/hub/brands";
+import { REGIONS } from "../../config";
+import {
+  AUSTRALIA_SECTIONS,
+  AU_EDITORIAL_BRANDS,
+} from "../../data/hub/australiaSections";
 import { hubComparisons } from "../../data/hub/comparisons";
-import { hubProducts } from "../../data/hub/products";
-import { hubGuides } from "../../data/hub/guides";
-import { hubReviews } from "../../data/hub/reviews";
 import { hubNewsPosts } from "../../data/hub/news";
 
 const au = REGIONS.australia;
-const auBrands = hubBrands.filter((b) => b.region === "australia" || b.region === "global");
 const auComparisons = hubComparisons.filter((c) => c.region === "australia");
-const auProducts = hubProducts.filter((p) => p.region === "australia");
 const auNews = hubNewsPosts.filter((n) => n.region === "australia").slice(0, 4);
 
-const title = "Australia — Disposable Vape Guides & Reviews";
+const title = "Australia — Disposable Vape Media & Buying Guides";
 const description =
-  "English-language buying guides, Alibarbar reviews and comparisons for Australian adult vapers. Shop at ailibarbar.com.";
+  "Independent Australia vape media: best disposable round-up, Alibarbar, IGET, HQD and KUZ brand columns, comparisons and market news.";
 ---
 
 <BaseLayout title={title} description={description} path="/australia" ogImage={au.heroImage} wide lang="en">
   <HubBreadcrumb items={[{ label: "Australia" }]} />
+  <AustraliaSectionNav current="/australia" />
 
   <header class="hub-index-header hub-index-header--region">
     <span class="region-card__flag">🇦🇺</span>
     <h1>Australia</h1>
     <p class="lead">
-      Independent English guides for the Australian market — disposables, flavour picks and head-to-head comparisons.
-      Official store: <a href={AU_SHOP_URL} rel="noopener noreferrer">ailibarbar.com</a>
+      Independent English editorial for the Australian disposable market — brand columns, head-to-head comparisons and buying guides across Alibarbar, IGET, HQD and KUZ.
     </p>
   </header>
 
   <figure class="article-hero article-hero--region">
-    <img src={au.heroImage} alt="Alibarbar Ingot 9000 Australia" width="1200" height="675" loading="eager" />
-    <div class="review-photo-strip">
+    <img src={au.heroImage} alt="Australian disposable vape market guides" width="1200" height="675" loading="eager" />
+    <ReviewPhotoStrip limit={10} label="Market photos and customer shots" />
+  </figure>
+
+  <section class="hub-section">
+    <h2 class="section-title">Editorial Columns</h2>
+    <p class="muted hub-section-intro">
+      Browse by topic — each column collects guides, comparisons and brand context in one place.
+    </p>
+    <div class="australia-editorial-grid">
       {
-        Array.from({ length: 6 }, (_, i) => (
-          <img
-            src={`/images/australia/reviews/review-${String(i + 1).padStart(2, "0")}.jpg`}
-            alt={`Customer review photo ${i + 1}`}
-            loading="lazy"
-            width="120"
-            height="120"
+        AUSTRALIA_SECTIONS.map((s) => (
+          <a class="australia-editorial-card" href={`/australia/${s.slug}`}>
+            <img src={s.heroImage} alt="" loading="lazy" width="400" height="225" />
+            <strong>{s.title}</strong>
+            <span>{s.description}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="hub-section">
+    <h2 class="section-title">Brands We Cover</h2>
+    <div class="hub-card-grid">
+      {
+        AU_EDITORIAL_BRANDS.map((b) => (
+          <ContentCard
+            href={`/brands/${b.slug}`}
+            title={b.name}
+            description={b.description}
+            image={b.heroImage}
+            imageAlt={b.imageAlt}
+            tag="Brand"
           />
         ))
       }
     </div>
-  </figure>
-
-  <section class="hub-section">
-    <h2 class="section-title">Buying Guides</h2>
-    <div class="hub-card-grid">
-      {
-        hubGuides.map((g) => (
-          <ContentCard href={`/buying-guides/${g.slug}`} title={g.title} description={g.description} image={g.heroImage} imageAlt={g.imageAlt} tag={g.category} />
-        ))
-      }
-    </div>
   </section>
 
   <section class="hub-section">
-    <h2 class="section-title">Flavour Reviews</h2>
-    <div class="hub-card-grid">
-      {
-        hubReviews.map((r) => (
-          <ContentCard href={`/reviews/${r.slug}`} title={r.title} description={r.description} image={r.heroImage} imageAlt={r.imageAlt} tag="Review" />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section">
-    <h2 class="section-title">Products</h2>
-    <div class="hub-card-grid">
-      {
-        auProducts.map((p) => (
-          <ContentCard href={`/products/${p.slug}`} title={p.name} description={p.description} image={p.heroImage} imageAlt={p.imageAlt} tag="Product" />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section">
-    <h2 class="section-title">Comparisons</h2>
+    <h2 class="section-title">Head-to-Head Comparisons</h2>
     <div class="hub-card-grid">
       {
         auComparisons.map((c) => (
-          <ContentCard href={`/comparisons/${c.slug}`} title={c.title} description={c.description} image={c.heroImage} imageAlt={c.imageAlt} tag="Comparison" />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section">
-    <h2 class="section-title">Brands</h2>
-    <div class="hub-card-grid">
-      {
-        auBrands.map((b) => (
-          <ContentCard href={`/brands/${b.slug}`} title={b.name} description={b.description} image={b.heroImage} imageAlt={b.imageAlt} tag="Brand" />
+          <ContentCard
+            href={`/comparisons/${c.slug}`}
+            title={c.title}
+            description={c.description}
+            image={c.heroImage}
+            imageAlt={c.imageAlt}
+            tag="Comparison"
+          />
         ))
       }
     </div>
@@ -111,9 +98,11 @@ const description =
       <section class="hub-section">
         <h2 class="section-title">Australia News</h2>
         <div class="hub-card-grid">
-          {auNews.map((n) => (
-            <ContentCard href={`/news/${n.slug}`} title={n.title} description={n.excerpt} image={n.heroImage} tag={n.weekTag} />
-          ))}
+          {
+            auNews.map((n) => (
+              <ContentCard href={`/news/${n.slug}`} title={n.title} description={n.excerpt} image={n.heroImage} tag={n.weekTag} />
+            ))
+          }
         </div>
       </section>
     ) : null

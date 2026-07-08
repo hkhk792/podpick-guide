@@ -94,6 +94,8 @@ export type HubComparison = {
   relatedSlugs: string[];
   datePublished: string;
   dateModified: string;
+  /** When set, page lives at this path instead of /comparisons/{slug} */
+  path?: string;
 };
 
 export type HubFaqTopic = {
@@ -103,6 +105,8 @@ export type HubFaqTopic = {
   intro?: string;
   items: { q: string; a: string }[];
 };
+
+export type AustraliaGuideBrand = "alibarbar" | "iget" | "hqd" | "kuz";
 
 export type HubGuide = {
   slug: string;
@@ -115,6 +119,9 @@ export type HubGuide = {
   faq?: { q: string; a: string }[];
   relatedGuides?: string[];
   relatedProductSlugs?: string[];
+  relatedReviewSlugs?: string[];
+  /** Australia brand column — omit for cross-brand / market guides */
+  brandSlug?: AustraliaGuideBrand;
   region: HubRegion;
   heroImage: string;
   imageAlt: string;

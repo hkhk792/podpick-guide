@@ -1,0 +1,23 @@
+---
+import { AUSTRALIA_SECTION_NAV } from "../../data/hub/australiaSections";
+
+interface Props {
+  current?: string;
+}
+
+const { current = "" } = Astro.props;
+---
+
+<nav class="australia-section-nav" aria-label="Australia editorial sections">
+  {
+    AUSTRALIA_SECTION_NAV.map((item) => (
+      <a
+        class:list={["australia-section-nav__link", { "is-active": current === item.href }]}
+        href={item.href}
+        aria-current={current === item.href ? "page" : undefined}
+      >
+        {item.label}
+      </a>
+    ))
+  }
+</nav>

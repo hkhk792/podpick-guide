@@ -4,6 +4,7 @@ import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import PodPickScore from "../../components/hub/PodPickScore.astro";
 import RegionShopCta from "../../components/hub/RegionShopCta.astro";
 import ContentSections from "../../components/hub/ContentSections.astro";
+import ReviewPhotoStrip from "../../components/hub/ReviewPhotoStrip.astro";
 import { hubProducts, getProduct } from "../../data/hub/products";
 import { getBrand } from "../../data/hub/brands";
 import { buildFaqJsonLd } from "../../lib/seo";
@@ -48,6 +49,7 @@ const jsonLd = product.faq.length
 
     <figure class="article-hero">
       <img src={product.heroImage} alt={product.imageAlt} width="1200" height="675" loading="eager" />
+      {region === "australia" ? <ReviewPhotoStrip limit={8} label="Customer and unboxing photos" /> : null}
     </figure>
 
     {

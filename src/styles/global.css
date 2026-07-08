@@ -1210,6 +1210,88 @@ img {
   color: var(--accent);
 }
 
+.australia-section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.australia-section-nav__link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.australia-section-nav__link:hover,
+.australia-section-nav__link.is-active {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.australia-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.australia-editorial-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.australia-editorial-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 6%);
+  text-decoration: none;
+}
+
+.australia-editorial-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.australia-editorial-card strong {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.australia-editorial-card span {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.hub-section-intro {
+  margin: -0.5rem 0 1rem;
+  max-width: 52ch;
+}
+
+.hub-section--brand-spotlight {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
 .header-shops {
   display: flex;
   gap: 0.5rem;
