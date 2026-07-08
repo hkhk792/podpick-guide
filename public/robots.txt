@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://podpickguide.com/sitemap-index.xml
+Sitemap: https://podpickguide.com/sitemap.xml

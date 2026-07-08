@@ -3,6 +3,16 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://podpickguide.com",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith("/lanavap-news-10"),
+      serialize(item) {
+        return {
+          ...item,
+          lastmod: new Date(),
+        };
+      },
+    }),
+  ],
   trailingSlash: "never",
 });
