@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+import { SITE_NAME, SITE_URL, GA_MEASUREMENT_ID, SHOP_URL, SHOP_LABEL } from "../config";
+import FloatingLineWidget from "../components/FloatingLineWidget.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  narrow?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = "",
+  ogImage = "/images/podpick-flavor-selection.png",
+  jsonLd,
+  narrow = false,
+} = Astro.props;
+
+const canonical = new URL(path.replace(/^\//, "") || "", SITE_URL).href;
+const ogImageUrl = new URL(ogImage, SITE_URL).href;
+const fullTitle = path === "" || path === "/" ? title : `${title} | ${SITE_NAME}`;
+const mainClass = narrow ? "container container--narrow" : "container";
+const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:type" content={path === "" ? "website" : "article"} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {
+      jsonLdList.map((node) => (
+        <script type="application/ld+json" set:html={JSON.stringify(node)} />
+      ))
+    }
+    {
+      GA_MEASUREMENT_ID ? (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+          <script
+            is:inline
+            set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
+          />
+        </>
+      ) : null
+    }
+  </head>
+  <body>
+    <header class="site-header">
+      <div class={`${mainClass} site-header__inner`}>
+        <a class="brand" href="/">
+          <img src="/favicon.png" alt="" width="28" height="28" />
+          {SITE_NAME}
+        </a>
+        <a class="header-hint" href={SHOP_URL} rel="noopener noreferrer">
+          <span class="header-hint__long">選好口味？現貨與規格請至</span>
+          <span class="header-hint__short">現貨請點</span>
+          <strong>{SHOP_LABEL}</strong>
+        </a>
+        <nav class="nav" aria-label="主要導覽">
+          <a class="nav__link" href="/">全部文章</a>
+          <a class="nav__link" href="/about">關於</a>
+          <a class="nav__cta" href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>
+        </nav>
+      </div>
+    </header>
+    <main class={mainClass}>
+      <slot />
+    </main>
+    <FloatingLineWidget />
+    <footer class="site-footer">
+      <div class={mainClass}>
+        <p>
+          {SITE_NAME} 為獨立選購參考站，非醫療或法律建議。內容僅供年滿 20 歲使用者參考；法規與產品以實際通路為準。
+          <a href="/about">關於我們</a>
+          ·
+          <a href="/author/jason-chen">評測編輯</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

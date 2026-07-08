@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import GridShopPrompt from "../components/GridShopPrompt.astro";
+import { SITE_NAME } from "../config";
+import { articles, featuredArticles } from "../data/articles";
+import { buildItemListJsonLd, buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
+
+const moreArticles = articles.filter((a) => !a.featured);
+
+const title = `${SITE_NAME} — 煙彈口味與選購指南`;
+const description =
+  "SP2S 煙彈口味、選購對比、使用技巧與旅行須知。簡明易讀的獨立參考站，選購前先看這裡。";
+
+const slides = featuredArticles;
+
+const jsonLd = [buildWebSiteJsonLd(description), buildOrganizationJsonLd(), buildItemListJsonLd(articles)];
+---
+
+<BaseLayout title={title} description={description} path="/" jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="kicker">PodPick Guide</p>
+      <h1>選煙彈前，先把口味與規格搞清楚</h1>
+      <p class="lead">
+        實測整理、新手指南與常見問題 — 共 {articles.length} 篇，幫你少踩雷。需要現貨時再前往官方選購站。
+      </p>
+    </div>
+
+    <div class="hero-slider" aria-label="精選文章輪播">
+      {
+        slides.map((a, index) => (
+          <a
+            class="hero-slide"
+            href={`/${a.slug}`}
+            style={`--i:${index}; --count:${slides.length}; background-image: linear-gradient(90deg, rgba(15,23,42,.74), rgba(15,23,42,.18)), url('${a.heroImage}')`}
+          >
+            <span class="hero-slide__tag">{a.category}</span>
+            <strong>{a.title}</strong>
+            <span>{a.description}</span>
+          </a>
+        ))
+      }
+      <div class="hero-dots" aria-hidden="true">
+        {slides.map(() => <span />)}
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">精選閱讀</h2>
+  <div class="article-grid">
+    {
+      featuredArticles.map((a) => (
+        <a class="card" href={`/${a.slug}`}>
+          <img
+            class="card__img"
+            src={a.heroImage}
+            alt={a.imageAlt}
+            width={a.heroWidth}
+            height={a.heroHeight}
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="card__body">
+            <span class="card__tag">{a.category}</span>
+            <h3 class="card__title">{a.title}</h3>
+            <p class="card__desc">{a.description}</p>
+            <span class="card__date">{a.date}</span>
+          </div>
+        </a>
+      ))
+    }
+    {featuredArticles.length % 2 === 1 ? <GridShopPrompt /> : null}
+  </div>
+
+  <h2 class="section-title">更多文章</h2>
+  <div class="article-grid">
+    {
+      moreArticles.map((a) => (
+        <a class="card" href={`/${a.slug}`}>
+          <img
+            class="card__img"
+            src={a.heroImage}
+            alt={a.imageAlt}
+            width={a.heroWidth}
+            height={a.heroHeight}
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="card__body">
+            <span class="card__tag">{a.category}</span>
+            <h3 class="card__title">{a.title}</h3>
+            <p class="card__desc">{a.description}</p>
+            <span class="card__date">{a.date}</span>
+          </div>
+        </a>
+      ))
+    }
+    {moreArticles.length % 2 === 1 ? <GridShopPrompt /> : null}
+  </div>
+</BaseLayout>

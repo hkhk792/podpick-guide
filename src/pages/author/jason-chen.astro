@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { DEFAULT_AUTHOR, buildAuthorPersonJsonLd } from "../../data/author";
+import { articles } from "../../data/articles";
+import { buildOrganizationJsonLd } from "../../lib/seo";
+import { SITE_URL } from "../../config";
+
+const title = `${DEFAULT_AUTHOR.nameZh}（${DEFAULT_AUTHOR.name}）— 評測編輯`;
+const description = DEFAULT_AUTHOR.bio;
+
+const authorArticles = articles.slice(0, 8);
+
+const jsonLd = [
+  buildOrganizationJsonLd(),
+  {
+    "@context": "https://schema.org",
+    ...buildAuthorPersonJsonLd(),
+    url: DEFAULT_AUTHOR.url,
+    image: new URL(DEFAULT_AUTHOR.image, SITE_URL).href,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/author/jason-chen" jsonLd={jsonLd} narrow>
+  <article class="static-page author-page">
+    <header class="author-page__header">
+      <img
+        src={DEFAULT_AUTHOR.image}
+        alt={`${DEFAULT_AUTHOR.nameZh} 頭像`}
+        width="96"
+        height="96"
+        class="author-page__avatar"
+      />
+      <div>
+        <h1>{DEFAULT_AUTHOR.nameZh}</h1>
+        <p class="author-page__title">{DEFAULT_AUTHOR.name} · {DEFAULT_AUTHOR.titleZh}</p>
+        <p class="author-page__stats">
+          自 {DEFAULT_AUTHOR.experienceSince} 年起 · 累計 {DEFAULT_AUTHOR.reviewsCount}+ 顆煙彈實測
+        </p>
+      </div>
+    </header>
+
+    <section>
+      <h2>簡介</h2>
+      <p>{DEFAULT_AUTHOR.bio}</p>
+    </section>
+
+    <section>
+      <h2>專業領域（Entity Expertise）</h2>
+      <p class="entity-tags">
+        {DEFAULT_AUTHOR.expertise.map((tag) => (
+          <span class="entity-tag">{tag}</span>
+        ))}
+      </p>
+    </section>
+
+    <section>
+      <h2>實測方法（Testing Method）</h2>
+      <ol>
+        {DEFAULT_AUTHOR.testingMethod.map((step) => (
+          <li>{step}</li>
+        ))}
+      </ol>
+    </section>
+
+    <section>
+      <h2>近期文章</h2>
+      <ul>
+        {authorArticles.map((a) => (
+          <li>
+            <a href={`/${a.slug}`}>{a.title}</a>
+          </li>
+        ))}
+      </ul>
+      <p><a href="/">查看全部 {articles.length} 篇文章 →</a></p>
+    </section>
+  </article>
+</BaseLayout>

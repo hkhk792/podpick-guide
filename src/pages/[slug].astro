@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShopCta from "../components/ShopCta.astro";
+import ArticleBody from "../components/ArticleBody.astro";
+import ArticleGeoBlock from "../components/ArticleGeoBlock.astro";
+import ArticleAuthorByline from "../components/ArticleAuthorByline.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
+import BreadcrumbNav from "../components/BreadcrumbNav.astro";
+import { articles, getArticle } from "../data/articles";
+import { getArticleBody } from "../data/articleBodies";
+import { enrichArticleBody, collectAllFaqItems } from "../lib/articleEnhancements";
+import { getRelatedArticles } from "../lib/relatedArticles";
+import {
+  buildArticleJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
+  buildReviewJsonLd,
+  buildSpeakableJsonLd,
+} from "../lib/seo";
+
+export function getStaticPaths() {
+  return articles.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const { slug } = Astro.params;
+const article = getArticle(slug!)!;
+const rawBody = getArticleBody(slug!)!;
+const body = enrichArticleBody(article, rawBody);
+const related = getRelatedArticles(article.slug, 6);
+const geo = body.geo!;
+
+const faqItems = collectAllFaqItems(body.sections);
+
+const jsonLd = [
+  buildBreadcrumbJsonLd(article),
+  buildArticleJsonLd(article, geo),
+  ...(faqItems.length ? [buildFaqJsonLd(faqItems)] : []),
+  ...(buildSpeakableJsonLd(article, geo.speakable ?? []) ? [buildSpeakableJsonLd(article, geo.speakable ?? [])!] : []),
+  ...(buildReviewJsonLd(article, geo) ? [buildReviewJsonLd(article, geo)!] : []),
+].filter(Boolean);
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.description}
+  path={`/${article.slug}`}
+  ogImage={article.heroImage}
+  jsonLd={jsonLd}
+  narrow
+>
+  <article>
+    <BreadcrumbNav title={article.title} slug={article.slug} />
+
+    <header class="article-header">
+      <span class="badge">{article.category}</span>
+      <h1>{article.title}</h1>
+      <ArticleAuthorByline article={article} />
+    </header>
+
+    <figure class="article-hero">
+      <img
+        src={article.heroImage}
+        alt={article.imageAlt}
+        width={article.heroWidth}
+        height={article.heroHeight}
+        loading="eager"
+        decoding="async"
+      />
+      {(body.heroCaption || article.imageAlt) && (
+        <figcaption>{body.heroCaption ?? article.imageAlt}</figcaption>
+      )}
+    </figure>
+
+    <ArticleGeoBlock geo={geo} />
+    <ArticleBody body={body} />
+    <ShopCta />
+    <RelatedArticles items={related} />
+    <a class="back-link" href="/">← 返回全部文章</a>
+  </article>
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import { DEFAULT_AUTHOR } from "../data/author";
+import type { ArticleCard } from "../data/articles";
+
+interface Props {
+  article: ArticleCard;
+}
+
+const { article } = Astro.props;
+const updated = article.dateModifiedIso ?? article.dateIso;
+---
+
+<div class="author-byline">
+  <img
+    class="author-byline__avatar"
+    src={DEFAULT_AUTHOR.image}
+    alt={`${DEFAULT_AUTHOR.nameZh} 頭像`}
+    width="48"
+    height="48"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="author-byline__meta">
+    <p class="author-byline__line">
+      評測：
+      <a href={DEFAULT_AUTHOR.url} rel="author">
+        {DEFAULT_AUTHOR.nameZh}（{DEFAULT_AUTHOR.name}）
+      </a>
+      · {DEFAULT_AUTHOR.titleZh}
+    </p>
+    <p class="author-byline__stats">
+      自 {DEFAULT_AUTHOR.experienceSince} 年起 · 累計 {DEFAULT_AUTHOR.reviewsCount}+ 顆實測
+      · 更新 {updated}
+    </p>
+  </div>
+</div>

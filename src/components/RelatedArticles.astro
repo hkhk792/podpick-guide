@@ -1,0 +1,36 @@
+---
+import type { ArticleCard } from "../data/articles";
+
+interface Props {
+  items: ArticleCard[];
+}
+
+const { items } = Astro.props;
+if (!items.length) return null;
+---
+
+<section class="related" aria-labelledby="related-heading">
+  <h2 id="related-heading">相關閱讀</h2>
+  <ul class="related__list">
+    {
+      items.map((a) => (
+        <li>
+          <a class="related__card" href={`/${a.slug}`}>
+            <img
+              src={a.heroImage}
+              alt={a.imageAlt}
+              width={a.heroWidth}
+              height={a.heroHeight}
+              loading="lazy"
+            />
+            <div>
+              <span class="related__tag">{a.category}</span>
+              <strong>{a.title}</strong>
+              <p>{a.description}</p>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

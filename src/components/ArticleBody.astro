@@ -1,0 +1,220 @@
+---
+import type { ArticleBody } from "../data/articleTypes";
+import { stars } from "../lib/articleEnhancements";
+
+interface Props {
+  body: ArticleBody;
+}
+
+const { body } = Astro.props;
+
+function renderFlavorMeta(item: {
+  sweetness?: number;
+  coolness?: number;
+  beginner?: number;
+  overall?: number;
+  suitableFor?: string[];
+  notSuitableFor?: string[];
+  entityTags?: string[];
+}) {
+  const parts: string[] = [];
+  if (item.sweetness) parts.push(`甜度 ${stars(item.sweetness)}`);
+  if (item.coolness) parts.push(`涼度 ${stars(item.coolness)}`);
+  if (item.beginner) parts.push(`新手 ${stars(item.beginner)}`);
+  if (item.overall) parts.push(`推薦 ${stars(item.overall)}`);
+  return parts;
+}
+---
+
+<div class="prose">
+  {body.intro.map((p) =>
+    body.introHtml ? <p set:html={p} /> : <p>{p}</p>
+  )}
+  {body.disclaimer && <p class="disclaimer">{body.disclaimer}</p>}
+
+  {
+    body.geo?.pros?.length || body.geo?.cons?.length ? (
+      <section class="pros-cons">
+        {body.geo.pros?.length ? (
+          <div class="pros-cons__col pros-cons__col--pros">
+            <h2>優點（Pros）</h2>
+            <ul>
+              {body.geo.pros.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+        {body.geo.cons?.length ? (
+          <div class="pros-cons__col pros-cons__col--cons">
+            <h2>缺點（Cons）</h2>
+            <ul>
+              {body.geo.cons.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </section>
+    ) : null
+  }
+
+  {
+    body.sections.map((sec) => {
+      if (sec.kind === "text") {
+        return (
+          <section>
+            {sec.title && <h2>{sec.title}</h2>}
+            {sec.paragraphs.map((p) =>
+              sec.html ? <p set:html={p} /> : <p>{p}</p>
+            )}
+          </section>
+        );
+      }
+      if (sec.kind === "list") {
+        const Tag = sec.ordered ? "ol" : "ul";
+        return (
+          <section>
+            <h2>{sec.title}</h2>
+            <Tag>
+              {sec.items.map((item) =>
+                sec.html ? <li set:html={item} /> : <li>{item}</li>
+              )}
+            </Tag>
+          </section>
+        );
+      }
+      if (sec.kind === "table") {
+        return (
+          <section>
+            <h2>{sec.title}</h2>
+            {sec.lead && <p>{sec.lead}</p>}
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    {sec.headers.map((h) => (
+                      <th scope="col">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sec.rows.map((row) => (
+                    <tr>
+                      {row.map((cell, i) =>
+                        i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {sec.caption && <figcaption class="table-caption">{sec.caption}</figcaption>}
+          </section>
+        );
+      }
+      if (sec.kind === "flavors") {
+        return (
+          <section>
+            <h2>{sec.title}</h2>
+            {sec.lead && (sec.html ? <p set:html={sec.lead} /> : <p>{sec.lead}</p>)}
+            <ul class="flavor-list">
+              {sec.items.map((f) => (
+                <li class="flavor-card">
+                  <p class="flavor-card__name">{f.name}</p>
+                  <p class="flavor-card__text">{f.text}</p>
+                  {renderFlavorMeta(f).length > 0 && (
+                    <p class="flavor-card__ratings">{renderFlavorMeta(f).join(" · ")}</p>
+                  )}
+                  {(f.suitableFor?.length || f.notSuitableFor?.length) && (
+                    <div class="flavor-card__fit">
+                      {f.suitableFor?.length ? (
+                        <p>
+                          <strong>適合：</strong>
+                          {f.suitableFor.map((s) => `✓ ${s}`).join(" · ")}
+                        </p>
+                      ) : null}
+                      {f.notSuitableFor?.length ? (
+                        <p>
+                          <strong>不適合：</strong>
+                          {f.notSuitableFor.map((s) => `✗ ${s}`).join(" · ")}
+                        </p>
+                      ) : null}
+                    </div>
+                  )}
+                  {f.entityTags?.length ? (
+                    <p class="flavor-card__tags">
+                      {f.entityTags.map((tag) => (
+                        <span class="entity-tag">{tag}</span>
+                      ))}
+                    </p>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      }
+      if (sec.kind === "prosCons") {
+        return (
+          <section class="pros-cons">
+            <div class="pros-cons__col pros-cons__col--pros">
+              <h2>{sec.title ? `${sec.title} — 優點` : "優點（Pros）"}</h2>
+              <ul>
+                {sec.pros.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="pros-cons__col pros-cons__col--cons">
+              <h2>缺點（Cons）</h2>
+              <ul>
+                {sec.cons.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        );
+      }
+      if (sec.kind === "keyTakeaways") {
+        return (
+          <section class="geo-block geo-takeaways">
+            <h2>{sec.title ?? "Key Takeaways"}</h2>
+            <ul class="takeaway-list">
+              {sec.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </section>
+        );
+      }
+      if (sec.kind === "summary") {
+        return (
+          <section class="geo-summary">
+            <h2>{sec.title ?? "重點摘要（Summary）"}</h2>
+            {sec.paragraphs.map((p) =>
+              sec.html ? <p set:html={p} /> : <p>{p}</p>
+            )}
+          </section>
+        );
+      }
+      if (sec.kind === "faq") {
+        return (
+          <section class="faq">
+            <h2>{sec.title}</h2>
+            <dl>
+              {sec.items.map((it) => (
+                <>
+                  <dt>{it.q}</dt>
+                  {sec.html ? <dd set:html={it.a} /> : <dd>{it.a}</dd>}
+                </>
+              ))}
+            </dl>
+          </section>
+        );
+      }
+      return null;
+    })
+  }
+</div>

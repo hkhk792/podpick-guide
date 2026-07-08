@@ -1,0 +1,44 @@
+---
+import type { ArticleGeo } from "../data/articleTypes";
+
+interface Props {
+  geo: ArticleGeo;
+}
+
+const { geo } = Astro.props;
+---
+
+{
+  (geo.quickAnswer?.length || geo.tldr || geo.keyTakeaways?.length) && (
+    <aside class="geo-blocks" aria-label="快速摘要">
+      {geo.quickAnswer && geo.quickAnswer.length > 0 && (
+        <section class="geo-block geo-quick-answer">
+          <h2 class="geo-block__title">Quick Answer</h2>
+          <ul>
+            {geo.quickAnswer.map((line) => (
+              <li>{line}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {geo.tldr && (
+        <section class="geo-block geo-tldr">
+          <h2 class="geo-block__title">TL;DR</h2>
+          <p>{geo.tldr}</p>
+        </section>
+      )}
+
+      {geo.keyTakeaways && geo.keyTakeaways.length > 0 && (
+        <section class="geo-block geo-takeaways">
+          <h2 class="geo-block__title">Key Takeaways</h2>
+          <ul class="takeaway-list">
+            {geo.keyTakeaways.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </aside>
+  )
+}

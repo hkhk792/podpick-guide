@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_NAME } from "../config";
+import { DEFAULT_AUTHOR } from "../data/author";
+import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
+
+const title = `關於 ${SITE_NAME}`;
+const description =
+  "PodPick Guide 是獨立的煙彈口味與選購參考站，提供 SP2S 實測評分、新手指南、故障排查與旅行須知。";
+
+const jsonLd = [
+  buildWebSiteJsonLd(description),
+  buildOrganizationJsonLd(),
+];
+---
+
+<BaseLayout title={title} description={description} path="/about" jsonLd={jsonLd} narrow>
+  <article class="static-page">
+    <header class="article-header">
+      <h1>關於 PodPick Guide</h1>
+      <p class="lead">
+        我們是專注封閉式 Pod System 的獨立內容站，目標是讓你在選購前就能看懂口味、規格與常見問題——而不是看完廣告才發現買錯。
+      </p>
+    </header>
+
+    <section>
+      <h2>我們做什麼</h2>
+      <ul>
+        <li>SP2S 等主流品牌口味實測與評分（甜度、涼度、新手友善度）</li>
+        <li>選購對比：一代/二代、品牌比較、真假辨識</li>
+        <li>使用技巧：漏油、糊味、保存、更換週期</li>
+        <li>旅行須知：機場、日韓攜帶規定概念整理</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>編輯方針（EEAT）</h2>
+      <p>
+        每篇文章由評測編輯 <a href={DEFAULT_AUTHOR.url}>{DEFAULT_AUTHOR.nameZh}</a> 審核，採用統一
+        Testing Method：連續 3 天實測、固定主機與 MTL 設定、記錄五項評分維度。我們標註更新日期，並在文末提供延伸閱讀內鏈，方便你建立完整選購知識。
+      </p>
+      <p>
+        本站為獨立參考站，非醫療或法律建議；產品與法規以實際通路與主管機關公告為準。內容僅供年滿 20 歲使用者參考。
+      </p>
+    </section>
+
+    <section>
+      <h2>與商城的關係</h2>
+      <p>
+        文末 CTA 連至官方選購站，方便你在看完評測後查現貨與規格。我們優先提供可驗證的實測資訊與對照表，而非硬性推銷單一口味。
+      </p>
+    </section>
+
+    <section>
+      <h2>主題權威（Topic Cluster）</h2>
+      <p>圍繞 SP2S / Pod System 我們建立完整主題群：</p>
+      <ul>
+        <li><a href="/sp2s-pod-flavor-guide">口味評測與排行榜</a></li>
+        <li><a href="/identify-counterfeit-pods">假煙彈辨識</a></li>
+        <li><a href="/pod-leaking-troubleshooting">漏油排查</a></li>
+        <li><a href="/airport-vaping-guide">機場旅行須知</a></li>
+        <li><a href="/sp2s-gen1-vs-gen2-pods">一代 vs 二代對比</a></li>
+      </ul>
+    </section>
+  </article>
+</BaseLayout>
