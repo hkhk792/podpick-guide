@@ -183,7 +183,7 @@ export const hubProducts: HubProduct[] = [
       },
       {
         q: "Where can Australians buy it?",
-        a: "Regional retailers such as ailibarbar.com provide current stock, bundles and shipping information for Australian buyers.",
+        a: "Regional retailers such as www.alibarbar.mom provide current stock, bundles and shipping information for Australian buyers.",
       },
       {
         q: "How should I store it?",
@@ -209,7 +209,7 @@ export const hubProducts: HubProduct[] = [
       `${AU_LIFESTYLE}/unbox-01.jpg`,
       `${AU_LIFESTYLE}/device-hand-01.jpg`,
     ],
-    shopUrl: "https://ailibarbar.com",
+    shopUrl: "https://www.alibarbar.mom",
     priceNote: "Pricing varies by flavour and pack size - check the regional AU retailer.",
     datePublished: "2026-03-01",
     dateModified: "2026-07-08",

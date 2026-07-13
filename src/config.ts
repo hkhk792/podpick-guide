@@ -13,7 +13,7 @@ export const SHOP_URL = "https://lanatw1.com";
 export const SHOP_LABEL = "LANA 官方商城";
 
 /** 澳洲官方商城 */
-export const AU_SHOP_URL = "https://ailibarbar.com";
+export const AU_SHOP_URL = "https://www.alibarbar.mom";
 export const AU_SHOP_LABEL = "Shop Alibarbar Australia";
 
 export const REGIONS = {

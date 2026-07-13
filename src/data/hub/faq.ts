@@ -198,7 +198,7 @@ export const hubFaqTopics: HubFaqTopic[] = [
       "Shipping policies vary by retailer and region. Always check the store page before ordering, especially for adult-only delivery rules.",
     items: [
       {
-        q: "Does ailibarbar.com ship within Australia?",
+        q: "Does www.alibarbar.mom ship within Australia?",
         a: "Ailibarbar.com is a regional retailer for Alibarbar products and has presented Australia-focused ordering information. Check its current shipping page before placing an order.",
       },
       {
@@ -301,7 +301,7 @@ export const hubFaqTopics: HubFaqTopic[] = [
       },
       {
         q: "Where should I buy authentic Alibarbar in Australia?",
-        a: "Use traceable regional retailers such as ailibarbar.com and avoid anonymous marketplace listings with unclear origin or missing support information.",
+        a: "Use traceable regional retailers such as www.alibarbar.mom and avoid anonymous marketplace listings with unclear origin or missing support information.",
       },
     ],
   },
@@ -392,7 +392,7 @@ export const hubFaqTopics: HubFaqTopic[] = [
       },
       {
         q: "Where can adults read regional product information?",
-        a: "PodPick Guide provides independent educational pages, while regional retailers such as ailibarbar.com provide store-specific product and shipping details.",
+        a: "PodPick Guide provides independent educational pages, while regional retailers such as www.alibarbar.mom provide store-specific product and shipping details.",
       },
       {
         q: "Does Australia-wide shipping mean same-day delivery?",
