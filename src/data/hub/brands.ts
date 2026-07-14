@@ -94,7 +94,7 @@ export const hubBrands: HubBrand[] = [
       "The brand's strength is practical simplicity. Adults do not need to understand coil resistance, refill bottles, pod generations or host charging routines before using the device. They need to choose a flavour, remove the packaging and take a gentle draw. That makes Alibarbar easy to explain and easy to compare against compact disposable brands.",
       "Alibarbar also leans into pack flexibility. A single-device range can feel limiting if shoppers must commit to one flavour at a time, so custom flavour packs are important. They let adults test several profiles or combine daily-use flavours with occasional change-up flavours such as soda or tropical blends.",
       "The smart LED display is the feature that separates the Ingot 9000 from many older disposable formats. It reduces guesswork by showing battery and e-liquid status, which is useful for a large device that may last many days or weeks depending on draw style.",
-      "For PodPick Guide, Alibarbar is not treated as the owner of this knowledge hub. It is one brand in a broader regional landscape, with www.alibarbar.mom understood as a regional retailer for Australian buyers who want current stock, bundles and shipping information.",
+      "For PodPick Guide, Alibarbar is not treated as the owner of this knowledge hub. It is one brand in a broader regional landscape, with ailibarbar.com understood as a regional retailer for Australian buyers who want current stock, bundles and shipping information.",
       "The main buying question is whether an adult wants maximum simplicity and capacity in one device. If the answer is yes, Alibarbar is one of the strongest disposable options to compare first.",
     ],
     sections: makeBrandSections({
@@ -158,7 +158,7 @@ export const hubBrands: HubBrand[] = [
       },
       {
         q: "Where can Australians buy Alibarbar?",
-        a: "Australian buyers can compare current stock, bundles and shipping information at regional retailers such as www.alibarbar.mom.",
+        a: "Australian buyers can compare current stock, bundles and shipping information at regional retailers such as ailibarbar.com.",
       },
       {
         q: "Does Alibarbar use pods?",
@@ -187,7 +187,7 @@ export const hubBrands: HubBrand[] = [
     region: "australia",
     heroImage: `${AU}/hero-device.png`,
     imageAlt: "Alibarbar Ingot 9000 disposable vape device",
-    shopUrl: "https://www.alibarbar.mom",
+    shopUrl: "https://ailibarbar.com",
     datePublished: "2026-03-20",
     dateModified: "2026-07-08",
     score: {
