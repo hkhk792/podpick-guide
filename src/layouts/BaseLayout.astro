@@ -76,6 +76,7 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
     <link rel="canonical" href={canonical} />
     {
       hreflangAlts.map((alt) => (

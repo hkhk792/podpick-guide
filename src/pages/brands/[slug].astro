@@ -49,6 +49,10 @@ const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australi
       <span class="badge">{brand.region === "taiwan" ? "Taiwan" : brand.region === "australia" ? "Australia" : "Global"}</span>
       <h1>{brand.title}</h1>
       <p class="lead">{brand.intro}</p>
+      <p class="meta">
+        <time datetime={brand.dateModified}>Updated {brand.dateModified}</time>
+        · <a href="/author/jason-chen">Jason Chen</a>
+      </p>
     </header>
 
     <figure class="article-hero">

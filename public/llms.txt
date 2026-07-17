@@ -42,6 +42,15 @@ GitHub: https://github.com/PodPickGuide
 - Australia shop: https://ailibarbar.com
 - Taiwan shop: https://lanatw1.com
 
+## Feeds
+
+- [RSS](https://podpickguide.com/rss.xml)
+- [Sitemap](https://podpickguide.com/sitemap.xml)
+
+## Open data
+
+- [GitHub organization](https://github.com/PodPickGuide) — public flavour indexes, comparison data, FAQ database
+
 ## Optional
 
 - [llms.txt](https://podpickguide.com/llms.txt)

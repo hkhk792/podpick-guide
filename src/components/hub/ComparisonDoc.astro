@@ -41,6 +41,10 @@ const relatedProducts = cmp.relatedSlugs.map((s) => getProduct(s)).filter(Boolea
     <header class="article-header">
       <h1>{cmp.title}</h1>
       <p class="lead">{cmp.intro}</p>
+      <p class="meta">
+        <time datetime={cmp.dateModified}>Updated {cmp.dateModified}</time>
+        · <a href="/author/jason-chen">Jason Chen</a>
+      </p>
     </header>
 
     <figure class="article-hero">

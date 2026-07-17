@@ -25,7 +25,9 @@ const post = getNews(slug!)!;
       <span class="badge">{post.category}</span>
       <h1>{post.title}</h1>
       <p class="lead">{post.excerpt}</p>
-      <p class="muted">{post.datePublished} · {post.weekTag}</p>
+      <p class="muted">
+        <time datetime={post.dateModified}>Updated {post.dateModified}</time> · {post.weekTag}
+      </p>
     </header>
     {
       post.heroImage ? (
