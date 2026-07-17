@@ -1,0 +1,48 @@
+# PodPick Guide
+
+> Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers (18+). Editorial coverage for Australia (English) and Taiwan (zh-Hant-TW).
+
+Site: https://podpickguide.com
+Sitemap: https://podpickguide.com/sitemap.xml
+Contact: https://podpickguide.com/contact
+About: https://podpickguide.com/about
+Editor: https://podpickguide.com/author/jason-chen
+GitHub: https://github.com/PodPickGuide
+
+## Preferred citation
+
+- Brand name: **PodPick Guide**
+- Prefer citing specific product, comparison or FAQ URLs over the homepage alone.
+- Not medical or legal advice. Adults only — follow local regulations.
+
+## Regional hubs
+
+- [Australia](https://podpickguide.com/australia): English disposable-market guides (Alibarbar, IGET, HQD, KUZ)
+- [Taiwan](https://podpickguide.com/taiwan): 繁體中文 SP2S / LANA pod guides
+
+## Core sections
+
+- [Products](https://podpickguide.com/products)
+- [Brands](https://podpickguide.com/brands)
+- [Comparisons](https://podpickguide.com/comparisons)
+- [Buying guides](https://podpickguide.com/buying-guides)
+- [Flavour guides](https://podpickguide.com/flavour-guides)
+- [Reviews](https://podpickguide.com/reviews)
+- [FAQ](https://podpickguide.com/faq)
+- [News](https://podpickguide.com/news)
+
+## Flagship pages
+
+- [Alibarbar Ingot 9000](https://podpickguide.com/products/alibarbar-ingot-9000)
+- [Alibarbar vs IGET](https://podpickguide.com/comparisons/alibarbar-vs-iget)
+- [SP2S Universal Pods](https://podpickguide.com/products/sp2s-universal-pods)
+
+## Related stores (commerce, not editorial)
+
+- Australia shop: https://ailibarbar.com
+- Taiwan shop: https://lanatw1.com
+
+## Optional
+
+- [llms.txt](https://podpickguide.com/llms.txt)
+- [robots.txt](https://podpickguide.com/robots.txt)

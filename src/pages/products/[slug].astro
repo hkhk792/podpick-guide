@@ -7,7 +7,12 @@ import ContentSections from "../../components/hub/ContentSections.astro";
 import ReviewPhotoStrip from "../../components/hub/ReviewPhotoStrip.astro";
 import { hubProducts, getProduct } from "../../data/hub/products";
 import { getBrand } from "../../data/hub/brands";
-import { buildFaqJsonLd } from "../../lib/seo";
+import {
+  absoluteUrl,
+  buildFaqJsonLd,
+  buildHubBreadcrumbJsonLd,
+  buildProductJsonLd,
+} from "../../lib/seo";
 
 export function getStaticPaths() {
   return hubProducts.map((p) => ({ params: { slug: p.slug } }));
@@ -17,10 +22,23 @@ const { slug } = Astro.params;
 const product = getProduct(slug!)!;
 const brand = getBrand(product.brandSlug);
 const region = product.region === "taiwan" ? "taiwan" : "australia";
+const pageLang = product.region === "taiwan" ? "zh-Hant-TW" : "en";
 
-const jsonLd = product.faq.length
-  ? [buildFaqJsonLd(product.faq.map((f) => ({ q: f.q, a: f.a })))]
-  : [];
+const crumbItems = [
+  { name: "Products", url: absoluteUrl("products") },
+  ...(brand
+    ? [{ name: brand.name, url: absoluteUrl(`brands/${brand.slug}`) }]
+    : []),
+  { name: product.name, url: absoluteUrl(`products/${product.slug}`) },
+];
+
+const jsonLd = [
+  buildProductJsonLd(product, brand?.name),
+  buildHubBreadcrumbJsonLd(crumbItems),
+  ...(product.faq.length
+    ? [buildFaqJsonLd(product.faq.map((f) => ({ q: f.q, a: f.a })))]
+    : []),
+];
 ---
 
 <BaseLayout
@@ -30,7 +48,8 @@ const jsonLd = product.faq.length
   ogImage={product.heroImage}
   jsonLd={jsonLd}
   narrow
-  lang={product.region === "taiwan" ? "zh-Hant-TW" : "en"}
+  lang={pageLang}
+  locale={pageLang}
 >
   <article class="hub-doc">
     <HubBreadcrumb
@@ -44,6 +63,11 @@ const jsonLd = product.faq.length
     <header class="article-header">
       <h1>{product.title}</h1>
       <p class="lead">{product.description}</p>
+      <p class="meta">
+        <time datetime={product.dateModified}>Updated {product.dateModified}</time>
+        {brand ? <> · <a href={`/brands/${brand.slug}`}>{brand.name}</a></> : null}
+        · <a href="/author/jason-chen">Jason Chen</a>
+      </p>
       {product.tldr ? <p class="geo-block geo-tldr"><strong>TL;DR:</strong> {product.tldr}</p> : null}
     </header>
 

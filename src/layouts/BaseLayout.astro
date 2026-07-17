@@ -14,6 +14,10 @@ import {
 import { MAIN_NAV, REGION_NAV } from "../data/hub/navigation";
 import { AUSTRALIA_SECTION_NAV } from "../data/hub/australiaSections";
 import FloatingLineWidget from "../components/FloatingLineWidget.astro";
+import {
+  buildHreflangAlternates,
+  type HreflangAlt,
+} from "../lib/seo";
 
 interface Props {
   title: string;
@@ -25,6 +29,9 @@ interface Props {
   wide?: boolean;
   lang?: string;
   locale?: string;
+  /** Override auto hreflang pairs when a true translation URL exists. */
+  hreflang?: HreflangAlt[];
+  ogType?: "website" | "article";
 }
 
 const {
@@ -37,11 +44,14 @@ const {
   wide = false,
   lang = "en",
   locale = "en",
+  hreflang,
+  ogType,
 } = Astro.props;
 
+const isHome = path === "" || path === "/";
 const canonical = new URL(path.replace(/^\//, "") || "", SITE_URL).href;
 const ogImageUrl = new URL(ogImage, SITE_URL).href;
-const fullTitle = path === "" || path === "/" ? title : `${title} | ${SITE_NAME}`;
+const fullTitle = isHome ? title : `${title} | ${SITE_NAME}`;
 const mainClass = narrow
   ? "container container--narrow"
   : wide
@@ -49,6 +59,10 @@ const mainClass = narrow
     : "container";
 const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
+const resolvedOgType = ogType ?? (isHome ? "website" : "article");
+const hreflangAlts = hreflang ?? buildHreflangAlternates(path, lang);
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
+const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? "";
 ---
 
 <!doctype html>
@@ -56,15 +70,32 @@ const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {
+      hreflangAlts.map((alt) => (
+        <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+      ))
+    }
     <meta name="robots" content="index, follow" />
     <meta name="p:domain_verify" content="1a79f87202f28166ad283df9bf776977" />
+    {
+      googleSiteVerification ? (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      ) : null
+    }
+    {
+      bingSiteVerification ? (
+        <meta name="msvalidate.01" content={bingSiteVerification} />
+      ) : null
+    }
     <meta property="og:locale" content={ogLocale} />
-    <meta property="og:type" content={path === "" ? "website" : "article"} />
+    <meta property="og:type" content={resolvedOgType} />
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -95,7 +126,7 @@ const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
     <header class="site-header site-header--hub">
       <div class="container container--wide site-header__top">
         <a class="brand" href="/">
-          <img src="/favicon.png" alt="" width="28" height="28" />
+          <img src="/favicon.svg" alt="" width="28" height="28" />
           {SITE_NAME}
         </a>
         <div class="region-pills" aria-label="Browse by region">

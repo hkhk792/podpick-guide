@@ -1,10 +1,138 @@
 import type { ArticleCard } from "../data/articles";
 import type { ArticleGeo } from "../data/articleTypes";
+import type { HubProduct } from "../data/hub/types";
 import { buildAuthorPersonJsonLd } from "../data/author";
 import { GITHUB_ORG_URL, SITE_NAME, SITE_URL } from "../config";
 
+export type HreflangAlt = { lang: string; href: string };
+export type BreadcrumbItem = { name: string; url?: string };
+
 export function articleUrl(slug: string): string {
   return `${SITE_URL}/${slug}`;
+}
+
+export function absoluteUrl(path = ""): string {
+  const cleaned = path.replace(/^\//, "");
+  return cleaned ? new URL(cleaned, SITE_URL).href : `${SITE_URL}/`;
+}
+
+/** Regional language entry points (en AU hub ↔ zh-TW hub) + self + x-default. */
+export function buildHreflangAlternates(path = "", lang = "en"): HreflangAlt[] {
+  const normalized = path === "/" ? "" : path.replace(/^\//, "");
+  const self = absoluteUrl(normalized);
+  const isZh = lang.startsWith("zh");
+
+  if (!normalized) {
+    return [
+      { lang: "en", href: absoluteUrl("") },
+      { lang: "zh-Hant-TW", href: absoluteUrl("taiwan") },
+      { lang: "x-default", href: absoluteUrl("") },
+    ];
+  }
+
+  if (normalized === "australia" || normalized.startsWith("australia/")) {
+    return [
+      { lang: "en", href: self },
+      { lang: "zh-Hant-TW", href: absoluteUrl("taiwan") },
+      { lang: "x-default", href: absoluteUrl("") },
+    ];
+  }
+
+  if (normalized === "taiwan" || normalized.startsWith("taiwan/")) {
+    return [
+      { lang: "zh-Hant-TW", href: self },
+      { lang: "en", href: absoluteUrl("australia") },
+      { lang: "x-default", href: absoluteUrl("") },
+    ];
+  }
+
+  return [
+    { lang: isZh ? "zh-Hant-TW" : "en", href: self },
+    {
+      lang: isZh ? "en" : "zh-Hant-TW",
+      href: absoluteUrl(isZh ? "australia" : "taiwan"),
+    },
+    { lang: "x-default", href: absoluteUrl("") },
+  ];
+}
+
+export function buildHubBreadcrumbJsonLd(items: BreadcrumbItem[]) {
+  const crumbs: BreadcrumbItem[] = [{ name: "Home", url: `${SITE_URL}/` }, ...items];
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      ...(item.url ? { item: item.url.startsWith("http") ? item.url : absoluteUrl(item.url) } : {}),
+    })),
+  };
+}
+
+export function buildProductJsonLd(
+  product: HubProduct,
+  brandName?: string
+) {
+  const imageUrl = new URL(product.heroImage, SITE_URL).href;
+  const url = absoluteUrl(`products/${product.slug}`);
+  const ratingValue = product.score?.overall;
+  const author = buildAuthorPersonJsonLd();
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: [imageUrl, ...(product.gallery?.map((src) => new URL(src, SITE_URL).href) ?? [])],
+    url,
+    sku: product.slug,
+    brand: {
+      "@type": "Brand",
+      name: brandName ?? product.brandSlug,
+    },
+    category: "Electronic Cigarette",
+    ...(product.dateModified
+      ? {
+          releaseDate: product.datePublished,
+        }
+      : {}),
+    ...(ratingValue != null
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue,
+            bestRating: 10,
+            worstRating: 0,
+            ratingCount: 1,
+            reviewCount: 1,
+          },
+          review: {
+            "@type": "Review",
+            name: product.title,
+            reviewBody: product.tldr ?? product.description,
+            datePublished: product.datePublished,
+            dateModified: product.dateModified,
+            author,
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue,
+              bestRating: 10,
+              worstRating: 0,
+            },
+          },
+        }
+      : {
+          review: {
+            "@type": "Review",
+            name: product.title,
+            reviewBody: product.tldr ?? product.description,
+            datePublished: product.datePublished,
+            dateModified: product.dateModified,
+            author,
+          },
+        }),
+  };
 }
 
 function buildPublisher() {
@@ -14,7 +142,7 @@ function buildPublisher() {
     url: SITE_URL,
     logo: {
       "@type": "ImageObject",
-      url: new URL("/favicon.png", SITE_URL).href,
+      url: new URL("/apple-touch-icon.png", SITE_URL).href,
     },
     sameAs: [GITHUB_ORG_URL],
   };
@@ -29,14 +157,6 @@ export function buildWebSiteJsonLd(description: string) {
     description,
     inLanguage: ["en", "zh-Hant-TW"],
     publisher: buildPublisher(),
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -46,7 +166,7 @@ export function buildOrganizationJsonLd() {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: new URL("/favicon.png", SITE_URL).href,
+    logo: new URL("/apple-touch-icon.png", SITE_URL).href,
     description:
       "Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers.",
     inLanguage: ["en", "zh-Hant-TW"],

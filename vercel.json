@@ -2,5 +2,13 @@
   "framework": "astro",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.podpickguide.com" }],
+      "destination": "https://podpickguide.com/:path*",
+      "permanent": true
+    }
+  ]
 }
