@@ -21,7 +21,7 @@ npm run dev
 ### IndexNow / Bing 站长（若构建日志出现 403）
 
 1. 打开 [Bing Webmaster Tools](https://www.bing.com/webmasters/) 添加站点 `https://podpickguide.com`
-2. 验证方式任选其一：上传 Bing 提供的 XML/HTML 文件到 `public/`，或使用现有 `public/podpick7f3a9c2b1e8d4f06.txt`（内容与 `INDEXNOW_KEY` 完全一致、无换行）
+2. 验证方式任选其一：上传 Bing 提供的 XML/HTML 文件到 `public/`，或使用现有 `public/12d65cc48c06483a96c304e1e51e4e3c.txt`（内容与 `INDEXNOW_KEY` 完全一致、无换行）
 3. 在 Bing 提交 Sitemap：`https://podpickguide.com/sitemap-index.xml`
 4. 重新部署后，构建日志应出现 `[indexnow] submitted ... status 200/202`
 
