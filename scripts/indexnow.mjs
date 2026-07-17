@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const SITE = "https://podpickguide.com";
 const HOST = "podpickguide.com";
-const KEY = process.env.INDEXNOW_KEY || "podpick7f3a9c2b1e8d4f06";
+const KEY = process.env.INDEXNOW_KEY || "12d65cc48c06483a96c304e1e51e4e3c";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 const useLive = process.argv.includes("--live");

@@ -45,4 +45,4 @@ export const LINE_URL = "https://line.me/ti/p/2_fR9iUP_1";
 export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "";
 
 /** IndexNow 密钥文件名（对应 public 下 {key}.txt） */
-export const INDEXNOW_KEY = import.meta.env.INDEXNOW_KEY ?? "podpick7f3a9c2b1e8d4f06";
+export const INDEXNOW_KEY = import.meta.env.INDEXNOW_KEY ?? "12d65cc48c06483a96c304e1e51e4e3c";
