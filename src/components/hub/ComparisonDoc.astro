@@ -8,7 +8,7 @@ import type { HubComparison } from "../../data/hub/types";
 import { hubComparisons, getComparisonPath } from "../../data/hub/comparisons";
 import { getBrand } from "../../data/hub/brands";
 import { getProduct } from "../../data/hub/products";
-import { buildFaqJsonLd } from "../../lib/seo";
+import { buildFaqJsonLd, buildHubSpeakableJsonLd } from "../../lib/seo";
 import { compareShopUrl } from "../../lib/shopLinks";
 
 interface Props {
@@ -19,7 +19,16 @@ interface Props {
 const { cmp, path } = Astro.props;
 const region = cmp.region === "australia" ? "australia" : undefined;
 const lang = "en";
-const jsonLd = cmp.faq.length ? [buildFaqJsonLd(cmp.faq.map((f) => ({ q: f.q, a: f.a })))] : [];
+const jsonLd = [
+  buildHubSpeakableJsonLd({
+    path,
+    name: cmp.title,
+    description: cmp.description,
+    datePublished: cmp.datePublished,
+    dateModified: cmp.dateModified,
+  }),
+  ...(cmp.faq.length ? [buildFaqJsonLd(cmp.faq.map((f) => ({ q: f.q, a: f.a })))] : []),
+];
 const otherComparisons = hubComparisons
   .filter((c) => c.slug !== cmp.slug && (cmp.region === "global" || c.region === cmp.region || c.region === "global"))
   .slice(0, 3);
@@ -36,6 +45,7 @@ const compareShopHref = compareShopUrl(cmp.slug);
   jsonLd={jsonLd}
   narrow
   lang={lang}
+  locale="en-AU"
 >
   <article class="hub-doc">
     <HubBreadcrumb items={[{ label: "Comparisons", href: "/comparisons" }, { label: cmp.title }]} />

@@ -5,10 +5,11 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/generate-favicons.mjs",
+    "prebuild": "node scripts/generate-favicons.mjs && node scripts/generate-llms-full.mjs",
     "build": "astro build && node scripts/flatten-sitemap.mjs",
     "build:notify": "npm run build && node scripts/indexnow.mjs",
     "favicon": "node scripts/generate-favicons.mjs",
+    "llms": "node scripts/generate-llms-full.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "indexnow:live": "node scripts/indexnow.mjs --live",
     "preview": "astro preview"

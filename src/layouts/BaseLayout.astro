@@ -74,6 +74,8 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+    <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
+    <link rel="alternate" type="text/plain" title="LLMs full index" href="/llms-full.txt" />
     <link rel="canonical" href={canonical} />
     {
       hreflangAlts.map((alt) => (

@@ -6,7 +6,7 @@ import PodPickScore from "../../components/hub/PodPickScore.astro";
 import RegionShopCta from "../../components/hub/RegionShopCta.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
 import { hubReviews, getReview } from "../../data/hub/reviews";
-import { buildFaqJsonLd } from "../../lib/seo";
+import { buildFaqJsonLd, buildHubSpeakableJsonLd } from "../../lib/seo";
 import { reviewShopUrls } from "../../lib/shopLinks";
 
 export function getStaticPaths() {
@@ -19,9 +19,18 @@ const shopLinks = reviewShopUrls(review.slug);
 const related = (review.relatedReviews ?? [])
   .map((s) => getReview(s))
   .filter(Boolean);
-const jsonLd = review.faq.length
-  ? [buildFaqJsonLd(review.faq.map((f) => ({ q: f.q, a: f.a })))]
-  : [];
+const jsonLd = [
+  buildHubSpeakableJsonLd({
+    path: `/reviews/${review.slug}`,
+    name: review.title,
+    description: review.description,
+    datePublished: review.datePublished,
+    dateModified: review.dateModified,
+  }),
+  ...(review.faq.length
+    ? [buildFaqJsonLd(review.faq.map((f) => ({ q: f.q, a: f.a })))]
+    : []),
+];
 ---
 
 <BaseLayout
@@ -32,6 +41,7 @@ const jsonLd = review.faq.length
   jsonLd={jsonLd}
   narrow
   lang="en"
+  locale="en-AU"
 >
   <article class="hub-doc">
     <HubBreadcrumb items={[{ label: "Reviews", href: "/reviews" }, { label: review.title }]} />
@@ -40,8 +50,20 @@ const jsonLd = review.faq.length
       <h1>{review.title}</h1>
       <p class="lead">{review.intro}</p>
       {review.tldr ? <p class="geo-block geo-tldr"><strong>TL;DR:</strong> {review.tldr}</p> : null}
-      <p class="muted">{review.readTime} · Updated {review.dateModified}</p>
+      <p class="meta">
+        <time datetime={review.dateModified}>Updated {review.dateModified}</time>
+        · {review.readTime}
+        · <a href="/author/jason-chen">Jason Chen</a>
+      </p>
     </header>
+    {
+      review.tldr ? null : (
+        <section class="geo-block geo-quick-answer">
+          <h2>Quick Answer</h2>
+          <p>{review.intro}</p>
+        </section>
+      )
+    }
     <figure class="article-hero">
       <img src={review.heroImage} alt={review.imageAlt} width="1200" height="675" loading="eager" />
     </figure>

@@ -11,6 +11,7 @@ import {
   absoluteUrl,
   buildFaqJsonLd,
   buildHubBreadcrumbJsonLd,
+  buildHubSpeakableJsonLd,
   buildProductJsonLd,
 } from "../../lib/seo";
 import { shopUrl, AU_SHOP_PATHS, SHOP_PRODUCTS } from "../../lib/shopLinks";
@@ -39,6 +40,13 @@ const crumbItems = [
 const jsonLd = [
   buildProductJsonLd(product, brand?.name),
   buildHubBreadcrumbJsonLd(crumbItems),
+  buildHubSpeakableJsonLd({
+    path: `/products/${product.slug}`,
+    name: product.title,
+    description: product.description,
+    datePublished: product.datePublished,
+    dateModified: product.dateModified,
+  }),
   ...(product.faq.length
     ? [buildFaqJsonLd(product.faq.map((f) => ({ q: f.q, a: f.a })))]
     : []),
@@ -53,7 +61,7 @@ const jsonLd = [
   jsonLd={jsonLd}
   narrow
   lang={pageLang}
-  locale={pageLang}
+  locale="en-AU"
 >
   <article class="hub-doc">
     <HubBreadcrumb

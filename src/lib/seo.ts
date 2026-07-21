@@ -2,7 +2,7 @@ import type { ArticleCard } from "../data/articles";
 import type { ArticleGeo } from "../data/articleTypes";
 import type { HubProduct } from "../data/hub/types";
 import { buildAuthorPersonJsonLd } from "../data/author";
-import { GITHUB_ORG_URL, SITE_NAME, SITE_URL } from "../config";
+import { ENTITY_SAME_AS, GITHUB_ORG_URL, SITE_NAME, SITE_URL } from "../config";
 
 export type HreflangAlt = { lang: string; href: string };
 export type BreadcrumbItem = { name: string; url?: string };
@@ -115,7 +115,7 @@ function buildPublisher() {
       "@type": "ImageObject",
       url: new URL("/apple-touch-icon.png", SITE_URL).href,
     },
-    sameAs: [GITHUB_ORG_URL],
+    sameAs: [...ENTITY_SAME_AS],
   };
 }
 
@@ -139,10 +139,45 @@ export function buildOrganizationJsonLd() {
     url: SITE_URL,
     logo: new URL("/apple-touch-icon.png", SITE_URL).href,
     description:
-      "Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers.",
+      "Independent Australia disposable vape reviews, buying guides, flavour guides and product comparisons for adult consumers (18+).",
     inLanguage: ["en-AU", "en"],
-    sameAs: [GITHUB_ORG_URL],
+    sameAs: [...ENTITY_SAME_AS],
     founder: buildAuthorPersonJsonLd(),
+    knowsAbout: [
+      "Disposable vapes",
+      "Alibarbar Ingot 9000",
+      "Australian vape buying guides",
+      "Flavour reviews",
+      "Vape product comparisons",
+    ],
+  };
+}
+
+/** Speakable blocks for AI / voice extraction on hub pages */
+export function buildHubSpeakableJsonLd(opts: {
+  path: string;
+  name: string;
+  description: string;
+  dateModified?: string;
+  datePublished?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": absoluteUrl(opts.path),
+    url: absoluteUrl(opts.path),
+    name: opts.name,
+    description: opts.description,
+    inLanguage: "en-AU",
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    author: buildAuthorPersonJsonLd(),
+    publisher: buildPublisher(),
+    ...(opts.datePublished ? { datePublished: opts.datePublished } : {}),
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".geo-quick-answer", ".geo-tldr", ".geo-summary", ".lead"],
+    },
   };
 }
 

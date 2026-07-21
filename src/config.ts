@@ -8,6 +8,14 @@ export const SITE_SUBTITLE =
 export const GITHUB_ORG_URL = "https://github.com/PodPickGuide";
 export const GITHUB_ORG_LABEL = "Data on GitHub";
 
+/** Entity sameAs graph for Organization JSON-LD / GEO */
+export const ENTITY_SAME_AS = [
+  GITHUB_ORG_URL,
+  "https://github.com/PodPickGuide/vape-comparison-data",
+  "https://github.com/PodPickGuide/podpick-flavour-index",
+  "https://github.com/PodPickGuide/pod-faq-database",
+] as const;
+
 /** Australia official store (Alibarbar) */
 export const AU_SHOP_URL = "https://www.ailibarbar.com";
 export const AU_SHOP_LABEL = "Shop Alibarbar Australia";

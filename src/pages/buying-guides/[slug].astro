@@ -7,7 +7,7 @@ import ContentCard from "../../components/hub/ContentCard.astro";
 import { hubGuides, getGuide } from "../../data/hub/guides";
 import { getProduct } from "../../data/hub/products";
 import { getReview } from "../../data/hub/reviews";
-import { buildFaqJsonLd } from "../../lib/seo";
+import { buildFaqJsonLd, buildHubSpeakableJsonLd } from "../../lib/seo";
 import { guideShopUrl } from "../../lib/shopLinks";
 
 export function getStaticPaths() {
@@ -17,6 +17,7 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const guide = getGuide(slug!)!;
 const shopDeepLink = guideShopUrl(guide.slug);
+const quickAnswer = guide.intro;
 const related = (guide.relatedGuides ?? [])
   .map((s) => getGuide(s))
   .filter(Boolean);
@@ -27,9 +28,18 @@ const relatedReviews = (guide.relatedReviewSlugs ?? [])
   .map((s) => getReview(s))
   .filter(Boolean);
 
-const jsonLd = guide.faq?.length
-  ? [buildFaqJsonLd(guide.faq.map((f) => ({ q: f.q, a: f.a })))]
-  : [];
+const jsonLd = [
+  buildHubSpeakableJsonLd({
+    path: `/buying-guides/${guide.slug}`,
+    name: guide.title,
+    description: guide.description,
+    datePublished: guide.datePublished,
+    dateModified: guide.dateModified,
+  }),
+  ...(guide.faq?.length
+    ? [buildFaqJsonLd(guide.faq.map((f) => ({ q: f.q, a: f.a })))]
+    : []),
+];
 ---
 
 <BaseLayout
@@ -40,6 +50,7 @@ const jsonLd = guide.faq?.length
   jsonLd={jsonLd}
   narrow
   lang="en"
+  locale="en-AU"
 >
   <article class="hub-doc">
     <HubBreadcrumb
@@ -52,8 +63,16 @@ const jsonLd = guide.faq?.length
       <span class="badge">{guide.category}</span>
       <h1>{guide.title}</h1>
       <p class="lead">{guide.intro}</p>
-      <p class="muted">{guide.readTime} · Updated {guide.dateModified}</p>
+      <p class="meta">
+        <time datetime={guide.dateModified}>Updated {guide.dateModified}</time>
+        · {guide.readTime}
+        · <a href="/author/jason-chen">Jason Chen</a>
+      </p>
     </header>
+    <section class="geo-block geo-quick-answer">
+      <h2>Quick Answer</h2>
+      <p>{quickAnswer}</p>
+    </section>
     <figure class="article-hero">
       <img src={guide.heroImage} alt={guide.imageAlt} width="1200" height="675" loading="eager" />
     </figure>
