@@ -417,43 +417,6 @@ export const hubFaqTopics: HubFaqTopic[] = [
     ],
   },
   {
-    slug: "taiwan",
-    title: "Taiwan FAQ",
-    description: "Taiwan pod ecosystem questions, including SP2S, LANA, compatibility and flavour selection.",
-    intro:
-      "Taiwan pod shoppers often compare SP2S, LANA and RELX-style systems. Compatibility and retailer trust matter as much as flavour.",
-    items: [
-      {
-        q: "Why are SP2S generation rules important?",
-        a: "SP2S Gen 1 and Gen 2 pods are not interchangeable. Buying the wrong generation is one of the most common compatibility mistakes.",
-      },
-      {
-        q: "Is LANA simpler than SP2S?",
-        a: "LANA can feel simpler because the ecosystem is more cohesive. SP2S offers more flavour breadth but requires careful generation checks.",
-      },
-      {
-        q: "What flavours are popular in Taiwan pod systems?",
-        a: "Fruit, tea, ice and lighter aromatic profiles are common. Jasmine tea, grape, peach and mineral-style profiles often appear in buyer discussions.",
-      },
-      {
-        q: "Are Taiwan pods the same as Australian disposables?",
-        a: "No. Taiwan pod systems usually use a rechargeable host with replaceable pods, while many Australia-focused pages discuss all-in-one disposables.",
-      },
-      {
-        q: "How do I reduce counterfeit risk in Taiwan pods?",
-        a: "Use traceable retailers, inspect packaging, verify generation labels and avoid listings with unclear photos or unusually low prices.",
-      },
-      {
-        q: "Can RELX pods fit SP2S or LANA devices?",
-        a: "Assume no unless exact compatibility is confirmed. Closed pod systems usually require matched pods and hosts.",
-      },
-      {
-        q: "Should beginners buy many Taiwan pod flavours at once?",
-        a: "Start with a small set across different flavour families. Once you know your preferred cooling and sweetness, bulk buying is less risky.",
-      },
-    ],
-  },
-  {
     slug: "pods",
     title: "Pods FAQ",
     description: "Pre-filled pods, hosts, leakage, coil life and flavour rotation.",

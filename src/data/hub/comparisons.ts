@@ -224,46 +224,6 @@ export const hubComparisons: HubComparison[] = [
     dateModified: "2026-07-08",
   },
   {
-    slug: "sp2s-vs-lana",
-    title: "SP2S vs LANA: Pod Brand Comparison (Taiwan)",
-    description: "Host ecosystem, flavours and buying logic - no universal winner, only fit.",
-    intro:
-      "SP2S and LANA are both major closed pod brands discussed by Taiwan pod users. This comparison focuses on ecosystem fit, generation matching and flavour habits rather than hype.",
-    quickWinner:
-      "SP2S wins for maximum flavour SKU breadth and third-party host awareness. LANA wins for balanced profiles and a cohesive host-plus-pod retail experience.",
-    leftLabel: "SP2S",
-    rightLabel: "LANA",
-    rows: [
-      { feature: "Flavour breadth", left: "32+ SKUs", right: "Curated range" },
-      { feature: "Host ecosystem", left: "Wide third-party hosts", right: "LANA-first host matching" },
-      { feature: "Generation rules", left: "Gen 1 and Gen 2 must be checked", right: "Match LANA pod SKU to host" },
-      { feature: "Best for", left: "Flavour explorers", right: "Simple rotation" },
-      { feature: "Buying risk", left: "Counterfeit and generation mismatch risk", right: "Host lock-in and smaller flavour matrix" },
-    ],
-    leftStrengths: ["Huge flavour matrix", "Strong community knowledge", "Flexible host ecosystem when matched correctly"],
-    rightStrengths: ["Retail traceability", "Balanced sweetness", "Simpler product story for beginners"],
-    verdict: [
-      "Match pod generation and host before comparing flavours. A great flavour in the wrong generation is still the wrong purchase.",
-      "SP2S suits flavour explorers who are willing to verify compatibility. LANA suits adults who want a more cohesive host and pod setup with balanced flavour profiles.",
-    ],
-    faq: [
-      {
-        q: "Can I use SP2S pods on LANA hosts?",
-        a: "Generally no. Treat brands as separate ecosystems unless a manufacturer or retailer explicitly confirms compatibility for the exact pod and host.",
-      },
-      {
-        q: "Which is better for beginners?",
-        a: "LANA is often simpler because the ecosystem is more cohesive. SP2S is still beginner-friendly if you buy the correct generation for your host.",
-      },
-    ],
-    region: "taiwan",
-    heroImage: "/images/podpick-brand-choice.png",
-    imageAlt: "SP2S versus LANA pod brand comparison",
-    relatedSlugs: ["sp2s", "lana", "sp2s-universal-pods", "lana-pods"],
-    datePublished: "2026-05-18",
-    dateModified: "2026-07-08",
-  },
-  {
     slug: "mesh-coil-vs-regular-coil",
     path: "/mesh-coil-vs-regular-coil",
     title: "Mesh Coil vs Regular Coil: What's the Difference?",
@@ -329,7 +289,7 @@ export const hubComparisons: HubComparison[] = [
     region: "global",
     heroImage: "/images/podpick-gen-comparison.png",
     imageAlt: "Mesh coil versus regular round-wire coil comparison diagram",
-    relatedSlugs: ["sp2s", "sp2s-universal-pods", "alibarbar-ingot-9000"],
+    relatedSlugs: ["alibarbar", "alibarbar-ingot-9000"],
     datePublished: "2026-07-08",
     dateModified: "2026-07-08",
   },

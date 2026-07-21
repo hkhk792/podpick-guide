@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import { SITE_NAME, SITE_URL } from "../config";
-import { articles } from "../data/articles";
 import { hubGuides } from "../data/hub/guides";
 import { hubReviews } from "../data/hub/reviews";
 import { hubNewsPosts } from "../data/hub/news";
@@ -28,13 +27,6 @@ function rfc822(iso: string): string {
 
 export const GET: APIRoute = () => {
   const items: FeedItem[] = [
-    ...articles.map((a) => ({
-      title: a.title,
-      description: a.description,
-      link: `${SITE_URL}/${a.slug}`,
-      pubDate: a.dateModifiedIso ?? a.dateIso,
-      category: a.category,
-    })),
     ...hubGuides.map((g) => ({
       title: g.title,
       description: g.description,

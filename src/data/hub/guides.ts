@@ -324,12 +324,33 @@ export const hubGuides: HubGuide[] = [
           "If you want to sample several profiles, custom packs let you choose several flavours from the current collection in one order. That is a practical way to find a favourite before committing to a single flavour repeatedly.",
         ],
       },
+      {
+        heading: "How to choose without relying on rankings",
+        paragraphs: [
+          "A flavour chart is more useful when it separates sweetness, cooling and fruit style instead of declaring one universal winner. Start by deciding whether you want ice, then choose between bright fruit, dark berry, tropical or soda-like profiles.",
+          "For adults unsure about menthol intensity, Peach Ice is the gentler iced starting point. For no-ice buyers, Quadruple Berry and Mango Magic are the more familiar options, while Lychee is lighter and more floral.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Which Alibarbar flavour is the easiest first choice?",
+        a: "Quadruple Berry is the broadest no-ice recommendation, while Peach Ice is the most approachable option for adults who want moderate cooling.",
+      },
+      {
+        q: "Which Alibarbar flavours have the strongest cooling?",
+        a: "Grape Ice and Blackberry Ice sit toward the colder end of the range. Cooling is subjective, so sample cautiously if you normally prefer non-menthol fruit.",
+      },
     ],
     relatedProductSlugs: ["alibarbar-ingot-9000"],
     relatedReviewSlugs: [
       "alibarbar-quadruple-berry-review",
       "alibarbar-peach-ice-review",
       "alibarbar-fanta-review",
+      "alibarbar-lychee-review",
+      "alibarbar-mango-magic-review",
+      "alibarbar-grape-ice-review",
+      "alibarbar-blackberry-ice-review",
     ],
     relatedGuides: ["what-is-alibarbar-ingot-9000", "how-to-use-a-disposable-vape"],
     region: "australia",
@@ -337,7 +358,7 @@ export const hubGuides: HubGuide[] = [
     heroImage: `${AU_PRODUCTS}/flavor-quadruple-berry.png`,
     imageAlt: "Alibarbar flavour selection in Australia",
     datePublished: "2026-02-16",
-    dateModified: "2026-07-01",
+    dateModified: "2026-07-21",
   },
   {
     slug: "disposable-vape-laws-in-australia",
@@ -443,6 +464,13 @@ export const hubGuides: HubGuide[] = [
           "Choose KUZ if you are comparing high-puff alternatives and want a second opinion on value",
         ],
       },
+      {
+        heading: "Check the claim behind the headline",
+        paragraphs: [
+          "Published puff counts are estimates based on short test draws, not guaranteed personal totals. Compare e-liquid volume, battery size and whether the exact device has a useful level display before treating a large puff number as proof of better value.",
+          "The shortlist should also pass basic ownership checks: traceable retailer details, clear product photography, current Australian information and packaging that states the relevant product specifications. Adults should check current rules in their state or territory before purchasing.",
+        ],
+      },
     ],
     faq: [
       {
@@ -459,7 +487,7 @@ export const hubGuides: HubGuide[] = [
     heroImage: `${AU_LIFESTYLE}/lifestyle-01.webp`,
     imageAlt: "Best disposable vape brands compared for Australia",
     datePublished: "2026-07-01",
-    dateModified: "2026-07-08",
+    dateModified: "2026-07-21",
   },
   {
     slug: "iget-australia-buying-guide",
@@ -645,6 +673,324 @@ export const hubGuides: HubGuide[] = [
     imageAlt: "KUZ disposable vape buying guide Australia",
     datePublished: "2026-07-04",
     dateModified: "2026-07-08",
+  },
+  {
+    slug: "alibarbar-buying-guide-australia",
+    title: "Alibarbar Ingot 9000 Buying Guide for Australia",
+    description:
+      "An independent Australia buying guide to the Alibarbar Ingot 9000, covering capacity, flavour choice, packs, authenticity checks and who the device suits.",
+    category: "Buying Guide",
+    readTime: "9 min read",
+    intro:
+      "The Alibarbar Ingot 9000 is aimed at adults who already vape and want a high-capacity, ready-to-use device. This PodPick guide turns the headline specifications into practical buying questions so you can decide whether its size, non-rechargeable format and flavour range suit your routine.",
+    sections: [
+      {
+        heading: "Start with the format, not the flavour",
+        paragraphs: [
+          "The Ingot 9000 is a sealed disposable rated for up to 9000 puffs, with 22ml of pre-filled e-liquid, a 2350mAh battery and an LED readout for battery and liquid. It is inhale-activated and does not require filling, charging or pairing with a pod.",
+          "That convenience comes with trade-offs. It is larger than a compact disposable, cannot be recharged or refilled, and must be replaced when either the battery or liquid reaches the end. Adults wanting a reusable setup should compare pod systems before buying.",
+        ],
+      },
+      {
+        heading: "Who is likely to get value from it",
+        paragraphs: [
+          "The clearest fit is an existing adult vaper who dislikes frequent device changes and values seeing remaining life. The display is more than decoration: it reduces guesswork when vapour begins to soften.",
+        ],
+        bullets: [
+          "Adults 18+ who already smoke or vape",
+          "Buyers prioritising capacity over pocket size",
+          "People who want no charging or maintenance routine",
+          "Flavour explorers interested in mixed packs",
+        ],
+      },
+      {
+        heading: "Choose a flavour by intensity",
+        paragraphs: [
+          "For rounded fruit without much cooling, begin with Quadruple Berry or Mango Magic. Lychee is softer and more aromatic. Peach Ice offers moderate chill, while Grape Ice and Blackberry Ice are better suited to adults who already know they enjoy a colder exhale.",
+          "A mixed pack makes sense when you are genuinely undecided; a single device is the lower-commitment choice when you already know the flavour family you prefer.",
+        ],
+      },
+      {
+        heading: "Australian checkout checklist",
+        paragraphs: [
+          "Before ordering, confirm the exact flavour and pack quantity, current shipping terms, total price in Australian dollars and the seller's age-verification process. Keep the order confirmation and product packaging until you have checked the device.",
+        ],
+        bullets: [
+          "Look for consistent Ingot 9000 branding and specification details",
+          "Avoid listings with vague model names or copied stock photos only",
+          "Check current laws and access requirements where you live",
+          "Use a traceable retailer with clear support details",
+        ],
+      },
+      {
+        heading: "The PodPick verdict",
+        paragraphs: [
+          "Buy the Ingot 9000 for straightforward high capacity and visible remaining life, not because a puff number alone guarantees a fixed duration. Draw length, frequency and storage conditions all change the result.",
+          "For current Australian flavour and pack availability, the regional Alibarbar retailer provides deeper product listings at https://www.ailibarbar.com/product/custom-5-pack.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is the Alibarbar Ingot 9000 rechargeable?",
+        a: "No. It is supplied pre-charged and is not designed for user charging or refilling.",
+      },
+      {
+        q: "Should I buy one flavour or a mixed pack?",
+        a: "Choose one device if you know your preferred profile. A mixed pack is more useful when comparing fruit, tropical and iced options.",
+      },
+      {
+        q: "Does 9000 puffs mean every device lasts the same time?",
+        a: "No. It is an up-to rating. Longer or harder draws consume more liquid and battery per puff, so real-world duration varies.",
+      },
+    ],
+    relatedGuides: [
+      "best-alibarbar-flavours-australia",
+      "how-to-open-alibarbar-vape",
+      "high-puff-disposable-capacity-australia-2026",
+    ],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    relatedReviewSlugs: [
+      "alibarbar-quadruple-berry-review",
+      "alibarbar-mango-magic-review",
+      "alibarbar-grape-ice-review",
+    ],
+    brandSlug: "alibarbar",
+    region: "australia",
+    heroImage: `${AU_LIFESTYLE}/hero-pair.png`,
+    imageAlt: "Alibarbar Ingot 9000 buying guide for Australian adults",
+    datePublished: "2026-07-21",
+    dateModified: "2026-07-21",
+  },
+  {
+    slug: "how-to-open-alibarbar-vape",
+    title: "How to Open an Alibarbar Vape and Start Using It",
+    description:
+      "How to safely unbox and start an Alibarbar Ingot 9000, remove shipping seals, take the first draw and troubleshoot a device that does not activate.",
+    category: "Beginner Guide",
+    readTime: "5 min read",
+    intro:
+      "Opening an Alibarbar vape means opening its retail pack and removing transport protection—not taking apart the device body. The Ingot 9000 is sealed, pre-filled and pre-charged, so an adult user should need no tools and should never pry at the casing.",
+    sections: [
+      {
+        heading: "1. Inspect the sealed pack",
+        paragraphs: [
+          "Check that the flavour name, device branding and packaging appear consistent with the item ordered. Retain the pack and order details until you have confirmed normal operation, as they may be useful if retailer support is needed.",
+        ],
+      },
+      {
+        heading: "2. Remove transport protection",
+        paragraphs: [
+          "Slide the device from the package, then remove any cap from the mouthpiece and any film or sticker covering an air inlet. Do not insert an object into the mouthpiece or vent.",
+          "Once those removable protections are clear, the device is ready. There is no fill port, power button or first-use charging step.",
+        ],
+      },
+      {
+        heading: "3. Use a short first draw",
+        paragraphs: [
+          "Place the mouthpiece to your lips and inhale gently for a brief draw. The airflow sensor should activate automatically. Starting softly helps you learn the draw resistance and avoids pulling excess liquid toward the mouthpiece.",
+          "Check the LED readout after activation. It should indicate the device's remaining battery and e-liquid rather than requiring a separate setup sequence.",
+        ],
+      },
+      {
+        heading: "If nothing happens",
+        paragraphs: [
+          "Recheck that no sticker blocks an air inlet and that your hand is not covering the vents. Try one controlled, gentle draw rather than repeated hard pulls.",
+        ],
+        bullets: [
+          "Stop if the casing is damaged, unusually hot or leaking",
+          "Do not shake, puncture or force the shell open",
+          "Contact the retailer if a new device remains inactive",
+          "Keep the device away from children and pets",
+        ],
+      },
+      {
+        heading: "Do not open the device body",
+        paragraphs: [
+          "The metal body encloses e-liquid, electronics and a lithium battery. It is not a service panel. Opening it for refilling or improvised charging creates avoidable damage and battery risk.",
+          "When the device is empty or no longer operates, stop using it and follow local battery or e-waste disposal guidance.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Do I need tools to open an Alibarbar Ingot 9000?",
+        a: "No. Open the retail packaging and remove the transport cap or stickers by hand. Never use tools on the device casing.",
+      },
+      {
+        q: "Is there an on button?",
+        a: "No. The device is inhale-activated and should start from a gentle draw once all shipping protection is removed.",
+      },
+      {
+        q: "Can I open the casing to refill or recharge it?",
+        a: "No. The Ingot 9000 is sealed, non-refillable and non-rechargeable.",
+      },
+    ],
+    relatedGuides: [
+      "how-to-use-a-disposable-vape",
+      "can-you-recharge-alibarbar-ingot-9000",
+      "how-to-make-disposable-vape-last-longer",
+    ],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    brandSlug: "alibarbar",
+    region: "australia",
+    heroImage: `${AU_LIFESTYLE}/unbox-03.webp`,
+    imageAlt: "Opening the retail packaging for an Alibarbar Ingot 9000",
+    datePublished: "2026-07-21",
+    dateModified: "2026-07-21",
+  },
+  {
+    slug: "how-to-make-disposable-vape-last-longer",
+    title: "How to Make a Disposable Vape Last Longer",
+    description:
+      "Practical adult-use tips for extending disposable vape life through gentler draws, sensible storage, rest time and correct end-of-life decisions.",
+    category: "Usage Guide",
+    readTime: "6 min read",
+    intro:
+      "No habit can create extra e-liquid or battery capacity, but several can reduce unnecessary waste and premature flavour decline. These tips apply to adults 18+ who already vape and focus on normal use—not opening, refilling or modifying a sealed device.",
+    sections: [
+      {
+        heading: "Use shorter, steady draws",
+        paragraphs: [
+          "A puff counter does not make every draw equal. Long, forceful inhalations consume more e-liquid and battery energy than shorter draws, while pulling too hard can draw excess liquid into the airflow path.",
+          "Use only enough airflow to activate the device and produce a comfortable result. Trying to maximise vapour on every puff works against device longevity.",
+        ],
+      },
+      {
+        heading: "Give the wick time between puffs",
+        paragraphs: [
+          "Repeated draws with no pause can heat the coil faster than liquid returns to the wick. A brief rest between puffs helps the device cool and reduces the chance of a dry or burnt-tasting draw.",
+          "If the mouthpiece or body becomes warmer than usual, stop and let the device return to room temperature rather than continuing.",
+        ],
+      },
+      {
+        heading: "Store it for stable temperature",
+        paragraphs: [
+          "Keep the device upright in a cool, dry location away from direct sun. High heat can accelerate battery ageing, thin the liquid and increase leakage risk; very cold conditions can temporarily weaken battery output.",
+        ],
+        bullets: [
+          "Never leave it in a parked car",
+          "Keep the mouthpiece clean and dry",
+          "Do not carry it loose with keys or sharp objects",
+          "Keep it inaccessible to children and pets",
+        ],
+      },
+      {
+        heading: "Watch the indicators, not wishful thinking",
+        paragraphs: [
+          "If the device has battery and liquid indicators, use both. Weak vapour may reflect end-of-life, a blocked air inlet or a depleted reservoir; continuing after a burnt taste will not recover lost liquid.",
+          "A sealed non-rechargeable device should be retired when depleted. Opening it, adding liquid or attaching improvised charging wires is not a life-extension method.",
+        ],
+      },
+      {
+        heading: "Set realistic expectations",
+        paragraphs: [
+          "Published puff counts are comparative estimates. Your daily total depends on draw length and frequency, so tracking how long a device lasts in days is often more useful than trying to count each puff.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Does taking smaller puffs make a disposable last longer?",
+        a: "Generally yes, because shorter draws use less liquid and battery energy. The exact difference varies by device and draw style.",
+      },
+      {
+        q: "Can I recharge a disposable to extend its life?",
+        a: "Only if the exact model is explicitly designed with a charging port and instructions. Never improvise charging on a sealed non-rechargeable device such as the Ingot 9000.",
+      },
+      {
+        q: "Why does chain-vaping shorten device life?",
+        a: "Rapid repeated draws keep the coil hot and may outpace wick saturation, increasing liquid use and the chance of dry or burnt flavour.",
+      },
+    ],
+    relatedGuides: [
+      "how-long-does-alibarbar-ingot-9000-last",
+      "how-many-puffs-does-alibarbar-ingot-9000-have",
+      "can-you-recharge-alibarbar-ingot-9000",
+    ],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    region: "australia",
+    heroImage: `${AU_LIFESTYLE}/device-hand-01.jpg`,
+    imageAlt: "Adult holding a disposable vape while following device care guidance",
+    datePublished: "2026-07-21",
+    dateModified: "2026-07-21",
+  },
+  {
+    slug: "high-puff-disposable-capacity-australia-2026",
+    title: "High-Puff Disposable Capacity in Australia: 2026 Research Guide",
+    description:
+      "A research-style guide to comparing high-puff disposable capacity in Australia using puff ratings, e-liquid volume, battery size and display features.",
+    category: "Research Guide",
+    readTime: "8 min read",
+    intro:
+      "High-puff labels are easy to compare and easy to misunderstand. This 2026 PodPick snapshot examines the public specifications adults encounter in Australia, with the Alibarbar Ingot 9000 as a documented high-capacity example and competitor ranges treated as model-dependent.",
+    sections: [
+      {
+        heading: "Quick finding",
+        paragraphs: [
+          "The Ingot 9000 sits near the upper end of the reviewed public listings: up to 9000 puffs, 22ml of e-liquid and a 2350mAh non-rechargeable battery, plus a combined battery and liquid display.",
+          "Across the comparison material reviewed, headline devices spanned roughly 1,900 to 9,000 or more puffs, while many competitor reservoirs were listed around 2ml to 12ml. Those bands describe listings, not laboratory-verified output.",
+        ],
+      },
+      {
+        heading: "Method",
+        paragraphs: [
+          "PodPick compared publicly stated product and inventory specifications available in 2026 for Alibarbar, IGET, HQD, Gunnpod and KUZ examples. We recorded four fields: puff claim, e-liquid volume, battery capacity and whether a useful status display was listed.",
+          "Community discussion can reveal common ownership concerns, but it was not treated as quantitative proof. No device was disassembled and no controlled puff machine was used, so this is a specification review rather than a lab assay.",
+        ],
+      },
+      {
+        heading: "Why four fields matter",
+        paragraphs: [
+          "Puff count is the most visible number but the least complete on its own. E-liquid volume indicates the available reservoir, battery capacity indicates stored energy, and a display can reduce uncertainty as either resource falls.",
+        ],
+        bullets: [
+          "Puff rating: useful for category comparison, not a personal guarantee",
+          "E-liquid volume: check the exact SKU rather than the brand average",
+          "Battery capacity: compare alongside rechargeability and reservoir size",
+          "Display: useful only when the listing explains what it reports",
+        ],
+      },
+      {
+        heading: "What the snapshot suggests",
+        paragraphs: [
+          "A 22ml reservoir paired with 2350mAh places the Ingot 9000 above the approximate 2ml-to-12ml range seen across many of the comparison examples. The display is also less common among the older or more compact devices reviewed.",
+          "That does not make it the automatic winner. High capacity increases size and single-device material use, and an adult who values portability may rationally prefer a lower-capacity option.",
+        ],
+      },
+      {
+        heading: "Limitations and responsible interpretation",
+        paragraphs: [
+          "Specifications can change by model, market and production batch. A brand-level statement should never replace checking the exact product listing and packaging. Puff duration, airflow and test conditions also differ between manufacturers.",
+          "This page is general editorial research for adults 18+ who already vape. It is not medical or legal advice, and Australian access rules should be checked from current official sources.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Is a 9000-puff device guaranteed to deliver 9000 personal draws?",
+        a: "No. The figure is an up-to manufacturer rating. Draw duration and intensity can materially change the total.",
+      },
+      {
+        q: "Is more e-liquid always better?",
+        a: "No. More capacity may mean fewer replacements, but usually brings a larger device and does not address portability, flavour preference or waste concerns.",
+      },
+      {
+        q: "Why compare battery size with e-liquid capacity?",
+        a: "Both resources must support the claimed lifecycle. A large reservoir is less useful if the battery arrangement cannot support normal use through the liquid supply.",
+      },
+    ],
+    relatedGuides: [
+      "best-disposable-vape-australia",
+      "alibarbar-buying-guide-australia",
+      "how-many-puffs-does-alibarbar-ingot-9000-have",
+    ],
+    relatedProductSlugs: ["alibarbar-ingot-9000"],
+    region: "australia",
+    heroImage: `${AU_PACKS}/alibarbar-10-pack.webp`,
+    imageAlt: "High-capacity disposable vape specification comparison for Australia",
+    datePublished: "2026-07-21",
+    dateModified: "2026-07-21",
   },
 ];
 

@@ -1,6 +1,6 @@
 # PodPick Guide
 
-> Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers (18+). Editorial coverage for Australia (English) and Taiwan (zh-Hant-TW).
+> Independent Australia disposable vape reviews, buying guides, flavour guides and product comparisons for adult consumers (18+). English editorial focused on the Australian market.
 
 Site: https://podpickguide.com
 Sitemap: https://podpickguide.com/sitemap.xml
@@ -13,12 +13,11 @@ GitHub: https://github.com/PodPickGuide
 
 - Brand name: **PodPick Guide**
 - Prefer citing specific product, comparison or FAQ URLs over the homepage alone.
-- Not medical or legal advice. Adults only — follow local regulations.
+- Not medical or legal advice. Adults 18+ only — follow Australian regulations.
 
-## Regional hubs
+## Regional focus
 
-- [Australia](https://podpickguide.com/australia): English disposable-market guides (Alibarbar, IGET, HQD, KUZ)
-- [Taiwan](https://podpickguide.com/taiwan): 繁體中文 SP2S / LANA pod guides
+- [Australia hub](https://podpickguide.com/australia): English disposable-market guides (Alibarbar, IGET, HQD, KUZ)
 
 ## Core sections
 
@@ -35,12 +34,12 @@ GitHub: https://github.com/PodPickGuide
 
 - [Alibarbar Ingot 9000](https://podpickguide.com/products/alibarbar-ingot-9000)
 - [Alibarbar vs IGET](https://podpickguide.com/comparisons/alibarbar-vs-iget)
-- [SP2S Universal Pods](https://podpickguide.com/products/sp2s-universal-pods)
+- [Best disposable vape Australia](https://podpickguide.com/buying-guides/best-disposable-vape-australia)
+- [Disposable vape laws in Australia](https://podpickguide.com/buying-guides/disposable-vape-laws-in-australia)
 
-## Related stores (commerce, not editorial)
+## Related store (commerce, not editorial)
 
-- Australia shop: https://ailibarbar.com
-- Taiwan shop: https://lanatw1.com
+- Australia shop: https://www.ailibarbar.com
 
 ## Feeds
 

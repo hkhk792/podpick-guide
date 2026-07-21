@@ -1,14 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { DEFAULT_AUTHOR, buildAuthorPersonJsonLd } from "../../data/author";
-import { articles } from "../../data/articles";
+import { hubGuides } from "../../data/hub/guides";
+import { hubReviews } from "../../data/hub/reviews";
 import { buildOrganizationJsonLd } from "../../lib/seo";
 import { SITE_URL } from "../../config";
 
-const title = `${DEFAULT_AUTHOR.nameZh}（${DEFAULT_AUTHOR.name}）— 評測編輯`;
+const title = `${DEFAULT_AUTHOR.name} — Editor, PodPick Guide`;
 const description = DEFAULT_AUTHOR.bio;
 
-const authorArticles = articles.slice(0, 8);
+const recent = [
+  ...hubGuides.slice(0, 4).map((g) => ({ href: `/buying-guides/${g.slug}`, title: g.title })),
+  ...hubReviews.slice(0, 4).map((r) => ({ href: `/reviews/${r.slug}`, title: r.title })),
+];
 
 const jsonLd = [
   buildOrganizationJsonLd(),
@@ -21,32 +25,32 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} path="/author/jason-chen" jsonLd={jsonLd} narrow>
+<BaseLayout title={title} description={description} path="/author/jason-chen" jsonLd={jsonLd} narrow lang="en" locale="en-AU">
   <article class="static-page author-page">
     <header class="author-page__header">
       <img
         src={DEFAULT_AUTHOR.image}
-        alt={`${DEFAULT_AUTHOR.nameZh} 頭像`}
+        alt={`${DEFAULT_AUTHOR.name} avatar`}
         width="96"
         height="96"
         class="author-page__avatar"
       />
       <div>
-        <h1>{DEFAULT_AUTHOR.nameZh}</h1>
-        <p class="author-page__title">{DEFAULT_AUTHOR.name} · {DEFAULT_AUTHOR.titleZh}</p>
+        <h1>{DEFAULT_AUTHOR.name}</h1>
+        <p class="author-page__title">{DEFAULT_AUTHOR.title ?? "Editor"} · Australia disposable reviews</p>
         <p class="author-page__stats">
-          自 {DEFAULT_AUTHOR.experienceSince} 年起 · 累計 {DEFAULT_AUTHOR.reviewsCount}+ 顆煙彈實測
+          Publishing since {DEFAULT_AUTHOR.experienceSince} · {DEFAULT_AUTHOR.reviewsCount}+ product notes
         </p>
       </div>
     </header>
 
     <section>
-      <h2>簡介</h2>
+      <h2>About</h2>
       <p>{DEFAULT_AUTHOR.bio}</p>
     </section>
 
     <section>
-      <h2>專業領域（Entity Expertise）</h2>
+      <h2>Expertise</h2>
       <p class="entity-tags">
         {DEFAULT_AUTHOR.expertise.map((tag) => (
           <span class="entity-tag">{tag}</span>
@@ -55,7 +59,7 @@ const jsonLd = [
     </section>
 
     <section>
-      <h2>實測方法（Testing Method）</h2>
+      <h2>Testing method</h2>
       <ol>
         {DEFAULT_AUTHOR.testingMethod.map((step) => (
           <li>{step}</li>
@@ -64,15 +68,15 @@ const jsonLd = [
     </section>
 
     <section>
-      <h2>近期文章</h2>
+      <h2>Recent work</h2>
       <ul>
-        {authorArticles.map((a) => (
+        {recent.map((a) => (
           <li>
-            <a href={`/${a.slug}`}>{a.title}</a>
+            <a href={a.href}>{a.title}</a>
           </li>
         ))}
       </ul>
-      <p><a href="/">查看全部 {articles.length} 篇文章 →</a></p>
+      <p><a href="/buying-guides">All buying guides →</a> · <a href="/reviews">All reviews →</a></p>
     </section>
   </article>
 </BaseLayout>

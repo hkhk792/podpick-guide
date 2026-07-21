@@ -187,9 +187,9 @@ export const hubBrands: HubBrand[] = [
     region: "australia",
     heroImage: `${AU}/hero-device.png`,
     imageAlt: "Alibarbar Ingot 9000 disposable vape device",
-    shopUrl: "https://ailibarbar.com",
+    shopUrl: "https://www.ailibarbar.com/product/custom-5-pack",
     datePublished: "2026-03-20",
-    dateModified: "2026-07-08",
+    dateModified: "2026-07-21",
     score: {
       flavorAccuracy: 9.5,
       cooling: 8.8,
@@ -198,202 +198,6 @@ export const hubBrands: HubBrand[] = [
       leakResistance: 9.4,
       beginnerFriendly: 9.0,
       overall: 9.3,
-    },
-  },
-  {
-    slug: "sp2s",
-    name: "SP2S",
-    title: "SP2S Brand Guide: Pods, Hosts & Flavour Ecosystem",
-    description:
-      "SP2S (Si Bo Rui) closed pod systems - Gen 1 vs Gen 2 compatibility, 32-flavour line-up and Taiwan buying context.",
-    intro:
-      "SP2S is one of the most discussed pod brands in Taiwan, known for mesh-coil pods, wide flavour variety and distinct Gen 1 / Gen 2 compatibility rules.",
-    overview: [
-      "SP2S is a flavour-led closed pod ecosystem. Its strongest advantage is breadth: adults comparing Taiwan pod systems often encounter SP2S because the flavour catalogue is large, the host ecosystem is well discussed, and the brand appears in many compatibility conversations.",
-      "The brand is also more complex than a simple disposable. Buyers need to understand pod generation, host matching and retailer terminology. Gen 1 and Gen 2 are not interchangeable, so a good SP2S purchase starts with identifying the host before choosing flavours.",
-      "When matched correctly, SP2S can be very rewarding. Mesh-coil pods deliver clear mouth-to-lung flavour, and the wide range makes it easy to rotate between fruit, tea, ice and unusual profiles without changing the whole device.",
-      "The risk is overconfidence. A shopper may recognise the SP2S name, buy a popular flavour, and still end up with the wrong pod generation. That is why PodPick Guide treats SP2S as a brand where education is part of the product experience.",
-      "For Taiwan readers, SP2S is often compared with LANA. SP2S usually wins on flavour breadth and ecosystem discussion, while LANA can feel simpler and more curated.",
-      "SP2S is best for adults who want flavour exploration and are willing to verify compatibility before buying.",
-    ],
-    sections: makeBrandSections({
-      name: "SP2S",
-      format: "closed pre-filled pods powered by compatible rechargeable hosts",
-      flagship: "Gen 2 universal pods, Gen 1 pods and host devices such as SP2S Pro or Bullet-style hosts",
-      regionFocus:
-        "Its strongest PodPick Guide context is Taiwan, where buyers often compare pod generation, flavour menus and host compatibility before ordering.",
-      historyAngle:
-        "broad flavour expansion and a growing host ecosystem that made compatibility guides essential",
-      productAngle:
-        "SP2S Gen 2 universal pods and SP2S host devices are the most important products to understand before exploring the wider flavour matrix.",
-      featureAngle:
-        "The main features are mesh-coil pod clarity, nicotine-salt mouth-to-lung draw, broad flavour selection and a recognisable generation structure.",
-      compatibilityAngle:
-        "SP2S compatibility depends on host generation and pod generation. Gen 1 and Gen 2 should be treated as separate systems.",
-      flavourAngle:
-        "SP2S is known for a wide set of fruit, tea, mineral, ice and sweet profiles, making it attractive to adults who rotate flavours frequently.",
-      buyingAngle:
-        "Buy SP2S only after confirming the exact host and pod generation, then choose a small flavour set before committing to bulk quantities.",
-      marketAngle:
-        "SP2S occupies the flavour-explorer lane of the Taiwan pod market, where catalogue size and community knowledge are key strengths.",
-      bullets: ["Best for flavour variety", "Requires generation checks", "Strong Taiwan pod discussion"],
-    }),
-    latestArticleSlugs: ["sp2s-vs-lana"],
-    history: [
-      "SP2S built recognition through universal pod lines compatible with multiple host devices.",
-      "The brand expanded flavour SKUs aggressively, making flavour guides essential before bulk purchases.",
-    ],
-    popularProducts: ["SP2S Gen 2 universal pods", "SP2S Gen 1 pods", "SP2S Pro host", "Bullet host"],
-    mainFeatures: ["Mesh coil pods", "Nicotine salt MTL", "32+ flavour SKUs", "Gen 1 / Gen 2 pod families"],
-    compatibleProducts: ["SP2S Pro", "Bullet", "Cartoon host", "Atomizer host - check generation"],
-    flavourRange: ["Grape", "Honey Peach", "Jasmine Green Tea", "Antarctic Ice", "Mineral Water", "Tea series"],
-    pros: ["Huge flavour catalogue", "Stable MTL experience", "Strong third-party host ecosystem"],
-    cons: ["Gen 1/2 not interchangeable", "Counterfeit risk if sourcing is unclear", "Flavour naming varies by batch"],
-    faq: [
-      {
-        q: "Can SP2S Gen 1 and Gen 2 pods mix?",
-        a: "No. Always match pod generation to your host. Gen 1 and Gen 2 are separate compatibility families.",
-      },
-      {
-        q: "Why is SP2S popular in Taiwan?",
-        a: "It combines a large flavour catalogue with a well-known pod ecosystem, which makes it attractive for adults who enjoy rotating flavours.",
-      },
-      {
-        q: "Is SP2S beginner-friendly?",
-        a: "Yes if the buyer checks compatibility first. The draw is simple, but choosing the wrong pod generation is an easy mistake.",
-      },
-      {
-        q: "What flavours is SP2S known for?",
-        a: "SP2S is known for fruit, tea, ice and mineral-style profiles, including grape, honey peach and jasmine green tea style flavours.",
-      },
-      {
-        q: "Can SP2S pods fit LANA hosts?",
-        a: "Assume no unless exact compatibility is confirmed. Treat SP2S and LANA as separate ecosystems.",
-      },
-      {
-        q: "How can I avoid fake SP2S pods?",
-        a: "Buy from traceable retailers, check packaging quality, verify generation labels and avoid suspiciously cheap listings.",
-      },
-      {
-        q: "Should I buy many SP2S flavours at once?",
-        a: "Start with a small variety across different flavour families. Bulk buying is safer after you know your cooling and sweetness preferences.",
-      },
-    ],
-    relatedSlugs: ["lana", "relx"],
-    compareSlug: "sp2s-vs-lana",
-    productSlug: "sp2s-universal-pods",
-    region: "taiwan",
-    heroImage: `${TW}/podpick-flavor-selection.png`,
-    imageAlt: "SP2S pod flavour lineup",
-    shopUrl: "https://lanatw1.com/product/sp2s-universal-pods",
-    datePublished: "2026-04-01",
-    dateModified: "2026-07-08",
-    score: {
-      flavorAccuracy: 9.1,
-      cooling: 8.5,
-      sweetness: 8.4,
-      batteryLife: 8.0,
-      leakResistance: 8.7,
-      beginnerFriendly: 9.2,
-      overall: 8.9,
-    },
-  },
-  {
-    slug: "lana",
-    name: "LANA",
-    title: "LANA Brand Guide: Pods, Hosts & Flavour Strategy",
-    description:
-      "LANA closed pod brand overview - device line-up, flavour positioning and how it compares with SP2S in Taiwan.",
-    intro:
-      "LANA focuses on refined flavour profiles and a cohesive host + pod ecosystem popular among Taiwan pod users.",
-    overview: [
-      "LANA is a closed pod brand with a more curated personality than SP2S. Instead of trying to win every flavour-count comparison, it presents itself through balanced sweetness, tidy retail bundles and a host-plus-pod experience that feels easier for many beginners.",
-      "The brand suits adults who want a predictable pod routine. A LANA buyer is usually choosing a host, choosing matching pods and rotating flavours within a more controlled ecosystem rather than navigating many third-party host combinations.",
-      "That simplicity is valuable in Taiwan, where pod shoppers often face compatibility confusion. LANA does not remove every risk, but the product story is easier to explain: match LANA pods with the intended LANA host and buy from traceable sellers.",
-      "Flavour is still central. LANA profiles tend to feel balanced rather than extreme, with fruit, tea, ice and classic options for adults who prefer steady daily use over novelty chasing.",
-      "Compared with SP2S, LANA gives up some flavour breadth but gains a more cohesive buying path. That makes it a strong recommendation for adults who value clarity and repeatability.",
-      "For PodPick Guide, LANA is one of the main Taiwan ecosystem brands to understand because it shows the trade-off between maximum variety and a cleaner matched-device experience.",
-    ],
-    sections: makeBrandSections({
-      name: "LANA",
-      format: "closed pod systems with matched hosts and pre-filled pods",
-      flagship: "LANA pods, LANA host devices and retail-friendly pod bundles",
-      regionFocus:
-        "Its main PodPick Guide context is Taiwan, where it is commonly compared with SP2S for flavour strategy and ease of buying.",
-      historyAngle:
-        "a retail-led pod ecosystem that grew through host and pod bundles rather than flavour count alone",
-      productAngle:
-        "LANA pods and LANA hosts define the brand experience, with compatible bundles making the entry path clearer for new buyers.",
-      featureAngle:
-        "The main features are closed-pod convenience, balanced flavour delivery, host colour options and a simple mouth-to-lung routine.",
-      compatibilityAngle:
-        "LANA pods should be matched with intended LANA hosts. Cross-brand compatibility should not be assumed.",
-      flavourAngle:
-        "LANA focuses on fruit, tea, ice and classic profiles that tend to feel balanced rather than aggressively sweet or cold.",
-      buyingAngle:
-        "LANA is best bought as a matched ecosystem: choose the host, confirm pod compatibility and then sample a few flavours before stocking up.",
-      marketAngle:
-        "LANA sits in the curated pod lane, competing with SP2S by offering a simpler product story and balanced flavour experience.",
-      bullets: ["Best for curated pods", "Strong beginner path", "Balanced flavour style"],
-    }),
-    latestArticleSlugs: ["sp2s-vs-lana"],
-    history: [
-      "LANA grew through pod + host bundles and consistent retail availability.",
-      "The brand competes on flavour clarity and accessory ecosystem rather than sheer SKU count alone.",
-    ],
-    popularProducts: ["LANA pods", "LANA host", "LANA e-liquid 30ml"],
-    mainFeatures: ["Closed pod system", "MTL nicotine salt", "Retail-friendly packaging", "Host colour variants"],
-    compatibleProducts: ["LANA-branded hosts", "Check pod SKU before cross-brand attempts"],
-    flavourRange: ["Fruit series", "Tea series", "Ice series", "Tobacco-alternative profiles"],
-    pros: ["Balanced sweetness", "Retail traceability", "Good for flavour rotation"],
-    cons: ["Smaller flavour matrix vs SP2S", "Host-specific compatibility", "Regional SKU differences"],
-    faq: [
-      {
-        q: "LANA vs SP2S - which is better?",
-        a: "Neither is universally better. SP2S offers more flavour breadth, while LANA is often simpler and more curated.",
-      },
-      {
-        q: "Do LANA pods fit every LANA host?",
-        a: "Check the exact SKU and host model. LANA is simpler than some ecosystems, but compatibility should still be verified.",
-      },
-      {
-        q: "Is LANA good for beginners?",
-        a: "Yes. LANA can be beginner-friendly because the host and pod story is comparatively cohesive.",
-      },
-      {
-        q: "What flavours does LANA focus on?",
-        a: "LANA typically focuses on fruit, tea, ice and classic profiles with balanced sweetness.",
-      },
-      {
-        q: "Can LANA pods fit SP2S hosts?",
-        a: "Assume no unless exact compatibility is confirmed by a trusted source.",
-      },
-      {
-        q: "Why choose LANA over a disposable?",
-        a: "Choose LANA if you prefer a reusable host and replaceable pods instead of replacing the whole device.",
-      },
-      {
-        q: "How should I buy LANA safely?",
-        a: "Use traceable retailers, keep packaging, confirm host compatibility and avoid listings with unclear product photos.",
-      },
-    ],
-    relatedSlugs: ["sp2s", "relx"],
-    compareSlug: "sp2s-vs-lana",
-    productSlug: "lana-pods",
-    region: "taiwan",
-    heroImage: `${TW}/podpick-brand-choice.png`,
-    imageAlt: "LANA pod and host products",
-    shopUrl: "https://lanatw1.com/product/lana-pods",
-    datePublished: "2026-04-05",
-    dateModified: "2026-07-08",
-    score: {
-      flavorAccuracy: 9.0,
-      cooling: 8.3,
-      sweetness: 8.0,
-      batteryLife: 8.2,
-      leakResistance: 8.8,
-      beginnerFriendly: 8.9,
-      overall: 8.8,
     },
   },
   {
@@ -552,7 +356,7 @@ export const hubBrands: HubBrand[] = [
         "RELX sits in the polished mainstream pod-system lane, between compact closed pods and broader flavour-explorer ecosystems.",
       bullets: ["Reusable host", "Polished hardware", "Generation matching required"],
     }),
-    latestArticleSlugs: ["alibarbar-vs-relx", "sp2s-vs-lana"],
+    latestArticleSlugs: ["alibarbar-vs-relx"],
     history: ["RELX expanded through sleek hardware and pre-filled pod convenience."],
     popularProducts: ["RELX device generations", "RELX pods"],
     mainFeatures: ["Closed pods", "Leak-resistant design focus", "Retail ecosystem"],
@@ -568,7 +372,7 @@ export const hubBrands: HubBrand[] = [
       { q: "Who should choose RELX?", a: "Adults who want polished reusable hardware and a straightforward pod routine may prefer RELX." },
       { q: "How does RELX compare with Alibarbar?", a: "RELX is reusable and pod-based; Alibarbar is disposable and ready out of the box." },
     ],
-    relatedSlugs: ["sp2s", "lana"],
+    relatedSlugs: ["alibarbar", "iget"],
     compareSlug: "alibarbar-vs-relx",
     region: "global",
     heroImage: `${TW}/podpick-disposable-refillable.png`,

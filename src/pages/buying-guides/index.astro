@@ -4,17 +4,21 @@ import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
 import { hubGuides } from "../../data/hub/guides";
 import { AUSTRALIA_SECTIONS } from "../../data/hub/australiaSections";
-import { articles } from "../../data/articles";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
 
-const twBuying = articles.filter((a) =>
-  ["新手指南", "選購對比", "入門知識", "旅行須知"].includes(a.category)
-);
-
-const title = "Buying Guides — How to Choose Vape Products";
+const title = "Buying Guides — How to Choose Disposable Vapes in Australia";
 const description =
-  "Australia brand columns and English buying guides plus Taiwan Traditional Chinese purchase references.";
+  "Australia buying guides for Alibarbar Ingot 9000, laws overview, puff capacity, flavours and brand comparisons.";
+
+const extraGuides = hubGuides.filter(
+  (g) =>
+    ![
+      "best-disposable-vape-australia",
+      "how-to-use-a-disposable-vape",
+      "disposable-vape-laws-in-australia",
+    ].includes(g.slug) && !g.brandSlug
+);
 
 const jsonLd = buildCollectionPageJsonLd(
   title,
@@ -24,13 +28,13 @@ const jsonLd = buildCollectionPageJsonLd(
 );
 ---
 
-<BaseLayout title={title} description={description} path="/buying-guides" wide jsonLd={jsonLd} lang="en">
+<BaseLayout title={title} description={description} path="/buying-guides" wide jsonLd={jsonLd} lang="en" locale="en-AU">
   <HubBreadcrumb items={[{ label: "Buying Guides" }]} />
   <header class="hub-index-header">
     <h1>Buying Guides</h1>
     <p class="lead">
-      Australia guides are organised by editorial column on the
-      <a href="/australia">Australia hub</a>. Taiwan articles remain in Traditional Chinese.
+      Australia guides organised by editorial column on the
+      <a href="/australia">Australia hub</a>. Start with laws, capacity and flavour fit before you buy.
     </p>
   </header>
 
@@ -39,9 +43,14 @@ const jsonLd = buildCollectionPageJsonLd(
       const sectionGuides =
         section.slug === "best-disposable-vape"
           ? hubGuides.filter((g) =>
-              ["best-disposable-vape-australia", "how-to-use-a-disposable-vape", "disposable-vape-laws-in-australia"].includes(
-                g.slug
-              )
+              [
+                "best-disposable-vape-australia",
+                "how-to-use-a-disposable-vape",
+                "disposable-vape-laws-in-australia",
+                "alibarbar-buying-guide-australia",
+                "high-puff-disposable-capacity-australia-2026",
+                "how-to-make-disposable-vape-last-longer",
+              ].includes(g.slug)
             )
           : section.brandSlug
             ? hubGuides.filter((g) => g.brandSlug === section.brandSlug)
@@ -69,19 +78,23 @@ const jsonLd = buildCollectionPageJsonLd(
     })
   }
 
-  <h2 class="section-title">Taiwan Guides (繁體)</h2>
-  <div class="hub-card-grid">
-    {
-      twBuying.map((a) => (
-        <ContentCard
-          href={`/${a.slug}`}
-          title={a.title}
-          description={a.description}
-          image={a.heroImage}
-          imageAlt={a.imageAlt}
-          tag={a.category}
-        />
-      ))
-    }
-  </div>
+  {
+    extraGuides.length ? (
+      <section class="hub-section">
+        <h2 class="section-title">More guides</h2>
+        <div class="hub-card-grid">
+          {extraGuides.map((g) => (
+            <ContentCard
+              href={`/buying-guides/${g.slug}`}
+              title={g.title}
+              description={g.description}
+              image={g.heroImage}
+              imageAlt={g.imageAlt}
+              tag={g.category}
+            />
+          ))}
+        </div>
+      </section>
+    ) : null
+  }
 </BaseLayout>

@@ -1,20 +1,20 @@
 export const SITE_NAME = "PodPick Guide";
 export const SITE_URL = "https://podpickguide.com";
-export const SITE_TAGLINE = "Independent Vape Reviews, Buying Guides & Comparisons";
+export const SITE_TAGLINE = "Australia Disposable Vape Reviews, Buying Guides & Comparisons";
 export const SITE_SUBTITLE =
-  "Helping adult consumers choose the right vape products through independent reviews, flavour guides and comparisons.";
+  "Independent English reviews, flavour guides and comparisons for adult consumers in the Australian disposable vape market.";
 
 /** Public data on GitHub Organization (SEO / citation) */
 export const GITHUB_ORG_URL = "https://github.com/PodPickGuide";
 export const GITHUB_ORG_LABEL = "Data on GitHub";
 
-/** 台灣官方選購站 */
-export const SHOP_URL = "https://lanatw1.com";
-export const SHOP_LABEL = "LANA 官方商城";
-
-/** 澳洲官方商城 */
-export const AU_SHOP_URL = "https://ailibarbar.com";
+/** Australia official store (Alibarbar) */
+export const AU_SHOP_URL = "https://www.ailibarbar.com";
 export const AU_SHOP_LABEL = "Shop Alibarbar Australia";
+
+/** @deprecated Use AU_SHOP_URL — kept for any residual imports */
+export const SHOP_URL = AU_SHOP_URL;
+export const SHOP_LABEL = AU_SHOP_LABEL;
 
 export const REGIONS = {
   australia: {
@@ -26,20 +26,7 @@ export const REGIONS = {
     shopLabel: AU_SHOP_LABEL,
     heroImage: "/images/australia/hero-device.png",
   },
-  taiwan: {
-    slug: "taiwan",
-    name: "Taiwan",
-    flag: "🇹🇼",
-    locale: "zh-Hant-TW",
-    shopUrl: SHOP_URL,
-    shopLabel: SHOP_LABEL,
-    heroImage: "/images/podpick-flavor-selection.png",
-  },
 } as const;
-
-/** LINE 諮詢（口味、規格、現貨、售後） */
-export const LINE_ID = "kao28992";
-export const LINE_URL = "https://line.me/ti/p/2_fR9iUP_1";
 
 /** 在 Vercel / .env 设置 PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXX */
 export const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "";

@@ -16,42 +16,13 @@ export function absoluteUrl(path = ""): string {
   return cleaned ? new URL(cleaned, SITE_URL).href : `${SITE_URL}/`;
 }
 
-/** Regional language entry points (en AU hub ↔ zh-TW hub) + self + x-default. */
-export function buildHreflangAlternates(path = "", lang = "en"): HreflangAlt[] {
+/** Australia-only hreflang: en-AU self + x-default home. */
+export function buildHreflangAlternates(path = "", _lang = "en"): HreflangAlt[] {
   const normalized = path === "/" ? "" : path.replace(/^\//, "");
   const self = absoluteUrl(normalized);
-  const isZh = lang.startsWith("zh");
-
-  if (!normalized) {
-    return [
-      { lang: "en", href: absoluteUrl("") },
-      { lang: "zh-Hant-TW", href: absoluteUrl("taiwan") },
-      { lang: "x-default", href: absoluteUrl("") },
-    ];
-  }
-
-  if (normalized === "australia" || normalized.startsWith("australia/")) {
-    return [
-      { lang: "en", href: self },
-      { lang: "zh-Hant-TW", href: absoluteUrl("taiwan") },
-      { lang: "x-default", href: absoluteUrl("") },
-    ];
-  }
-
-  if (normalized === "taiwan" || normalized.startsWith("taiwan/")) {
-    return [
-      { lang: "zh-Hant-TW", href: self },
-      { lang: "en", href: absoluteUrl("australia") },
-      { lang: "x-default", href: absoluteUrl("") },
-    ];
-  }
-
   return [
-    { lang: isZh ? "zh-Hant-TW" : "en", href: self },
-    {
-      lang: isZh ? "en" : "zh-Hant-TW",
-      href: absoluteUrl(isZh ? "australia" : "taiwan"),
-    },
+    { lang: "en-AU", href: self },
+    { lang: "en", href: self },
     { lang: "x-default", href: absoluteUrl("") },
   ];
 }
@@ -155,7 +126,7 @@ export function buildWebSiteJsonLd(description: string) {
     name: SITE_NAME,
     url: SITE_URL,
     description,
-    inLanguage: ["en", "zh-Hant-TW"],
+    inLanguage: ["en-AU", "en"],
     publisher: buildPublisher(),
   };
 }
@@ -169,7 +140,7 @@ export function buildOrganizationJsonLd() {
     logo: new URL("/apple-touch-icon.png", SITE_URL).href,
     description:
       "Independent vape reviews, buying guides, flavour guides and product comparisons for adult consumers.",
-    inLanguage: ["en", "zh-Hant-TW"],
+    inLanguage: ["en-AU", "en"],
     sameAs: [GITHUB_ORG_URL],
     founder: buildAuthorPersonJsonLd(),
   };
@@ -323,7 +294,7 @@ export function buildArticleJsonLd(article: ArticleCard, geo?: ArticleGeo) {
     image: [imageUrl],
     datePublished: article.dateIso,
     dateModified: article.dateModifiedIso ?? article.dateIso,
-    inLanguage: "zh-Hant-TW",
+    inLanguage: "en-AU",
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl(article.slug),

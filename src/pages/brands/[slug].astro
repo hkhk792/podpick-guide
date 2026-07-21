@@ -30,7 +30,7 @@ const jsonLd = [
   buildBrandJsonLd(brand),
   ...(brand.faq.length ? [buildFaqJsonLd(brand.faq.map((f) => ({ q: f.q, a: f.a })))] : []),
 ];
-const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australia" ? "australia" : undefined;
+const region = brand.region === "australia" ? "australia" : undefined;
 ---
 
 <BaseLayout
@@ -40,13 +40,14 @@ const region = brand.region === "taiwan" ? "taiwan" : brand.region === "australi
   ogImage={brand.heroImage}
   jsonLd={jsonLd}
   narrow
-  lang={brand.region === "taiwan" ? "zh-Hant-TW" : "en"}
+  lang="en"
+  locale="en-AU"
 >
   <article class="hub-doc">
     <HubBreadcrumb items={[{ label: "Brands", href: "/brands" }, { label: brand.name }]} />
 
     <header class="article-header">
-      <span class="badge">{brand.region === "taiwan" ? "Taiwan" : brand.region === "australia" ? "Australia" : "Global"}</span>
+      <span class="badge">{brand.region === "australia" ? "Australia" : "Global"}</span>
       <h1>{brand.title}</h1>
       <p class="lead">{brand.intro}</p>
       <p class="meta">

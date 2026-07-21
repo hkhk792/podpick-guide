@@ -1,32 +1,33 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../components/hub/HubBreadcrumb.astro";
-import { LINE_ID, LINE_URL } from "../config";
+import { AU_SHOP_URL, AU_SHOP_LABEL } from "../config";
 
 const title = "Contact PodPick Guide";
-const description = "Editorial contact, corrections and partnership enquiries for PodPick Guide.";
+const description = "Editorial contact, corrections and partnership enquiries for PodPick Guide (Australia).";
 ---
 
-<BaseLayout title={title} description={description} path="/contact" narrow lang="en">
+<BaseLayout title={title} description={description} path="/contact" narrow lang="en" locale="en-AU">
   <HubBreadcrumb items={[{ label: "Contact" }]} />
   <article class="static-page">
     <h1>Contact</h1>
-    <p class="lead">PodPick Guide is an independent knowledge hub — not a store. For orders, use regional official stores.</p>
+    <p class="lead">
+      PodPick Guide is an independent Australia knowledge hub — not a store. For orders and stock, use the official Alibarbar Australia shop.
+    </p>
     <section>
       <h2>Editorial</h2>
       <p>
-        Corrections, source citations or review methodology questions: reach the editor via
-        <a href="/author/jason-chen">Jason Chen</a> profile or LINE for Taiwan-related enquiries.
-      </p>
-      <p>
-        LINE ID: <a href={LINE_URL} rel="noopener noreferrer">{LINE_ID}</a>
+        Corrections, source citations or review methodology questions: reach the editor via the
+        <a href="/author/jason-chen">Jason Chen</a> profile.
       </p>
     </section>
     <section>
-      <h2>Official Stores</h2>
+      <h2>Official store</h2>
       <ul>
-        <li><a href="https://ailibarbar.com" rel="noopener noreferrer">ailibarbar.com</a> — Australia</li>
-        <li><a href="https://lanatw1.com" rel="noopener noreferrer">lanatw1.com</a> — Taiwan</li>
+        <li>
+          <a href={AU_SHOP_URL} rel="noopener noreferrer">{AU_SHOP_URL.replace(/^https?:\/\//, "")}</a>
+          — {AU_SHOP_LABEL}
+        </li>
       </ul>
     </section>
   </article>

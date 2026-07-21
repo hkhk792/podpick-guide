@@ -2,31 +2,28 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HubBreadcrumb from "../../components/hub/HubBreadcrumb.astro";
 import ContentCard from "../../components/hub/ContentCard.astro";
-import { articles } from "../../data/articles";
 import { hubReviews } from "../../data/hub/reviews";
 import { hubGuides } from "../../data/hub/guides";
 import { SITE_URL } from "../../config";
 import { buildCollectionPageJsonLd } from "../../lib/seo";
 
-const taiwanFlavourGuides = articles.filter((a) => a.category === "口味指南");
 const australiaFlavourGuide = hubGuides.find((g) => g.slug === "best-alibarbar-flavours-australia")!;
 
-const title = "Flavour Guides — Taste, Cooling & Sweetness";
+const title = "Flavour Guides — Taste, Cooling & Sweetness (Australia)";
 const description =
-  "Alibarbar Ingot 9000 flavour picks for Australia plus SP2S taste matrices, coolness scales and seasonal profiles for Taiwan.";
+  "Alibarbar Ingot 9000 flavour picks, rankings and individual flavour reviews for adult buyers in Australia.";
 
 const jsonLd = buildCollectionPageJsonLd(title, description, "/flavour-guides", [
   { name: australiaFlavourGuide.title, url: `${SITE_URL}/buying-guides/${australiaFlavourGuide.slug}` },
   ...hubReviews.map((r) => ({ name: r.title, url: `${SITE_URL}/reviews/${r.slug}` })),
-  ...taiwanFlavourGuides.map((a) => ({ name: a.title, url: `${SITE_URL}/${a.slug}` })),
 ]);
 ---
 
-<BaseLayout title={title} description={description} path="/flavour-guides" wide jsonLd={jsonLd} lang="en">
+<BaseLayout title={title} description={description} path="/flavour-guides" wide jsonLd={jsonLd} lang="en" locale="en-AU">
   <HubBreadcrumb items={[{ label: "Flavour Guides" }]} />
   <header class="hub-index-header">
     <h1>Flavour Guides</h1>
-    <p class="lead">Find your flavour profile before you buy — Australia Alibarbar picks and Taiwan pod taste guides.</p>
+    <p class="lead">Find your Alibarbar flavour profile before you buy — sweetness, cooling and all-day suitability for Australia.</p>
   </header>
 
   <section class="hub-section">
@@ -49,24 +46,6 @@ const jsonLd = buildCollectionPageJsonLd(title, description, "/flavour-guides", 
             image={r.heroImage}
             imageAlt={r.imageAlt}
             tag="Flavour Review"
-          />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section">
-    <h2 class="section-title">Taiwan — Pod Flavour Guides</h2>
-    <div class="hub-card-grid">
-      {
-        taiwanFlavourGuides.map((a) => (
-          <ContentCard
-            href={`/${a.slug}`}
-            title={a.title}
-            description={a.description}
-            image={a.heroImage}
-            imageAlt={a.imageAlt}
-            tag={a.category}
           />
         ))
       }

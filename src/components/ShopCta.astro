@@ -1,17 +1,25 @@
 ---
-import { SHOP_URL, SHOP_LABEL, LINE_ID, LINE_URL } from "../config";
+import { AU_SHOP_URL, AU_SHOP_LABEL } from "../config";
+import { shopUrl, AU_SHOP_PATHS } from "../lib/shopLinks";
+
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href, label } = Astro.props;
+const shopHref = href ? (href.startsWith("http") ? href : shopUrl(href)) : AU_SHOP_URL;
+const shopLabel = label ?? AU_SHOP_LABEL;
 ---
 
-<aside class="article-aside" aria-label="選購與諮詢">
-  <p class="article-aside__lead">
-    若已大致選定口味或型號，可至<strong><a href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a></strong>查看現貨、相容規格與選購說明；本站文章僅供閱讀參考，不以站內下單為目的。
+<aside class="shop-cta" aria-label="Official Australia store">
+  <p>
+    If you have narrowed a flavour or pack size, check live stock on
+    <strong><a href={shopHref} rel="noopener noreferrer">{shopLabel}</a></strong>.
+    This site is editorial only — we do not process orders here.
   </p>
-  <p class="article-aside__line">
-    LINE ID：<a href={LINE_URL} rel="noopener noreferrer">{LINE_ID}</a>
-    — 可協助確認口味、規格、現貨與售後諮詢。
-  </p>
-  <div class="article-aside__actions">
-    <a class="btn btn--shop" href={SHOP_URL} rel="noopener noreferrer">前往{SHOP_LABEL}</a>
-    <a class="btn btn--line" href={LINE_URL} rel="noopener noreferrer">加 LINE 諮詢</a>
+  <div class="shop-cta__actions">
+    <a class="btn btn--shop" href={shopHref} rel="noopener noreferrer">Go to {shopLabel}</a>
+    <a class="btn" href={shopUrl(AU_SHOP_PATHS.buyingGuide)} rel="noopener noreferrer">AU buying guide on store</a>
   </div>
 </aside>

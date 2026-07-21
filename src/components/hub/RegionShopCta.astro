@@ -1,20 +1,23 @@
 ---
-import { AU_SHOP_LABEL, AU_SHOP_URL, SHOP_LABEL, SHOP_URL } from "../../config";
+import { AU_SHOP_LABEL } from "../../config";
+import { shopUrl, AU_SHOP_PATHS } from "../../lib/shopLinks";
 
 interface Props {
-  region?: "australia" | "taiwan";
+  region?: "australia";
   label?: string;
+  /** Deep path on ailibarbar.com, e.g. /guides/... or /product/... */
+  href?: string;
 }
 
-const { region, label } = Astro.props;
-const shopUrl = region === "australia" ? AU_SHOP_URL : region === "taiwan" ? SHOP_URL : SHOP_URL;
-const shopLabel = label ?? (region === "australia" ? AU_SHOP_LABEL : SHOP_LABEL);
+const { label, href } = Astro.props;
+const shopHref = href ? (href.startsWith("http") ? href : shopUrl(href)) : shopUrl(AU_SHOP_PATHS.home);
+const shopLabel = label ?? AU_SHOP_LABEL;
 ---
 
 <aside class="region-cta" aria-label="Official store">
   <p>
-    Ready to check stock? Visit <a href={shopUrl} rel="noopener noreferrer"><strong>{shopLabel}</strong></a>
-    for current availability and specifications.
+    Ready to check stock? Visit <a href={shopHref} rel="noopener noreferrer"><strong>{shopLabel}</strong></a>
+    for current availability and specifications on the official Australia store.
   </p>
-  <a class="btn btn--shop" href={shopUrl} rel="noopener noreferrer">Visit {shopLabel}</a>
+  <a class="btn btn--shop" href={shopHref} rel="noopener noreferrer">Visit store</a>
 </aside>

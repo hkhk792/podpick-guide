@@ -6,12 +6,15 @@ import {
   SITE_SUBTITLE,
   SITE_TAGLINE,
   SITE_URL,
+  AU_SHOP_URL,
+  AU_SHOP_LABEL,
 } from "../config";
 import { HOME_BRANDS, HOME_GUIDE_LINKS } from "../data/hub/navigation";
 import { hubBrands } from "../data/hub/brands";
 import { hubComparisons } from "../data/hub/comparisons";
 import { hubProducts } from "../data/hub/products";
-import { articles, featuredArticles } from "../data/articles";
+import { hubGuides } from "../data/hub/guides";
+import { hubReviews } from "../data/hub/reviews";
 import { buildOrganizationJsonLd, buildWebSiteJsonLd } from "../lib/seo";
 
 const title = `${SITE_NAME} — ${SITE_TAGLINE}`;
@@ -19,9 +22,12 @@ const description = SITE_SUBTITLE;
 
 const editorPicks = [
   hubProducts.find((p) => p.slug === "alibarbar-ingot-9000")!,
-  hubProducts.find((p) => p.slug === "sp2s-universal-pods")!,
   hubComparisons.find((c) => c.slug === "alibarbar-vs-iget")!,
-];
+  hubGuides.find((g) => g.slug === "best-disposable-vape-australia")!,
+].filter(Boolean);
+
+const latestGuides = hubGuides.slice(0, 6);
+const latestReviews = hubReviews.slice(0, 3);
 
 const jsonLd = [
   buildWebSiteJsonLd(description),
@@ -40,10 +46,10 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} path="/" wide jsonLd={jsonLd} lang="en">
+<BaseLayout title={title} description={description} path="/" wide jsonLd={jsonLd} lang="en" locale="en-AU">
   <section class="hub-hero">
     <div class="hub-hero__copy">
-      <p class="kicker">PodPick Guide</p>
+      <p class="kicker">Australia · Adults 18+</p>
       <h1>{SITE_TAGLINE}</h1>
       <p class="lead">{SITE_SUBTITLE}</p>
       <div class="hub-hero__tags">
@@ -51,19 +57,18 @@ const jsonLd = [
         <span>Buying Guides</span>
         <span>Comparisons</span>
       </div>
+      <p class="hub-hero__cta">
+        <a class="btn btn--shop" href="/australia">Explore Australia hub</a>
+        <a class="btn" href={AU_SHOP_URL} rel="noopener noreferrer">{AU_SHOP_LABEL}</a>
+      </p>
     </div>
     <div class="hub-hero__regions">
-      <h2 class="section-kicker">Browse by Region</h2>
+      <h2 class="section-kicker">Focus market</h2>
       <div class="region-cards">
         <a class="region-card region-card--au" href="/australia">
           <span class="region-card__flag">🇦🇺</span>
           <strong>Australia</strong>
-          <span>Best disposable round-up, IGET, HQD, KUZ & Alibarbar columns</span>
-        </a>
-        <a class="region-card region-card--tw" href="/taiwan">
-          <span class="region-card__flag">🇹🇼</span>
-          <strong>Taiwan</strong>
-          <span>SP2S, LANA pod guides & 繁體中文選購參考</span>
+          <span>Best disposable round-up, Alibarbar, IGET, HQD &amp; KUZ columns</span>
         </a>
       </div>
     </div>
@@ -105,15 +110,23 @@ const jsonLd = [
         editorPicks.map((item) => (
           <ContentCard
             href={
-              "brandSlug" in item
+              "brandSlug" in item && "specifications" in item
                 ? `/products/${item.slug}`
-                : `/comparisons/${item.slug}`
+                : "leftLabel" in item
+                  ? `/comparisons/${item.slug}`
+                  : `/buying-guides/${item.slug}`
             }
             title={item.title}
             description={item.description}
             image={item.heroImage}
-            imageAlt={item.imageAlt}
-            tag={"brandSlug" in item ? "Product" : "Comparison"}
+            imageAlt={"imageAlt" in item ? item.imageAlt : item.title}
+            tag={
+              "specifications" in item
+                ? "Product"
+                : "leftLabel" in item
+                  ? "Comparison"
+                  : "Guide"
+            }
           />
         ))
       }
@@ -121,35 +134,40 @@ const jsonLd = [
   </section>
 
   <section class="hub-section">
-    <h2 class="section-title">Latest Articles</h2>
+    <h2 class="section-title">Latest Buying Guides</h2>
     <div class="hub-card-grid">
       {
-        articles.slice(0, 6).map((a) => (
+        latestGuides.map((g) => (
           <ContentCard
-            href={`/${a.slug}`}
-            title={a.title}
-            description={a.description}
-            image={a.heroImage}
-            imageAlt={a.imageAlt}
-            tag={a.category}
+            href={`/buying-guides/${g.slug}`}
+            title={g.title}
+            description={g.description}
+            image={g.heroImage}
+            imageAlt={g.imageAlt}
+            tag={g.category}
           />
         ))
       }
     </div>
-    <p class="hub-more"><a href="/taiwan">More Taiwan guides →</a> · <a href="/australia">Australia hub →</a></p>
+    <p class="hub-more"><a href="/buying-guides">All buying guides →</a> · <a href="/australia">Australia hub →</a></p>
   </section>
 
-  <section class="hub-section hub-section--countries">
-    <h2 class="section-title">Countries</h2>
-    <div class="region-cards region-cards--footer">
-      <a class="region-card" href="/australia">
-        <strong>Australia</strong>
-        <span>English guides → ailibarbar.com</span>
-      </a>
-      <a class="region-card" href="/taiwan">
-        <strong>Taiwan</strong>
-        <span>繁體指南 → lanatw1.com</span>
-      </a>
+  <section class="hub-section">
+    <h2 class="section-title">Flavour Reviews</h2>
+    <div class="hub-card-grid">
+      {
+        latestReviews.map((r) => (
+          <ContentCard
+            href={`/reviews/${r.slug}`}
+            title={r.title}
+            description={r.description}
+            image={r.heroImage}
+            imageAlt={r.imageAlt}
+            tag={r.category}
+          />
+        ))
+      }
     </div>
+    <p class="hub-more"><a href="/reviews">All reviews →</a></p>
   </section>
 </BaseLayout>

@@ -6,14 +6,11 @@ import {
   GA_MEASUREMENT_ID,
   GITHUB_ORG_LABEL,
   GITHUB_ORG_URL,
-  SHOP_URL,
-  SHOP_LABEL,
   SITE_NAME,
   SITE_URL,
 } from "../config";
-import { MAIN_NAV, REGION_NAV } from "../data/hub/navigation";
+import { MAIN_NAV } from "../data/hub/navigation";
 import { AUSTRALIA_SECTION_NAV } from "../data/hub/australiaSections";
-import FloatingLineWidget from "../components/FloatingLineWidget.astro";
 import {
   buildHreflangAlternates,
   type HreflangAlt,
@@ -38,12 +35,12 @@ const {
   title,
   description,
   path = "",
-  ogImage = "/images/podpick-flavor-selection.png",
+  ogImage = "/images/australia/hero-device.png",
   jsonLd,
   narrow = false,
   wide = false,
   lang = "en",
-  locale = "en",
+  locale = "en-AU",
   hreflang,
   ogType,
 } = Astro.props;
@@ -58,7 +55,7 @@ const mainClass = narrow
     ? "container container--wide"
     : "container";
 const jsonLdList = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
-const ogLocale = locale.startsWith("zh") ? "zh_TW" : "en_US";
+const ogLocale = "en_AU";
 const resolvedOgType = ogType ?? (isHome ? "website" : "article");
 const hreflangAlts = hreflang ?? buildHreflangAlternates(path, lang);
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? "";
@@ -130,15 +127,9 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
           <img src="/favicon.svg" alt="" width="28" height="28" />
           {SITE_NAME}
         </a>
-        <div class="region-pills" aria-label="Browse by region">
-          {
-            REGION_NAV.map((r) => (
-              <a class="region-pill" href={r.href}>
-                <span aria-hidden="true">{r.flag}</span> {r.label}
-              </a>
-            ))
-          }
-        </div>
+        <a class="region-pill region-pill--solo" href="/australia">
+          <span aria-hidden="true">🇦🇺</span> Australia
+        </a>
       </div>
       <div class="container container--wide site-header__navrow">
         <nav class="hub-nav" aria-label="Main navigation">
@@ -146,24 +137,22 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
         </nav>
         <div class="header-shops">
           <a class="header-shop header-shop--au" href={AU_SHOP_URL} rel="noopener noreferrer">{AU_SHOP_LABEL}</a>
-          <a class="header-shop header-shop--tw" href={SHOP_URL} rel="noopener noreferrer">{SHOP_LABEL}</a>
         </div>
       </div>
     </header>
     <main class={mainClass}>
       <slot />
     </main>
-    <FloatingLineWidget />
     <footer class="site-footer">
       <div class="container container--wide footer-grid">
         <div>
           <strong>{SITE_NAME}</strong>
-          <p>Independent vape reviews, buying guides and comparisons for adult consumers.</p>
+          <p>Independent Australia disposable vape reviews, buying guides and comparisons for adult consumers (18+).</p>
         </div>
         <div>
-          <strong>Regions</strong>
+          <strong>Australia</strong>
           <p>
-            <a href="/australia">Australia</a> · <a href="/taiwan">Taiwan</a>
+            <a href="/australia">Australia hub</a> · <a href="/buying-guides">Buying guides</a>
           </p>
         </div>
         <div>
@@ -180,10 +169,9 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
           </p>
         </div>
         <div>
-          <strong>Stores</strong>
+          <strong>Official store</strong>
           <p>
-            <a href={AU_SHOP_URL} rel="noopener noreferrer">ailibarbar.com</a> ·
-            <a href={SHOP_URL} rel="noopener noreferrer">lanatw1.com</a>
+            <a href={AU_SHOP_URL} rel="noopener noreferrer">www.ailibarbar.com</a>
           </p>
         </div>
         <div>
@@ -197,14 +185,12 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? ""
           <strong>Open Data</strong>
           <p>
             <a href={GITHUB_ORG_URL} rel="noopener noreferrer me">{GITHUB_ORG_LABEL}</a>
+            · <a href="/rss.xml">RSS</a>
           </p>
         </div>
       </div>
-      <div class="container container--wide">
-        <p class="footer-legal">
-          Not medical or legal advice. Adults only — follow local regulations. Products and laws vary by region.
-          · <a href={GITHUB_ORG_URL} rel="noopener noreferrer me">{GITHUB_ORG_LABEL}</a>
-        </p>
+      <div class="container container--wide footer-note">
+        <p>Adults 18+ only. Not medical or legal advice. Follow Australian regulations.</p>
       </div>
     </footer>
   </body>

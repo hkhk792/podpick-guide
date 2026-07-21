@@ -8,6 +8,7 @@ import { hubGuides, getGuide } from "../../data/hub/guides";
 import { getProduct } from "../../data/hub/products";
 import { getReview } from "../../data/hub/reviews";
 import { buildFaqJsonLd } from "../../lib/seo";
+import { guideShopUrl } from "../../lib/shopLinks";
 
 export function getStaticPaths() {
   return hubGuides.map((g) => ({ params: { slug: g.slug } }));
@@ -15,6 +16,7 @@ export function getStaticPaths() {
 
 const { slug } = Astro.params;
 const guide = getGuide(slug!)!;
+const shopDeepLink = guideShopUrl(guide.slug);
 const related = (guide.relatedGuides ?? [])
   .map((s) => getGuide(s))
   .filter(Boolean);
@@ -128,6 +130,6 @@ const jsonLd = guide.faq?.length
         </section>
       ) : null
     }
-    <RegionShopCta region="australia" />
+    <RegionShopCta region="australia" href={shopDeepLink} label="Official store page for this guide" />
   </article>
 </BaseLayout>

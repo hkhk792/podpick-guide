@@ -1,4 +1,4 @@
-export type HubRegion = "global" | "australia" | "taiwan";
+export type HubRegion = "global" | "australia";
 
 export type PodPickScore = {
   flavorAccuracy: number;

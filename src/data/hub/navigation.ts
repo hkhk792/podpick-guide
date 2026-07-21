@@ -13,17 +13,14 @@ export const MAIN_NAV: HubNavItem[] = [
 
 export const REGION_NAV = [
   { label: "Australia", href: "/australia", flag: "🇦🇺" },
-  { label: "Taiwan", href: "/taiwan", flag: "🇹🇼" },
 ] as const;
 
 export const HOME_BRANDS = [
   { name: "Alibarbar", slug: "alibarbar" },
-  { name: "SP2S", slug: "sp2s" },
-  { name: "LANA", slug: "lana" },
   { name: "IGET", slug: "iget" },
   { name: "HQD", slug: "hqd" },
-  { name: "RELX", slug: "relx" },
   { name: "KUZ", slug: "kuz" },
+  { name: "RELX", slug: "relx" },
 ] as const;
 
 export const HOME_GUIDE_LINKS = [

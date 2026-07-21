@@ -13,6 +13,7 @@ import {
   buildHubBreadcrumbJsonLd,
   buildProductJsonLd,
 } from "../../lib/seo";
+import { shopUrl, AU_SHOP_PATHS, SHOP_PRODUCTS } from "../../lib/shopLinks";
 
 export function getStaticPaths() {
   return hubProducts.map((p) => ({ params: { slug: p.slug } }));
@@ -21,8 +22,11 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const product = getProduct(slug!)!;
 const brand = getBrand(product.brandSlug);
-const region = product.region === "taiwan" ? "taiwan" : "australia";
-const pageLang = product.region === "taiwan" ? "zh-Hant-TW" : "en";
+const region = "australia" as const;
+const pageLang = "en";
+const productShopHref =
+  product.shopUrl ??
+  shopUrl(product.slug === "alibarbar-ingot-9000" ? SHOP_PRODUCTS.quadrupleBerry : AU_SHOP_PATHS.home);
 
 const crumbItems = [
   { name: "Products", url: absoluteUrl("products") },
@@ -171,6 +175,6 @@ const jsonLd = [
       ) : null
     }
 
-    <RegionShopCta region={region} />
+    <RegionShopCta region={region} href={productShopHref} />
   </article>
 </BaseLayout>

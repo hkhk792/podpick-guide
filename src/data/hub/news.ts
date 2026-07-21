@@ -23,26 +23,6 @@ const newsPosts: HubNewsPost[] = [
     weekTag: "2026-W28",
   },
   {
-    slug: "taiwan-pod-buyers-check-generation-labels",
-    title: "Taiwan Pod Buyers Are Checking Generation Labels More Carefully",
-    description:
-      "SP2S and LANA comparisons continue to highlight pod generation, host matching and packaging checks.",
-    category: "Taiwan News",
-    region: "taiwan",
-    excerpt:
-      "Generation matching remains one of the most important buying steps for Taiwan pod shoppers comparing SP2S, LANA and other closed systems.",
-    body: [
-      "Taiwan pod buyers are paying closer attention to generation labels as SP2S Gen 1 and Gen 2 products continue to appear in the same conversations.",
-      "The practical advice is simple: identify the host first, then buy pods that explicitly match that host and generation. Physical fit does not guarantee electrical compatibility.",
-      "For LANA buyers, the same caution applies at the SKU level. A more cohesive ecosystem still requires exact pod and host matching.",
-    ],
-    heroImage: "/images/cover-brand-choice.svg",
-    relatedSlugs: ["sp2s", "lana", "sp2s-vs-lana"],
-    datePublished: "2026-07-06",
-    dateModified: "2026-07-08",
-    weekTag: "2026-W28",
-  },
-  {
     slug: "high-puff-disposables-drive-display-comparisons",
     title: "High-Puff Disposables Drive More Display Comparisons",
     description:
@@ -77,7 +57,7 @@ const newsPosts: HubNewsPost[] = [
       "Tea profiles in Taiwan pod systems serve a different role: aromatic, lighter and often more suitable for adults who find candy fruit too heavy.",
     ],
     heroImage: "/images/cover-seasonal.svg",
-    relatedSlugs: ["flavours", "alibarbar-fanta-review", "sp2s"],
+    relatedSlugs: ["flavours", "alibarbar-fanta-review", "alibarbar"],
     datePublished: "2026-06-29",
     dateModified: "2026-07-08",
     weekTag: "2026-W27",
@@ -99,26 +79,6 @@ const newsPosts: HubNewsPost[] = [
     heroImage: "/images/cover-counterfeit.svg",
     relatedSlugs: ["regulations", "australia", "disposable-vape-laws-in-australia"],
     datePublished: "2026-06-24",
-    dateModified: "2026-07-08",
-    weekTag: "2026-W26",
-  },
-  {
-    slug: "closed-pod-market-favours-clear-compatibility",
-    title: "Closed Pod Market Favours Clear Compatibility Notes",
-    description:
-      "Pod brands with clearer host and generation information are easier for adult buyers to compare.",
-    category: "Market",
-    region: "taiwan",
-    excerpt:
-      "Compatibility clarity is becoming a market advantage as buyers compare SP2S, LANA, RELX and other closed pod ecosystems.",
-    body: [
-      "Closed pod systems can offer strong flavour rotation, but they also create a compatibility burden for buyers.",
-      "Brands and retailers that clearly state host generation, pod generation and cross-compatibility limits reduce the most common purchase mistake.",
-      "This is especially important for SP2S buyers, where Gen 1 and Gen 2 labels determine whether the product can be used at all.",
-    ],
-    heroImage: "/images/cover-brand-choice.svg",
-    relatedSlugs: ["compatibility", "pods", "sp2s-vs-lana"],
-    datePublished: "2026-06-22",
     dateModified: "2026-07-08",
     weekTag: "2026-W26",
   },
